@@ -7,7 +7,7 @@
 -- into four combinations (no mod, shift, ctrl, shift+ctrl)
 -- which then run override bindings that perish on logout.
 
-local _, db = ...
+local db = ConsolePort
 ---------------------------------------------------------------
 		-- Resources
 local 	TUTORIAL, BIND, TEXTURE, ICONS,
@@ -423,8 +423,8 @@ end
 local function SetTempBinding(self, modifier, original, override)
 	if original and override then
 		local key1, key2 = GetBindingKey(original) or config.mouseBindings[original]
-		if key1 then SetOverrideBinding(self, false, modifier..key1, override) end
-		if key2 then SetOverrideBinding(self, false, modifier..key2, override) end
+        if key1 then SetBinding(modifier..key1, override) end
+        if key2 then SetBinding(modifier..key2, override) end
 	end
 end
 
@@ -433,8 +433,7 @@ local function SetMouseBindings(self, handler, bindingSet)
 		if bindingSet[stick] and bindingSet[stick][""] then
 			for modifier in ConsolePort:GetModifiers() do
 				if modifier ~= "" then
-					SetOverrideBinding(handler, false, modifier..button, config.mouseDefault[button])
-				end
+					SetBinding(modifier..button, config.mouseDefault[button])				end
 			end
 		end
 	end

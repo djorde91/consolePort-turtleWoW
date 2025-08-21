@@ -3,7 +3,7 @@
 ---------------------------------------------------------------
 -- Creates the base config panel and account-wide cvar options.
 
-local _, db = ...
+local db = ConsolePort
 ---------------------------------------------------------------
 		-- Resource tables.
 local 	Settings, TUTORIAL, TEXTURE, ICONS,

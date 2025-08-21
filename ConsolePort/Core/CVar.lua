@@ -5,7 +5,7 @@
 -- applying permanent changes to global CVars. Allows
 -- cvar updates when entering/leaving combat.
 
-local _, db = ...
+local db = ConsolePort
 
 local CVars = {
 	TargetNearestUseNew 		= 	{value = 0,		event = nil},

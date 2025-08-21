@@ -4,7 +4,7 @@
 -- Keeps a stack of frames to control with the D-pad when they
 -- are visible on screen. See Cursors\Interface.lua.
 ---------------------------------------------------------------
-local _, db = ...
+local db = ConsolePort
 ---------------------------------------------------------------
 		-- Upvalue main frame due to frequent calls
 local 	Core, 

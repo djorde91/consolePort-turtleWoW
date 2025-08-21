@@ -33,7 +33,7 @@
 	4) How to insert your code into the plugin loader (this segment can be copied):
 		
 		 1) Upvalue ConsolePort's addon table at the top of your file:
-		local _, db = ... 
+		local db = ConsolePort 
 
 		2) Insert a table entry for your addon with the title as key:
 		db('PLUGINS/MyAddOn', function(ConsolePort)

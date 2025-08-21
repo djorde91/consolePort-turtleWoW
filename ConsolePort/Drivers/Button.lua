@@ -6,7 +6,7 @@
 -- direct 'clicking' causes taint to spread in a lot of cases.
 -- These buttons are under-the-hood and invisible to the user.
 
-local _, db = ...
+local db = ConsolePort
 local CORE, HANDLE, KEY = ConsolePort, ConsolePortButtonHandler, db.KEY
 ---------------------------------------------------------------
 local Button = {}

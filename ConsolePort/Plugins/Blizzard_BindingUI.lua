@@ -3,7 +3,7 @@
 -- CP is using unsaved bindings to get the correct bindings keys in secure scopes since overrides might be present.
 -- Saving bindings while these temp bindings are configured will overwrite regular keyboard bindings.
 
-local _, db = ...
+local db = ConsolePort
 
 ConsolePort:AddPlugin('Blizzard_BindingUI', function(self)
 	local 	kbF, okayButton, popup = 

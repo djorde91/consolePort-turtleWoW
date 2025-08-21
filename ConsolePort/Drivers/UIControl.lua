@@ -1,4 +1,4 @@
-local _, db = ...
+local db = ConsolePort
 local UI = ConsolePortUI
 local UIParent, assert, pairs = UIParent, assert, pairs
 local Registry = UI.FrameRegistry

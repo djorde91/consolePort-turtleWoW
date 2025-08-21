@@ -15,7 +15,7 @@
 	<Script>
 		-- Unreferenced frame to handle WoWmapper calibration updates pushed to the client.
 		-- Binding agreed upon: ALT-CTRL-SHIFT-F12
-		SetOverrideBinding(CreateFrame("Frame"), true, "ALT-CTRL-SHIFT-F12", "WM_UPDATE");
+		SetBinding("ALT-CTRL-SHIFT-F12", "WM_UPDATE");
 	</Script>
 
 	<!-- Camera handler (invisible) -->
@@ -42,12 +42,13 @@
 		</Frames>
 		<Scripts>
 			<OnLoad>
-				self.Start = MouselookStart;
-				self.Stop = MouselookStop;
+				local f = getglobal("ConsolePortCamera");
+				f.Start = MouselookStart;
+				f.Stop = MouselookStop;
 
-				self.BlockUI:SetParent(UIParent);
-				self.BlockUI:SetFrameStrata('FULLSCREEN_DIALOG');
-				self.BlockUI:SetAllPoints();
+				f.BlockUI:SetParent(UIParent);
+				f.BlockUI:SetFrameStrata('FULLSCREEN_DIALOG');
+				f.BlockUI:SetAllPoints();
 			</OnLoad>
 		</Scripts>
 	</Frame>

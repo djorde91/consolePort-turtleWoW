@@ -4,7 +4,7 @@
 -- Adds custom frames to deal with multi-choice spell-casting,
 -- such as portals/teleports, totems, pets, etc. 
 
-local _, db = ...
+local db = ConsolePort
 
 if not SpellFlyout then return end
 local Flyout, Selector, GameTooltip = SpellFlyout, ConsolePortSpellFlyout, GameTooltip

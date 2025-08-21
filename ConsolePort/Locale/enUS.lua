@@ -1,4 +1,4 @@
-local _, db = ...
+local db = ConsolePort
 
 -- Use English as default locale.
 

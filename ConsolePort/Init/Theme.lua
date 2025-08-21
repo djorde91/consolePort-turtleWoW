@@ -3,7 +3,7 @@
 ---------------------------------------------------------------
 -- Provides controller specific textures and tooltip lines.
 
-local _, db = ...
+local db = ConsolePort
 local TEXTURE_PATH = [[Interface\AddOns\ConsolePort\Controllers\%s\Icons%d\%s]]
 local TEXTURE_ESC = '|T%s:24:24:0:0|t'
 

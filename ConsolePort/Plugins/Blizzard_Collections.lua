@@ -1,7 +1,7 @@
 -- Workaround for the wardrobe collection models, which behave as buttons
 -- using OnMouseDown, making the interface cursor dismiss the objects as
 -- regular unclickable frames. 
-local _, db = ...
+local db = ConsolePort
 
 ConsolePort:AddPlugin('Blizzard_Collections', function(self)
 	if UIPanelWindows.WardrobeFrame then

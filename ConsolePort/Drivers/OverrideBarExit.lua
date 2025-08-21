@@ -4,7 +4,7 @@ if CPAPI:IsClassicVersion() then return end
 ---------------------------------------------------------------
 local ExitButton = OverrideActionBarLeaveFrameLeaveButton
 ---------------------------------------------------------------
-local _, db = ...
+local db = ConsolePort
 local OBExit = ConsolePortOBExit
 local EXIT_VEHICLE_BINDING = ('ACTIONBUTTON' .. ((NUM_OVERRIDE_BUTTONS or 6) + 1))
 

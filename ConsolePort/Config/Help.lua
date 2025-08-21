@@ -1,5 +1,5 @@
 if select(5, GetAddOnInfo('ConsolePortHelp')) ~= 'DEMAND_LOADED' then return end
-local _, db = ...
+local db = ConsolePort
 local Atlas, mixin, spairs = db.Atlas, db.table.mixin, db.table.spairs
 local WindowMixin, IndexButton, HTMLHandler, selectedIndex = {}, {}, {}
 

@@ -4,7 +4,7 @@
 -- Provides a framework for managing alpha animations without
 -- risk of spreading taint.
 
-local _, db = ...
+local db = ConsolePort
 
 ---------------------------------------------------------------
 -- Fade: Taint-free fade functions

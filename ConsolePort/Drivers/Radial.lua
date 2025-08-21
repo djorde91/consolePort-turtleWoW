@@ -55,7 +55,7 @@ function HANDLE:SetMovementBindings()
 		if keyset then
 			for i, key in pairs(keyset) do
 				for modifier in GetModifiers() do
-					self:SetOverrideBinding(false, modifier..key, binding)
+					SetBinding(modifier..key, binding)
 				end
 			end
 		end
@@ -106,7 +106,7 @@ end
 function HANDLE:GetCurrentMovementBindings() return LOCAL_BINDINGS or DEFAULT_BINDINGS end
 function HANDLE:GetMovementBindings() return db('turnCharacter') and MOVEMENT.TWIRL or MOVEMENT.DEFAULT end
 
-HANDLE.SetOverrideBinding = SetOverrideBinding
+HANDLE.SetOverrideBinding = SetBinding
 HANDLE.ClearOverrideBindings = ClearOverrideBindings
 ConsolePort:RegisterCallback('OnNewBindings', HANDLE.SetMovementBindings, HANDLE)
 

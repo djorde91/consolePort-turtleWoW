@@ -3,7 +3,7 @@
 ---------------------------------------------------------------
 -- Creates initial tutorial and helper frames for new users. 
 
-local _, db = ...
+local db = ConsolePort
 local KEY = db.KEY
 local SETUP = db.TUTORIAL.SETUP
 

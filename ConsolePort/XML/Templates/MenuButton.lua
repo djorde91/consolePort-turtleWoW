@@ -1,6 +1,9 @@
-local _, db = ...
+local db = ConsolePort
 ---------------------------------------------------------------
-ConsolePortMenuButtonMixin = CreateFromMixins(ConsolePortActionButtonMixin)
+ConsolePortMenuButtonMixin = {}
+for k, v in pairs(ConsolePortActionButtonMixin) do
+    ConsolePortMenuButtonMixin[k] = v
+end
 ---------------------------------------------------------------
 
 function ConsolePortMenuButtonMixin:OnEnter()

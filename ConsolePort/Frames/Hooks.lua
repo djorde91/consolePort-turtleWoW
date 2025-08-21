@@ -5,7 +5,7 @@
 -- the gimmicky nature of controller input. Also contains a
 -- terrible tooltip hook to provide click instructions.
 
-local _, db = ...
+local db = ConsolePort
 
 do 
 	-- Give default UI action buttons their correct action IDs.

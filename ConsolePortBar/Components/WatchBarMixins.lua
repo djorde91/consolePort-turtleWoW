@@ -60,7 +60,10 @@ function CPStatusTrackingBarMixin:UpdateTextVisibility()
 end
 
 ---------------------------------------------------------------
-CPExpBarMixin = CreateFromMixins(CPStatusTrackingBarMixin)
+CPExpBarMixin = {}
+for k, v in pairs(CPStatusTrackingBarMixin) do
+    CPExpBarMixin[k] = v
+end
 
 local XP_STATUS_BAR_TEXT = 'XP: %d/%d'
 
@@ -331,7 +334,10 @@ function CPExhaustionTickMixin:OnUpdate(elapsed)
 end
 
 ---------------------------------------------------------------
-CPReputationBarMixin = CreateFromMixins(CPStatusTrackingBarMixin)
+CPReputationBarMixin = {}
+for k, v in pairs(CPStatusTrackingBarMixin) do
+    CPReputationBarMixin[k] = v
+end
 
 function CPReputationBarMixin:GetPriority()
 	return self.priority 

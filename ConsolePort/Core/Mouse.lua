@@ -5,7 +5,7 @@
 -- Allows user to mouseover their character to control camera.
 -- Toggles off on targeted spells, InteractUnit and pickups.
 
-local _, db = ...
+local db = ConsolePort
 ---------------------------------------------------------------
 local TEXTURE, ICONS, Settings = db.TEXTURE, db.ICONS
 ---------------------------------------------------------------
@@ -430,7 +430,7 @@ end
 function Mouse:ToggleInsecureOverride(enabled, key, binding)
 	if enabled and not Core:HasUIFocus() then
 		self.insecureOverrideActive = true
-		SetOverrideBinding(self, true, key, binding)
+		SetBinding(key, binding)
 	else
 		self.insecureOverrideActive = false
 		ClearOverrideBindings(self)

@@ -42,7 +42,7 @@ end
 ---------------------------------------------------------------
 -- Popup restyling: temporarily re-style popups 
 ---------------------------------------------------------------
-local _, db = ...
+local db = ConsolePort
 local popup, defaultBackdrop
 
 function ConsolePort:ShowPopup(...)

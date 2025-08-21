@@ -3,7 +3,7 @@
 ---------------------------------------------------------------
 -- Provides a template function for convenient panel creation.
 
-local _, db = ...
+local db = ConsolePort
 local TUTORIAL = db.TUTORIAL.CONFIG
 local Mixin, FadeIn, FadeOut = db.table.mixin, db.GetFaders()
 local red, green, blue = db.Atlas.GetCC()

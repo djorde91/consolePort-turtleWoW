@@ -16,12 +16,12 @@ function ConsolePortActionButtonMixin:ClearIcon()
 	end
 end
 
-function ConsolePortActionButtonMixin:SetVertexColor(...)
-	local icon = self.icon or self.Icon
-	local font = self:GetFontString()
-	
-	 if icon then icon:SetVertexColor(...) end
-	 if font then font:SetVertexColor(...) end
+function ConsolePortActionButtonMixin:SetVertexColor(r, g, b, a)
+    local icon = self.icon or self.Icon
+    local font = self:GetFontString()
+    
+    if icon then icon:SetVertexColor(r, g, b, a) end
+    if font then font:SetVertexColor(r, g, b, a) end 
 end
 
 function ConsolePortActionButtonMixin:ClearVertexColor()

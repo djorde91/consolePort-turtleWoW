@@ -2,7 +2,7 @@
 -- using OnMouseDown, making the interface cursor dismiss the objects as
 -- regular unclickable frames. 
 
-local _, db = ...
+local db = ConsolePort
 
 ConsolePort:AddPlugin('Blizzard_MapCanvas', function(self)
 	local NodeMixin, pins, maps, nodes = {}, {}, {}, {}

@@ -1,4 +1,4 @@
-local _, db = ...
+local db = ConsolePort
 ---------------------------------------
 local AI, SEL, HANDLE, CORE = ConsolePortTargetAI, ConsolePortTargetAISelector, ConsolePortMouseHandle, ConsolePort
 ---------------------------------------

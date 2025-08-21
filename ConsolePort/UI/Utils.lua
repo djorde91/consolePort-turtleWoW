@@ -1,4 +1,4 @@
-local _, db = ...
+local db = ConsolePort
 local mx = db.table.mixin
 local UI = ConsolePortUI
 

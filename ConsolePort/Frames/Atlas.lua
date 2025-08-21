@@ -4,7 +4,7 @@
 -- A collection of widget constructors, backdrops, textures
 -- and stuff that can be reused for various purposes.
 ---------------------------------------------------------------
-local _, db = ...
+local db = ConsolePort
 local path = "Interface\\AddOns\\ConsolePort\\Textures\\"
 local class = select(2, UnitClass("player"))
 local cc = RAID_CLASS_COLORS[class]

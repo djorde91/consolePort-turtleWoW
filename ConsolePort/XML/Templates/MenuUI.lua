@@ -1,6 +1,16 @@
 ---------------------------------------------------------------
 -- Menu header secure code template
 ---------------------------------------------------------------
+
+-- Add this near the top of MenuUI.lua
+local function TableCount(t)
+    local n = 0
+    for k, v in pairs(t) do
+        n = n + 1
+    end
+    return n
+end
+
 local ENV_DEFAULT = {
 	_onload = [[
 		hID = 1
@@ -81,7 +91,7 @@ end
 
 function ConsolePortMenuSecureMixin:UpdateHeaderIndex(forceCount)
 	self.headers = forceCount and {} or self.headers or {}
-	if ( #self.headers < 1 or forceCount ) then
+	if ( TableCount(self.headers) < 1 or forceCount ) then
 		self:SetAttribute('headerwidth', 0)
 		for _, child in ipairs({self:GetChildren()}) do
 			local id = child:GetID()
@@ -102,7 +112,7 @@ function ConsolePortMenuSecureMixin:GetMinHeaderWidth()
 end
 
 function ConsolePortMenuSecureMixin:GetNumHeaders(forceCount)
-	return #self:UpdateHeaderIndex(forceCount)
+	return TableCount(self:UpdateHeaderIndex(forceCount))
 end
 
 function ConsolePortMenuSecureMixin:IterateHeaders(forceCount)
@@ -219,7 +229,7 @@ function ConsolePortMenuArtMixin:OnArtUpdate(elapsed)
 
 		if isAtTop or isAtBottom then
 			pan = isAtTop and half or (LS_HEIGHT - half)
-			self.artIndex = self.artIndex >= #artDisplays and 1 or self.artIndex + 1
+			self.artIndex = self.artIndex >= TableCount(artDisplays) and 1 or self.artIndex + 1
 			self.Art:SetTexture(artDisplays[self.artIndex])
 			self.panDelta = self.panDelta * -1
 		else

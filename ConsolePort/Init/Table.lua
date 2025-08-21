@@ -4,7 +4,7 @@
 -- These table functions are used to perform special operations
 -- that are not natively supported.  
 ---------------------------------------------------------------
-local _, db = ...
+local db = ConsolePort
 local tbl = {}
 ---------------------------------------------------------------
 db.table = tbl

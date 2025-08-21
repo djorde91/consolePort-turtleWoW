@@ -3,7 +3,7 @@
 -- between the two addons and replaces most graphical components to
 -- fit the art style of ConsolePort, instead of Storyline. 
 
-local _, db = ...
+local db = ConsolePort
 ConsolePort:AddPlugin('Storyline', function(self)
 	-----------------------------------------
 	local Frame = Storyline_NPCFrame
