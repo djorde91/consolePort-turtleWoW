@@ -65,7 +65,7 @@ function LootFrame:UpdateItems(fadeOnShow)
 				Data.UIFrameFadeIn(button, 0.3, 0, 1)
 			end
 
-			self.active[#self.active + 1] = button
+			table.insert(self.active, button)
 
 			if prevButton then
 				button:SetPoint('TOPRIGHT', prevButton.NameFrame, 'BOTTOMLEFT', 36, -4)

@@ -173,7 +173,7 @@ function Keyboard:GetSuggestions()
 					end
 
 					-- fix: if the best suggestion was pushed first, make sure its priority isn't nudged down
-					priority = #suggestions > 1 and index or 2
+					priority = db.table.count(suggestions) > 1 and index or 2
 
 					-- words with literal matches have higher priority 
 					if  ( this.match and not compare.match ) then
@@ -235,5 +235,5 @@ function Keyboard:UP()
 end
 
 function Keyboard:DOWN()
-	self:SetSuggestions(self.CompleteIndex+1 <= #suggestions and self.CompleteIndex+1 or nil)
+	self:SetSuggestions(self.CompleteIndex+1 <= db.table.count(suggestions) and self.CompleteIndex+1 or nil)
 end

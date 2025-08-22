@@ -8,7 +8,7 @@ ConsolePortRaidCursor:SetFrameRef("hiddenBars", bar.UIHider)
 ConsolePortRaidCursor:Execute([[
 	UpdateFrameStack = [=[
 		local frames = newtable(self:GetParent():GetChildren())
-		frames[#frames + 1] = self:GetFrameRef("hiddenBars")
+		table.insert(frames, self:GetFrameRef("hiddenBars"))
 		for _, frame in ipairs(frames) do
 			if frame:IsProtected() and not Cache[frame] then
 				CurrentNode = frame

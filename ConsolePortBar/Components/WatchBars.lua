@@ -289,10 +289,10 @@ function WBC:LayoutBars(visBars)
 	self:HideStatusBars()
 
 	local TOP_BAR, IS_DOUBLE = true, true
-	if ( #visBars > 1 ) then
+	if ( db.table.count(visBars) > 1 ) then
 		self:LayoutBar(visBars[1], width, not TOP_BAR, IS_DOUBLE)
 		self:LayoutBar(visBars[2], width, TOP_BAR, IS_DOUBLE)
-	elseif( #visBars == 1 ) then 
+	elseif( db.table.count(visBars) == 1 ) then 
 		self:LayoutBar(visBars[1], width, TOP_BAR, not IS_DOUBLE)
 	end
 	self.mainBar = visBars and visBars[1]

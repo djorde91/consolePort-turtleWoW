@@ -299,8 +299,12 @@ function Helper:OnActionPlaced(actionID, pushTexture)
 		end
 		
 		if not freeIcon then
-			freeIcon = CreateFrame('FRAME', self:GetName()..'Icon'..(#self.iconList+1), UIParent, 'CPIconIntroTemplate')
-			self.iconList[#self.iconList+1] = freeIcon
+			local iconListSize = 0
+			for _ in pairs(self.iconList) do
+				iconListSize = iconListSize + 1
+			end
+			freeIcon = CreateFrame('FRAME', self:GetName()..'Icon'..(iconListSize+1), UIParent, 'CPIconIntroTemplate')
+			table.insert(self.iconList, freeIcon)
 		end
 
 		freeIcon:AnimateNewActionFromCoords(button, x, y, actionID, texture)

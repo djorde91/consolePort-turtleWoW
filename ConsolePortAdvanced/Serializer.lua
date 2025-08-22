@@ -36,7 +36,7 @@ function encodeB64(str)
 	local remainder = 0
 	local remainder_length = 0
 	local encoded_size = 0
-	local l=#str
+	local l = db.table.count(str)
 	local code
 	for i=1,l do
 		code = string.byte(str, i)
@@ -65,7 +65,7 @@ function decodeB64(str)
 	local i = 1
 	local bitfield_len = 0
 	local bitfield = 0
-	local l = #str
+	local l = db.table.count(str)
 	while true do
 		if bitfield_len >= 8 then
 			decoded_size = decoded_size + 1

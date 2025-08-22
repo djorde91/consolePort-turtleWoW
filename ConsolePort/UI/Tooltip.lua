@@ -72,7 +72,7 @@ function UI:GetTooltip()
 		end
 	end
 	if not tooltip then
-		local id = #framePool + 1
+		local id = db.table.count(framePool) + 1
 		tooltip = UI:CreateFrame('GameTooltip', 'ConsolePortUITooltip'..id, UIParent, 'GameTooltipTemplate', {
 			shoppingTooltips = GameTooltip.shoppingTooltips,
 			Mixin = {Tooltip, 'ScaleOnFocus'},

@@ -254,7 +254,7 @@ function Bar:OnLoad(cfg, benign)
 		if borderRGB then wrapper:SetBorderColor(unpack(borderRGB))
 		else wrapper:SetBorderColor(1, 1, 1, 1) end
 
-		self.Buttons[#self.Buttons + 1] = wrapper
+		table.insert(self.Buttons, wrapper)
 	end
 
 	self.WatchBarContainer:Hide() -- hide so it updates OnShow, if set.
@@ -288,7 +288,7 @@ function Bar:OnLoad(cfg, benign)
 		]])
 	end
 
-	local width = cfg.width or ( #self.Buttons > 10 and (10 * 110) + 55 or (#self.Buttons * 110) + 55 )
+	local width = cfg.width or ( db.table.count(self.Buttons) > 10 and (10 * 110) + 55 or (db.table.count(self.Buttons) * 110) + 55 )
 	self:SetSize(width, BAR_FIXED_HEIGHT)
 end
 

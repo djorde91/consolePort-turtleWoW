@@ -295,7 +295,7 @@ function HeaderMixin:SetValues()
 		button.name = binding.name
 		button:OnShow()
 	end
-	self.ValueList:Refresh(#bindings)
+	self.ValueList:Refresh(db.table.count(bindings))
 end
 
 function HeaderMixin:OnClick()
@@ -321,7 +321,7 @@ local function RefreshHeaderList(self)
 		hCount = hCount + 1
 		local button = buttons[hCount]
 		if not button then
-			button = db.Atlas.GetBindingMetaButton("$parentButton"..#buttons, self, config)
+			button = db.Atlas.GetBindingMetaButton("$parentButton"..db.table.count(buttons), self, config)
 			db.Atlas.SetFutureButtonStyle(button)
 			button.Label:SetJustifyH("LEFT")
 
@@ -822,7 +822,7 @@ function WindowMixin:OnShow(override)
 end
 
 ---------------------------------------------------------------
-db.PANELS[#db.PANELS + 1] = {name = "Binds", header = TUTORIAL.HEADER, mixin = WindowMixin, onLoad = function(self, core)
+table.insert(db.PANELS, {name = "Binds", header = TUTORIAL.HEADER, mixin = WindowMixin, onLoad = function(self, core)
 	local settings = db.Settings
 	local player = GetUnitName("player").."-"..GetRealmName()
 	local cc = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
@@ -1077,7 +1077,7 @@ db.PANELS[#db.PANELS + 1] = {name = "Binds", header = TUTORIAL.HEADER, mixin = W
 			if not custom or config.mouseBindings[buttonName] then
 				button.name = triggers[buttonName] or buttonName
 				Mixin(button, LayoutMixin)
-				self.Overlay.Buttons[#self.Overlay.Buttons + 1] = button
+				table.insert(self.Overlay.Buttons, button)
 			end
 		end
 		config.layOut = nil

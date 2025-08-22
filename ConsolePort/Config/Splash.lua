@@ -36,7 +36,7 @@ function ConsolePort:CheckCalibration(forceCustom)
 			if 	isConfigurableButton and isDynamicKeyAllowed and not GetBindingKey(button) then
 				------------------------------------
 				unassigned = unassigned or {}
-				unassigned[#unassigned + 1] = button
+				table.insert(unassigned, button)
 				------------------------------------
 			end
 		end
@@ -387,7 +387,7 @@ function ConsolePort:CalibrateController(reset)
 			cbF.StickInput:SetScript('OnKeyDown', function(self, key)
 				cbF.InputDetect:Ping()
 				self.input = self.input or {}
-				self.input[#self.input + 1] = key
+				table.insert(self.input, key)
 				if not self.process then
 					SetDetecting(self)
 					self.process = true
@@ -656,7 +656,7 @@ function ConsolePort:SelectController()
 				Controller:SetScript("OnLeave", OnLeave)
 				Controller:SetScript("OnClick", OnClick)
 
-				Splash.Controllers[#Splash.Controllers + 1] = Controller
+				table.insert(Splash.Controllers, Controller)
 			end
 		end
 

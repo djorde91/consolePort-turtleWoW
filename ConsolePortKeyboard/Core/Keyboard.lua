@@ -70,7 +70,11 @@ local function utf8sub(str, startChar, numChars)
  
 	local currentIndex = startIndex
  
-	while numChars > 0 and currentIndex <= #str do
+	local strSize = 0
+	for _ in pairs(str) do
+		strSize = strSize + 1
+	end
+	while numChars > 0 and currentIndex <= strSize do
 		local char = string.byte(str, currentIndex)
 		currentIndex = currentIndex + chsize(char)
 		numChars = numChars -1

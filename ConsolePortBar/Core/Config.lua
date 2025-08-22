@@ -264,7 +264,7 @@ function Layout:OnShow()
 		button:Show()
 	end
 	self.Popout:Show()
-	self:Refresh(#self.Buttons)
+	self:Refresh(db.table.count(self.Buttons))
 end
 
 function Layout:OnHide()
@@ -284,7 +284,7 @@ function Layout:CreateHeader(arg1, arg2, arg3, arg4, arg5)
 			local anchor = frame.Objects[i-1]
 			object['Set' .. info.data](object, type(info.val) == 'table' and unpack(info.val) or info.val)
 			object:SetPoint('LEFT', anchor or frame, anchor and 'RIGHT' or 'LEFT', info.x or 0, info.y or 0)
-			frame.Objects[#frame.Objects + 1] = object
+			table.insert(frame.Objects, object)
 		end
 	end
 	self:AddButton(frame, 12, 0)
@@ -531,7 +531,7 @@ function WindowMixin:CreateLayoutModule()
 		[19] = 'Art';
 	}
 
-	for i=1, #info, 2 do
+	for i=1, db.table.count(info), 2 do
 		local header = subHeaders[i]
 		if header then
 			layout:CreateHeader({val = header, x = 0, data = 'Text', type = 'FontString', setup = {nil, 'ARTWORK', 'FriendsFont_Large'}})

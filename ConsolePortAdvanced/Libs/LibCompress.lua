@@ -81,7 +81,7 @@ local function setCleanupTables(arg1, arg2, arg3, arg4, arg5)
 		LibCompress.frame:Show()
 	end
 	local args = {arg1, arg2, arg3, arg4, arg5}
-	for i = 1, #args do
+	for i = 1, 5 do
 		if args[i] then
 			tables_to_clean[args[i]] = true
 		end
@@ -101,24 +101,30 @@ end
 -- the bytes returned by this do not contain "\000"
 local bytes = {}
 local function encode(x)
-	for k = 1, #bytes do
+	for k = 1, 10 do
 		bytes[k] = nil
 	end
 	
-	bytes[#bytes + 1] = x % 255
+	table.insert(bytes, x % 255)
 	x=math.floor(x/255)
 	
 	while x > 0 do
-		bytes[#bytes + 1] = x % 255
+		table.insert(bytes, x % 255)
 		x=math.floor(x/255)
 	end
-	if #bytes == 1 and bytes[1] > 0 and bytes[1] < 250 then
+	local bytesCount = 0
+	for _ in pairs(bytes) do
+		bytesCount = bytesCount + 1
+	end
+	if bytesCount == 1 and bytes[1] > 0 and bytes[1] < 250 then
 		return string_char(bytes[1])
 	else
-		for i = 1, #bytes do
-			bytes[i] = bytes[i] + 1
+		for i = 1, 10 do
+			if bytes[i] then
+				bytes[i] = bytes[i] + 1
+			end
 		end
-		return string_char(256 - #bytes, unpack(bytes))
+		return string_char(256 - bytesCount, unpack(bytes))
 	end
 end
 
@@ -160,7 +166,7 @@ function LibCompress:CompressLZW(uncompressed)
 			dict[string_char(i)] = i
 		end
 		
-		for i = 1, #uncompressed do
+		for i = 1, db.table.count(uncompressed) do
 			local c = uncompressed:sub(i, i)
 			local wc = w..c
 			if dict[wc] then
@@ -169,19 +175,31 @@ function LibCompress:CompressLZW(uncompressed)
 				dict[wc] = dict_size
 				dict_size = dict_size + 1
 				local r = encode(dict[w])
-				ressize = ressize + #r
-				result[#result + 1] = r
+				local rSize = 0
+				for _ in pairs(r) do
+					rSize = rSize + 1
+				end
+				ressize = ressize + rSize
+				table.insert(result, r)
 				w = c
 			end
 		end
 		
 		if w then
 			local r = encode(dict[w])
-			ressize = ressize + #r
-			result[#result + 1] = r
+			local rSize = 0
+			for _ in pairs(r) do
+				rSize = rSize + 1
+			end
+			ressize = ressize + rSize
+			table.insert(result, r)
 		end
 		
-		if (#uncompressed + 1) > ressize then
+		local uncompressedSize = 0
+		for _ in pairs(uncompressed) do
+			uncompressedSize = uncompressedSize + 1
+		end
+		if (uncompressedSize + 1) > ressize then
 			return table_concat(result)
 		else
 			return string_char(1)..uncompressed
@@ -216,15 +234,19 @@ function LibCompress:DecompressLZW(compressed)
 		local delta, k
 		k, delta = decode(compressed, t)
 		t = t + delta
-		result[#result + 1] = dict[k]
+		table.insert(result, dict[k])
 		
 		local w = dict[k]
 		local entry
-		while t <= #compressed do
+		local compressedSize = 0
+		for _ in pairs(compressed) do
+			compressedSize = compressedSize + 1
+		end
+		while t <= compressedSize do
 			k, delta = decode(compressed, t)
 			t = t + delta
 			entry = dict[k] or (w..w:sub(1, 1))
-			result[#result + 1] = entry
+			table.insert(result, entry)
 			dict[dict_size] = w..entry:sub(1, 1)
 			dict_size = dict_size + 1
 			w = entry
@@ -317,7 +339,11 @@ function LibCompress:CompressHuffman(uncompressed)
 	if type(uncompressed) ~= "string" then
 		return nil, "Can only compress strings"
 	end
-	if #uncompressed == 0 then
+	local uncompressedSize = 0
+	for _ in pairs(uncompressed) do
+		uncompressedSize = uncompressedSize + 1
+	end
+	if uncompressedSize == 0 then
 		return "\001"
 	end
 	
@@ -353,14 +379,25 @@ function LibCompress:CompressHuffman(uncompressed)
 		end
 	end)
 
-	local nLeafs = #leafs
+	local nLeafs = 0
+	for _ in pairs(leafs) do
+		nLeafs = nLeafs + 1
+	end
 	
 	-- create tree
 	local huff = {}
 	--While there is more than one node in the queues:
 	local length, height, li, hi, leaf1, leaf2
 	local newNode
-	while (#leafs + #huff > 1) do
+	local leafsSize = 0
+	for _ in pairs(leafs) do
+		leafsSize = leafsSize + 1
+	end
+	local huffSize = 0
+	for _ in pairs(huff) do
+		huffSize = huffSize + 1
+	end
+	while (leafsSize + huffSize > 1) do
 		-- Dequeue the two nodes with the lowest weight.
 		-- Dequeue first
 		if not next(huff) then
@@ -409,7 +446,11 @@ function LibCompress:CompressHuffman(uncompressed)
 		table_insert(huff,newNode)
 	end
 	
-	if #leafs > 0 then
+	local leafsSize = 0
+	for _ in pairs(leafs) do
+		leafsSize = leafsSize + 1
+	end
+	if leafsSize > 0 then
 		li, length = next(leafs)
 		table_insert(huff, length)
 		table_remove(leafs, li)
@@ -454,7 +495,7 @@ function LibCompress:CompressHuffman(uncompressed)
 	-- first byte is version info. 0 = uncompressed, 1 = 8 - bit word huffman compressed
 	compressed[1] = "\003"
 	
-	-- Header: byte 0 = #leafs, bytes 1-3 = size of uncompressed data
+	-- Header: byte 0 = leafs count, bytes 1-3 = size of uncompressed data
 	-- max 2^24 bytes
 	local length = string_len(uncompressed)
 	compressed[2] = string_char(bit_band(nLeafs -1, 255))	-- number of leafs
@@ -500,7 +541,15 @@ function LibCompress:CompressHuffman(uncompressed)
 	local compressed_string = table_concat(large_compressed, "", 1, large_compressed_size)
 	
 	-- is compression worth it? If not, return uncompressed data.
-	if (#uncompressed + 1) <= #compressed_string then
+	local uncompressedSize = 0
+	for _ in pairs(uncompressed) do
+		uncompressedSize = uncompressedSize + 1
+	end
+	local compressedStringSize = 0
+	for _ in pairs(compressed_string) do
+		compressedStringSize = compressedStringSize + 1
+	end
+	if (uncompressedSize + 1) <= compressedStringSize then
 		return "\001"..uncompressed
 	end
 	
@@ -620,7 +669,7 @@ function LibCompress:DecompressHuffman(compressed)
 		return nil, "Can only uncompress strings"
 	end
 
-	local compressed_size = #compressed
+			local compressed_size = db.table.count(compressed)
 	--decode header
 	local info_byte = string_byte(compressed)
 	-- is data compressed
@@ -742,7 +791,11 @@ function LibCompress:DecompressHuffman(compressed)
 			else
 				test_code_len = test_code_len + 1
 				if test_code_len > maxCodeLen then
-					return nil, "Decompression error at "..tostring(i).."/"..tostring(#compressed)
+					local compressedSize = 0
+		for _ in pairs(compressed) do
+			compressedSize = compressedSize + 1
+		end
+		return nil, "Decompression error at "..tostring(i).."/"..tostring(compressedSize)
 				end
 			end
 		else
@@ -799,7 +852,15 @@ function LibCompress:Compress(data)
 	method = next(compression_methods, method)
 	while method do
 		n = compression_methods[method](self, data)
-		if #n < #result then
+		local nSize = 0
+	for _ in pairs(n) do
+		nSize = nSize + 1
+	end
+	local resultSize = 0
+	for _ in pairs(result) do
+		resultSize = resultSize + 1
+	end
+	if nSize < resultSize then
 			result = n
 		end
 		method = next(compression_methods, method)
@@ -833,8 +894,8 @@ end
 	table, msg = LibCompress:GetEncodeTable(reservedChars, escapeChars,  mapChars)
 	
 		reservedChars: The characters in this string will not appear in the encoded data.
-		escapeChars: A string of characters used as escape-characters (don't supply more than needed). #escapeChars >= 1
-		mapChars: First characters in reservedChars maps to first characters in mapChars.  (#mapChars <= #reservedChars)
+			escapeChars: A string of characters used as escape-characters (don't supply more than needed). escapeChars count >= 1
+	mapChars: First characters in reservedChars maps to first characters in mapChars.  (mapChars count <= reservedChars count)
 	
 	return value:
 		table
@@ -883,7 +944,15 @@ function LibCompress:GetEncodeTable(reservedChars, escapeChars, mapChars)
 		return nil, "No escape characters supplied"
 	end
 	
-	if #reservedChars < #mapChars then
+	local reservedCharsSize = 0
+	for _ in pairs(reservedChars) do
+		reservedCharsSize = reservedCharsSize + 1
+	end
+	local mapCharsSize = 0
+	for _ in pairs(mapChars) do
+		mapCharsSize = mapCharsSize + 1
+	end
+	if reservedCharsSize < mapCharsSize then
 		return nil, "Number of reserved characters must be at least as many as the number of mapped chars"
 	end
 	
@@ -916,8 +985,12 @@ function LibCompress:GetEncodeTable(reservedChars, escapeChars, mapChars)
 	local escapeCharIndex, escapeChar = 0
 	
 	-- map single byte to single byte
-	if #mapChars > 0 then
-		for i = 1, #mapChars do
+	local mapCharsSize = 0
+	for _ in pairs(mapChars) do
+		mapCharsSize = mapCharsSize + 1
+	end
+	if mapCharsSize > 0 then
+		for i = 1, mapCharsSize do
 			from = string_sub(reservedChars, i, i)
 			to = string_sub(mapChars, i, i)
 			encode_translate[from] = to
@@ -975,7 +1048,11 @@ function LibCompress:GetEncodeTable(reservedChars, escapeChars, mapChars)
 	end
 	
 	-- change last line from "str = ...;" to "return ...;";
-	decode_func_string[#decode_func_string] = decode_func_string[#decode_func_string]:gsub("str = (.*);", "return %1;")
+	local decodeFuncStringSize = 0
+	for _ in pairs(decode_func_string) do
+		decodeFuncStringSize = decodeFuncStringSize + 1
+	end
+	decode_func_string[decodeFuncStringSize] = decode_func_string[decodeFuncStringSize]:gsub("str = (.*);", "return %1;")
 	decode_func_string = "return function(self, str) "..table_concat(decode_func_string).." end"
 	
 	encode_search = "([".. escape_for_gsub(table_concat(encode_search)).."])"
@@ -1058,7 +1135,7 @@ function LibCompress:Encode7bit(str)
 	local remainder_length = 0
 	local tbl = tables.encode7bit
 	local encoded_size = 0
-	local length = #str
+	local length = db.table.count(str)
 	for i = 1, length do
 		local code = string_byte(str, i)
 		remainder = remainder + bit_lshift(code, remainder_length)
@@ -1088,7 +1165,7 @@ function LibCompress:Decode7bit(str)
 	local i = 1
 	local bitfield_len = 0
 	local bitfield = 0
-	local length = #str
+	local length = db.table.count(str)
 	while true do
 		if bitfield_len >= 8 then
 			decoded_size = decoded_size + 1

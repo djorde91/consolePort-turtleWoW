@@ -104,7 +104,7 @@ function call(region, method, data)
 	local func = SETUP[method] or region[method]
 	if type(func) == 'function' then
 		-- if sequential array, just unpack it.
-		if ( type(data) == 'table' and #data ~= 0 ) then
+		if ( type(data) == 'table' and db.table.count(data) ~= 0 ) then
 			return func(region, unpack(data))
 		else
 			return func(region, data)
@@ -166,7 +166,7 @@ end
 
 function anchor()
 	for _, setup in pairs(ANCHORS) do
-		local numArgs = #setup
+		local numArgs = db.table.count(setup)
 		if numArgs == 2 then
 			local region, point = unpack(setup)
 			region:SetPoint(point)
@@ -201,7 +201,7 @@ function addSubTable(tbl, arg1, arg2, arg3, arg4, arg5)
 			table.insert(validArgs, arg)
 		end
 	end
-	tbl[#tbl + 1] = validArgs 
+	table.insert(tbl, validArgs) 
 end
 
 ----------------------------------

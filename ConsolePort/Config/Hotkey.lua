@@ -183,7 +183,7 @@ end
 
 function db.CreateHotkey(self, forceStyle, forceName, forceMod)
 	-- self is the secure button in this case
-	local count = self.HotKeys and #self.HotKeys+1 or 1
+	local count = self.HotKeys and db.table.count(self.HotKeys)+1 or 1
 	local hotKey = CreateFrame("Frame", "$parentHOTKEY"..count, self)
 	Mixin(hotKey, HotkeyMixin)
 

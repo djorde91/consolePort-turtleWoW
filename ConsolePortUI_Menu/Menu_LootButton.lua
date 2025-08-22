@@ -136,17 +136,17 @@ function LootButton:OnShow()
 	if ( canNeed ) then
 		self.canNeed = true
 	else
-		self.tooltipLines[#self.tooltipLines + 1] = _G['LOOT_ROLL_INELIGIBLE_REASON'..reasonNeed]
+		table.insert(self.tooltipLines, _G['LOOT_ROLL_INELIGIBLE_REASON'..reasonNeed])
 	end
 	if ( canGreed) then
 		self.canGreed = true
 	else
-		self.tooltipLines[#self.tooltipLines + 1] = _G['LOOT_ROLL_INELIGIBLE_REASON'..reasonGreed]
+		table.insert(self.tooltipLines, _G['LOOT_ROLL_INELIGIBLE_REASON'..reasonGreed])
 	end
 	if ( canDisenchant) then
 		self.canDisenchant = true
 	else
-		self.tooltipLines[#self.tooltipLines + 1] = format(_G['LOOT_ROLL_INELIGIBLE_REASON'..reasonDisenchant], deSkillRequired)
+		table.insert(self.tooltipLines, format(_G['LOOT_ROLL_INELIGIBLE_REASON'..reasonDisenchant], deSkillRequired))
 	end
 --	self.Timer:SetFrameLevel(self:GetFrameLevel() - 1);
 end

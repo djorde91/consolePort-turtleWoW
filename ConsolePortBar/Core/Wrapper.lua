@@ -396,7 +396,7 @@ function HANDLE:Create(parent, id, orientation)
 	wrapper.Buttons = {}
 
 	for mod, info in pairs(mods) do
-		local name = 'CPB_' .. (id:sub(4, #id)) .. (mod == '' and mod or ('_' .. (mod:sub(1, #mod -1))))
+		local name = 'CPB_' .. (id:sub(4, db.table.count(id))) .. (mod == '' and mod or ('_' .. (mod:sub(1, db.table.count(mod) -1))))
 		local bSize, tSize = unpack(info.size)
 		local button = CreateButton(parent, id..mod, name, mod, bSize, tSize, mod == '' and config)
 		button.plainID = id

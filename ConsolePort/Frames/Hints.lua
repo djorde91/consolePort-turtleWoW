@@ -19,7 +19,7 @@ function Hint:DisplayMessage(text, time, yOffset)
 		self:Show()
 		self:SetScript("OnUpdate", self.ShowHint)
 	else
-		queue[#queue + 1] = {text = text, time = time, yOffset = yOffset}
+		table.insert(queue, {text = text, time = time, yOffset = yOffset})
 	end
 end
 

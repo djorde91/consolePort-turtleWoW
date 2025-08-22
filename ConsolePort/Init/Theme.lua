@@ -48,7 +48,13 @@ local function LoadTriggerTextures(ctrlType, cfg, shared)
 		[4] = cfg.CP_T4 or 'CP_R_GRIP',
 	}
 	-- Arbitrary buttons
-	for i=#t, 8 do
+	local tLength = 0
+	for k in pairs(t) do
+		if type(k) == "number" and k > tLength then
+			tLength = k
+		end
+	end
+	for i = tLength + 1, 8 do
 		t[i] = cfg['CP_T' .. i]
 	end
 	-- Modifiers

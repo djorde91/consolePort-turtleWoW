@@ -10,7 +10,11 @@ local Control = ConsolePortUIHandle
 for name, script in pairs({
 ----------------------------------
 	SetFocusFrame = [[
-		if #stack > 0 then
+		local stackSize = 0
+		for _ in pairs(stack) do
+			stackSize = stackSize + 1
+		end
+		if stackSize > 0 then
 			focusFrame = stack[1]
 			MouseHandle:SetAttribute('blockhandle', true)
 			self:SetAttribute('focus', focusFrame)
@@ -41,7 +45,7 @@ for name, script in pairs({
 
 		for _, frame in pairs(oldStack) do
 			if frame ~= added then
-				stack[#stack + 1] = frame
+				table.insert(stack, frame)
 			end
 		end
 	]],
@@ -54,7 +58,7 @@ for name, script in pairs({
 
 		for _, frame in pairs(oldStack) do
 			if frame ~= removed then
-				stack[#stack + 1] = frame
+				table.insert(stack, frame)
 			end
 		end
 	]],
@@ -63,7 +67,11 @@ for name, script in pairs({
 		if self:RunAttribute('SetFocusFrame') then
 			self:CallMethod('SetHintFocus')
 			self:CallMethod('RestoreHints')
-			for i=2, #stack do
+			local stackSize = 0
+			for _ in pairs(stack) do
+				stackSize = stackSize + 1
+			end
+			for i=2, stackSize do
 				self:CallMethod('SetIgnoreFadeFrame', stack[i]:GetName(), false)
 			end
 			if focusFrame:GetAttribute('hideUI') then
@@ -235,10 +243,10 @@ local function GetFadeFrames(onlyActionBars, focusFrame)
 	if onlyActionBars then
 		frameStack = {}
 		for registeredFrame in pairs(Registry) do
-			frameStack[#frameStack + 1] = registeredFrame
+			table.insert(frameStack, registeredFrame)
 		end
 		for actionBar in ConsolePort:GetActionBars() do
-			frameStack[#frameStack + 1] = actionBar
+			table.insert(frameStack, actionBar)
 		end
 	else
 		frameStack = {UIParent:GetChildren()}

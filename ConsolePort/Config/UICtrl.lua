@@ -413,7 +413,7 @@ function WindowMixin:Save()
 
 	return needReload
 end
-db.PANELS[#db.PANELS + 1] = {name = "UICtrl", header = UIOPTIONS_MENU, mixin = WindowMixin, onLoad = function(UICtrl, self)
+table.insert(db.PANELS, {name = "UICtrl", header = UIOPTIONS_MENU, mixin = WindowMixin, onLoad = function(UICtrl, self)
 ---------------------------------------------------------------
 
 	UICtrl.TutorialFrame = db.Atlas.GetGlassWindow("$parentTutorialFrame", UICtrl, nil, true)
@@ -735,7 +735,11 @@ db.PANELS[#db.PANELS + 1] = {name = "UICtrl", header = UIOPTIONS_MENU, mixin = W
 	local iconFile, iconTCoords = CPAPI:GetClassIcon()
 
 	for index, info in pairs(actionBarStyles) do
-		local button = CreateFrame("CheckButton", "$parentStyle"..#UICtrl.HotKeyModule.Styles+1, UICtrl.HotKeyModule)
+		local stylesSize = 0
+		for _ in pairs(UICtrl.HotKeyModule.Styles) do
+			stylesSize = stylesSize + 1
+		end
+		local button = CreateFrame("CheckButton", "$parentStyle"..stylesSize+1, UICtrl.HotKeyModule)
 		button:SetSize(39, 39)
 
 		button.Checked = button:CreateTexture(nil, "ARTWORK")
@@ -772,7 +776,7 @@ db.PANELS[#db.PANELS + 1] = {name = "UICtrl", header = UIOPTIONS_MENU, mixin = W
 			button:SetChecked(false)
 		end
 
-		styles[#styles + 1] = button
+		table.insert(styles, button)
 
 		button:SetScript("OnClick", function(self)
 			for i, button in pairs(styles) do

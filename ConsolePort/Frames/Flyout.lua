@@ -119,7 +119,7 @@ end
 function Selector:SetSelection(index)
 	for i, button in pairs(self.Buttons) do
 		button:UnlockHighlight()
-		FadeIn(button, 0.2, button:GetAlpha(), 1 - (abs(i - index) / #self.Buttons))
+		FadeIn(button, 0.2, button:GetAlpha(), 1 - (abs(i - index) / db.table.count(self.Buttons)))
 	end
 	local selected = self.Buttons[index]
 	if selected then

@@ -800,7 +800,7 @@ setmetatable(db, {
 
 local function __cd(root, default, raw)
 	local path = {strsplit('/', raw)}
-	local depth = #path
+	local depth = db.table.count(path)
 	if (depth == 1) then
 		return default, raw
 	else

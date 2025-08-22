@@ -87,8 +87,8 @@ end
 
 function Scroll:ScrollTo(id)
 	local maxScroll = self:GetHorizontalScrollRange()
-	local stepSize = maxScroll / #Category.Buttons
-	local new = id <= 3 and 0 or id >= (#Category.Buttons - 2) and maxScroll or stepSize * (id - 1)
+	local stepSize = maxScroll / db.table.count(Category.Buttons)
+	local new = id <= 3 and 0 or id >= (db.table.count(Category.Buttons) - 2) and maxScroll or stepSize * (id - 1)
 	self.StepSize = stepSize
 	self.Target = new < 0 and 0 or new > maxScroll and maxScroll or new
 	self:SetScript("OnUpdate", self.SmoothScroll)
@@ -362,7 +362,7 @@ local function CategoryOnEnter(self)
 end
 
 function Category:AddNew(header, bannerAtlas)
-	local id = #self.Buttons+1
+	local id = db.table.count(self.Buttons)+1
 	local banner = db.Atlas.GetFutureButton("$parentHeader"..id, self, nil, bannerAtlas, 110, 30, true)
 	banner.id = id
 	banner:SetText(header)
@@ -530,7 +530,7 @@ function WindowMixin:OnKeyDown(key)
 	local t2 = GetBindingKey("CP_T2")
 	if key == t1 or key == t2 then
 		self:SetPropagateKeyboardInput(false)
-		local containerID, numCategories = self.Container.id, #self.Category.Buttons
+		local containerID, numCategories = self.Container.id, db.table.count(self.Category.Buttons)
 		if containerID then
 			if key == t1 and containerID - 1 > 0 then
 				self:OpenCategory(containerID - 1)

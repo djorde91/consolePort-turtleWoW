@@ -108,11 +108,26 @@ local function spairs(t, order)
 	end
 end
 ---------------------------------------------------------------
+-- count: Count the number of entries in a table (safe for WoW Classic 1.12.1)
+---------------------------------------------------------------
+local function count(t)
+	if type(t) ~= "table" then
+		print("ConsolePort: Warning - Attempted to count non-table value:", type(t), tostring(t))
+		return 0
+	end
+	local count = 0
+	for _ in pairs(t) do
+		count = count + 1
+	end
+	return count
+end
+
+---------------------------------------------------------------
 local function mixin(object, mixin1, mixin2, mixin3, mixin4, mixin5)
 	local scriptSupport = (type(object.HasScript) == 'function')
 	local mixins = {mixin1, mixin2, mixin3, mixin4, mixin5}
 	
-	for i = 1, #mixins do
+	for i = 1, 5 do
 		local mixin = mixins[i]
 		if not mixin then break end
 
@@ -135,3 +150,4 @@ end
 tbl.copy, tbl.flip, tbl.compare = copy, flip, compare
 tbl.unravel, tbl.unravelv = unravel, unravelv
 tbl.spairs, tbl.mixin = spairs, mixin
+tbl.count = count

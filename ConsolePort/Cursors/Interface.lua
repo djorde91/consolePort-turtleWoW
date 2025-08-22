@@ -414,7 +414,8 @@ function Node:IsDrawn(node, super)
 end
 
 function Node:CacheItem(node, object, super)
-	tinsert(self.cache, node.hasPriority and 1 or #self.cache + 1, {
+	local insertPos = node.hasPriority and 1 or db.table.count(self.cache) + 1
+	tinsert(self.cache, insertPos, {
 		node   = node;
 		object = object;
 		super  = super;
@@ -570,7 +571,7 @@ end
 function Node:SetCurrent()	
 	if old and old.node:IsVisible() and Node:IsDrawn(old.node) then
 		current = old
-	elseif #self.cache > 0 and (not current or not current.node:IsVisible()) then
+	elseif db.table.count(self.cache) > 0 and (not current or not current.node:IsVisible()) then
 		local x, y, targNode = Cursor:GetCenter()
 		if not x or not y then
 			targNode = self.cache[1]

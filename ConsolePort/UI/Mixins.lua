@@ -87,7 +87,7 @@ MIXINS = {
 			local regions = {self:GetChildren()}
 			if not self.ignoreRegions then
 				for _, v in pairs({self:GetRegions()}) do
-					regions[#regions + 1] = v
+					table.insert(regions, v)
 				end
 			end
 			return pairs(regions)
@@ -96,7 +96,7 @@ MIXINS = {
 			local adjustable = {}
 			for _, child in self:IterateChildren() do
 				if child.AdjustToChildren then
-					adjustable[#adjustable + 1] = child
+					table.insert(adjustable, child)
 				end
 			end
 			return pairs(adjustable)

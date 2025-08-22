@@ -127,7 +127,7 @@ function AceSerializer:Serialize(arg1, arg2, arg3, arg4, arg5)
 	local nres = 1
 	local args = {arg1, arg2, arg3, arg4, arg5}
 	
-	for i=1,#args do
+	for i=1,5 do
 		local v = args[i]
 		if v then
 			nres = SerializeValue(v, serializeTbl, nres)

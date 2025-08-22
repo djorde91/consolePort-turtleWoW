@@ -263,7 +263,7 @@ function ConsolePort:CreateSlashHandler()
 		local cvars = ConsolePort:GetCompleteCVarList()
 		if type(msg) == 'string' then
 			for word in msg:gmatch('%S+') do
-				inputs[#inputs + 1] = word
+				table.insert(inputs, word)
 			end
 		end
 		local funcName = inputs[1]

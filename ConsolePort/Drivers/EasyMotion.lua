@@ -399,7 +399,7 @@ end
 function EM:GetHotkey(binding)
 	local frame
 	self.ActiveFrames = self.ActiveFrames + 1
-	if self.ActiveFrames > #self.FramePool then
+	if self.ActiveFrames > db.table.count(self.FramePool) then
 		frame = CreateFrame('Frame', 'ConsolePortEasyMotionDisplay'..self.ActiveFrames, self)
 		frame:SetFrameStrata("TOOLTIP")
 		frame.size = db.Settings.unitHotkeySize or 32
@@ -442,7 +442,7 @@ function HotkeyMixin:Clear()
 end
 
 function HotkeyMixin:Adjust(depth)
-	local offset = depth and #self.ShownKeys + depth or #self.ShownKeys
+	local offset = depth and db.table.count(self.ShownKeys) + depth or db.table.count(self.ShownKeys)
 	self:SetWidth( offset * ( self.size * 0.75 ) )
 end
 

@@ -54,7 +54,7 @@ local function FadeOnUpdate(self, elapsed)
 		index = index + 1
 	end
 	
-	if #FADEFRAMES == 0 then
+	if db.table.count(FADEFRAMES) == 0 then
 		self:SetScript("OnUpdate", nil)
 	end
 end
@@ -136,7 +136,7 @@ end
 -- Called every frame to update flashing frames
 local function FlashOnUpdate(self, elapsed)
 	local frame
-	local index = #FLASHFRAMES
+	local index = db.table.count(FLASHFRAMES)
 	
 	-- Update timers for all synced frames
 	for syncId, timer in pairs(FlashTimers) do
@@ -176,7 +176,7 @@ local function FlashOnUpdate(self, elapsed)
 		index = index - 1
 	end
 	
-	if #FLASHFRAMES == 0 then
+	if db.table.count(FLASHFRAMES) == 0 then
 		self:SetScript("OnUpdate", nil)
 	end
 end

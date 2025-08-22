@@ -453,7 +453,7 @@ end
 function Field:Compile()
 	if not self:IsEnabled() then 
 		return
-	elseif self.Buttons and #self.Buttons > 0 then
+	elseif self.Buttons and db.table.count(self.Buttons) > 0 then
 		local t = {}
 		for _, field in self:GetButtons() do
 			local key, val = field:Compile()
@@ -505,7 +505,7 @@ function Field:IsCollapsed() return self.collapsed end
 
 function Field:AddChild(child)
 	if not self.Buttons then self.Buttons = {} end
-	local numEntries = #self.Buttons
+	local numEntries = db.table.count(self.Buttons)
 	self.Buttons[numEntries + 1] = child
 	child:SetParent(self)
 	child:ClearAllPoints()

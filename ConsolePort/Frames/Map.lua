@@ -64,12 +64,16 @@ local function ClickMapNode(self)
 end
 
 local function CreateMapNode()
-	local node = CreateFrame("Button", "MapNode"..#mapNodes+1, WorldMapScrollFrame)
+	local mapNodesSize = 0
+	for _ in pairs(mapNodes) do
+		mapNodesSize = mapNodesSize + 1
+	end
+	local node = CreateFrame("Button", "MapNode"..mapNodesSize+1, WorldMapScrollFrame)
 	node:SetScript("OnEnter", EnterNode)
 	node:SetScript("OnLeave", LeaveNode)
 	node:SetScript("OnClick", ClickMapNode)
 	node:SetSize(4,4)
-	mapNodes[#mapNodes + 1] = node
+	table.insert(mapNodes, node)
 	return node
 end
 
