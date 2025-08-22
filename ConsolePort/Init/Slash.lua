@@ -170,24 +170,24 @@ function ConsolePort:CreateSlashHandler()
 				GetAddOnMetadata(addOn, 'Version');
 				GetBuildInfo();
 			}; 
-			['Calibration'] = __tpop(settings, 'calibration');
+			['Calibration'] = __tpop(settings, 'calibration'),
 			['Controller'] 	= {
-				['Type'] 	= __tpop(settings, 'type');
-				['Force'] 	= __tpop(settings, 'forceController'); 
-				['GuideFix']= __tpop(settings, 'skipGuideBtn'); 
-			};
-			['Loadout']		= (not discordOutput) and copy(db.Bindings) or nil;
+				['Type'] 	= __tpop(settings, 'type'),
+				['Force'] 	= __tpop(settings, 'forceController'), 
+				['GuideFix']= __tpop(settings, 'skipGuideBtn'), 
+			},
+			['Loadout']		= (not discordOutput) and copy(db.Bindings) or nil,
 			['Mouse'] 		= {
-				['Camera'] 	= __tpop(mouse, 'Camera');
-				['Cursor'] 	= __tpop(mouse, 'Cursor');
-			};
+				['Camera'] 	= __tpop(mouse, 'Camera'),
+				['Cursor'] 	= __tpop(mouse, 'Cursor'),
+			},
 			['Modifiers'] 	= {
-				['CP_M1']	= __tpop(settings, 'CP_M1');
-				['CP_M2']	= __tpop(settings, 'CP_M2');
-				['CP_T1']	= __tpop(settings, 'CP_T1');
-				['CP_T2']	= __tpop(settings, 'CP_T2');
-				['CP_T3']	= __tpop(settings, 'CP_T3');
-				['CP_T4']	= __tpop(settings, 'CP_T4');
+				['CP_M1']	= __tpop(settings, 'CP_M1'),
+				['CP_M2']	= __tpop(settings, 'CP_M2'),
+				['CP_T1']	= __tpop(settings, 'CP_T1'),
+				['CP_T2']	= __tpop(settings, 'CP_T2'),
+				['CP_T3']	= __tpop(settings, 'CP_T3'),
+				['CP_T4']	= __tpop(settings, 'CP_T4'),
 			};
 			['Settings'] 	= settings;
 		}) do
@@ -228,32 +228,32 @@ function ConsolePort:CreateSlashHandler()
 
 	local instructions = {
 		['actionbar'] = {	
-			desc = SLASH.ACTIONBAR_SHOW;
-			func = ShowActionBarPopup };
+			desc = SLASH.ACTIONBAR_SHOW,
+			func = ShowActionBarPopup },
 		['debug'] = {
-			desc = SLASH.DEBUG_OUTPUT; 
-			func = Debug };
+			desc = SLASH.DEBUG_OUTPUT, 
+			func = Debug },
 		['binds'] = {
-			desc = SLASH.BINDS;
-			func = ShowBinds };
+			desc = SLASH.BINDS,
+			func = ShowBinds },
 		['config'] = {
-			desc = SLASH.CONFIG;
-			func = ShowConfig };
+			desc = SLASH.CONFIG,
+			func = ShowConfig },
 		['cvar'] = {
-			desc = SLASH.CVARLIST;
-			func = PrintCVars };
+			desc = SLASH.CVARLIST,
+			func = PrintCVars },
 		['help'] = {
-			desc = HELP_LABEL .. ' & ' .. SHOW_TUTORIALS;
-			func = ShowHelp };
+			desc = HELP_LABEL .. ' & ' .. SHOW_TUTORIALS,
+			func = ShowHelp },
 		['recalibrate'] = {
-			desc = SLASH.RECALIBRATE; 
-			func = ShowCalibration };
+			desc = SLASH.RECALIBRATE, 
+			func = ShowCalibration },
 		['resetall'] = {
-			desc = SLASH.RESET; 
-			func = ResetAll };
+			desc = SLASH.RESET, 
+			func = ResetAll },
 		['type'] = {
-			desc = SLASH.TYPE;
-			func = ShowSplash };
+			desc = SLASH.TYPE,
+			func = ShowSplash },
 	}
 
 

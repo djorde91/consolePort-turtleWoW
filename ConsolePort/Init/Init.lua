@@ -6,6 +6,10 @@
 -- 3. Create the slash handler function.
 
 -- Fix for WoW Classic 1.12.1 - properly define addon and db
+-- Ensure ConsolePort global exists
+if not ConsolePort then
+    ConsolePort = CreateFrame("Frame", "ConsolePort")
+end
 local addOn = ConsolePort
 local db = ConsolePort
 ---------------------------------------------------------------
@@ -111,6 +115,31 @@ end
 if not SetPortraitTexture then
     function SetPortraitTexture(texture, unit)
         SetPortrait(texture, unit)
+    end
+end
+
+-- RegisterStateDriver compatibility (if it doesn't exist)
+if not RegisterStateDriver then
+    function RegisterStateDriver(frame, state, conditional)
+        -- Simple fallback - just store the state for later use
+        frame.stateDriver = frame.stateDriver or {}
+        frame.stateDriver[state] = conditional
+    end
+end
+
+-- WrapScript compatibility (if it doesn't exist)
+if not CreateFrame("Frame").WrapScript then
+    local function WrapScript(frame, scriptType, scriptBody)
+        -- Simple fallback - just store the script for later use
+        frame.wrappedScripts = frame.wrappedScripts or {}
+        frame.wrappedScripts[scriptType] = scriptBody
+    end
+    
+    -- Add WrapScript to all frames
+    local frameMeta = getmetatable(CreateFrame("Frame"))
+    if frameMeta then
+        frameMeta.__index = frameMeta.__index or {}
+        frameMeta.__index.WrapScript = WrapScript
     end
 end
 

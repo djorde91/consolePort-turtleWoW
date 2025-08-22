@@ -218,7 +218,11 @@ for func, hook in pairs({
 	PetMoveTo = Camera.Stop,
 	-- Hook action usage to manipulate mouselook
 	UseAction = Camera.OnAction, 
-}) do hooksecurefunc(func, hook) end
+}) do 
+	if _G[func] then
+		hooksecurefunc(func, hook) 
+	end
+end
 
 ---------------------------------------------------------------
 -- Mouse function wrappers in case of extended functionality
