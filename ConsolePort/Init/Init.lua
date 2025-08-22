@@ -143,6 +143,15 @@ if not CreateFrame("Frame").WrapScript then
     end
 end
 
+-- Missing global variables compatibility
+if not SET_FOCUS then
+    SET_FOCUS = "Set Focus"
+end
+
+if not FOCUS_CAST_KEY_TEXT then
+    FOCUS_CAST_KEY_TEXT = "Focus Cast"
+end
+
 ---------------------------------------------------------------
 
 function ConsolePort:LoadSettings()

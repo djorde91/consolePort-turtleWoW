@@ -1,4 +1,4 @@
-CPAPI = {};
+CPAPI = {}
 
 local function GetClassInfo()	return UnitClass('player') end
 local function GetClassFile()   return select(2, UnitClass('player')) end
@@ -49,52 +49,52 @@ function CPAPI:GetCharacterMetadata()
 	return GetClassID(), GetClassInfo()
 end
 
-function CPAPI:GetNumQuestWatches(...)
+CPAPI.GetNumQuestWatches = function(self, ...)
 	return GetNumQuestWatches and GetNumQuestWatches(...) or 0
 end
 
-function CPAPI:GetNumWorldQuestWatches(...)
+CPAPI.GetNumWorldQuestWatches = function(self, ...)
 	return GetNumWorldQuestWatches and GetNumWorldQuestWatches(...) or 0
 end
 
-function CPAPI:GetQuestLogSpecialItemInfo(...)
+CPAPI.GetQuestLogSpecialItemInfo = function(self, ...)
 	return GetQuestLogSpecialItemInfo and GetQuestLogSpecialItemInfo(...)
 end
 
-function CPAPI:UnitIsBattlePet(...)
+CPAPI.UnitIsBattlePet = function(self, ...)
 	return UnitIsBattlePet and UnitIsBattlePet(...)
 end
 
-function CPAPI:UnitThreatSituation(...)
+CPAPI.UnitThreatSituation = function(self, ...)
 	return UnitThreatSituation and UnitThreatSituation(...)
 end
 
-function CPAPI:IsXPUserDisabled(...)
+CPAPI.IsXPUserDisabled = function(self, ...)
 	return IsXPUserDisabled and IsXPUserDisabled(...)
 end
 
-function CPAPI:IsSpellOverlayed(...)
+CPAPI.IsSpellOverlayed = function(self, ...)
 	return IsSpellOverlayed and IsSpellOverlayed(...)
 end
 
-function CPAPI:GetFriendshipReputation(...)
+CPAPI.GetFriendshipReputation = function(self, ...)
 	return GetFriendshipReputation and GetFriendshipReputation(...)
 end
 
-function CPAPI:IsPartyLFG(...)
+CPAPI.IsPartyLFG = function(self, ...)
 	return IsPartyLFG and IsPartyLFG(...)
 end
 
-function CPAPI:IsInLFGDungeon(...)
+CPAPI.IsInLFGDungeon = function(self, ...)
 	return IsInLFGDungeon and IsInLFGDungeon(...)
 end
 
 
 -- Project identifiers, should return true or nil (nil for dynamic table insertions)
-function CPAPI:IsClassicVersion(...)
+CPAPI.IsClassicVersion = function(self, ...)
 	if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then return true end
 end
 
-function CPAPI:IsRetailVersion(...)
+CPAPI.IsRetailVersion = function(self, ...)
 	if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then return true end
 end

@@ -189,7 +189,7 @@ function ConsolePort:CreateSlashHandler()
 				['CP_T3']	= __tpop(settings, 'CP_T3'),
 				['CP_T4']	= __tpop(settings, 'CP_T4'),
 			};
-			['Settings'] 	= settings;
+			['Settings'] 	= settings,
 		}) do
 			editBox:AddMessage(('\n|cffffe00a%s:|r'):format(header))
 			DevTools_Dump(data)
