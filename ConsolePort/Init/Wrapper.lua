@@ -49,52 +49,92 @@ function CPAPI:GetCharacterMetadata()
 	return GetClassID(), GetClassInfo()
 end
 
-CPAPI.GetNumQuestWatches = function(self, ...)
-	return GetNumQuestWatches and GetNumQuestWatches(...) or 0
+function CPAPI:GetNumQuestWatches()
+	return GetNumQuestWatches and GetNumQuestWatches() or 0
 end
 
-CPAPI.GetNumWorldQuestWatches = function(self, ...)
-	return GetNumWorldQuestWatches and GetNumWorldQuestWatches(...) or 0
+function CPAPI:GetNumWorldQuestWatches()
+	return GetNumWorldQuestWatches and GetNumWorldQuestWatches() or 0
 end
 
-CPAPI.GetQuestLogSpecialItemInfo = function(self, ...)
-	return GetQuestLogSpecialItemInfo and GetQuestLogSpecialItemInfo(...)
+function CPAPI:GetQuestLogSpecialItemInfo(questIndex)
+	if GetQuestLogSpecialItemInfo then
+		return GetQuestLogSpecialItemInfo(questIndex)
+	else
+		-- Fallback for Classic - return nil or default values
+		return nil, nil, nil, nil, nil
+	end
 end
 
-CPAPI.UnitIsBattlePet = function(self, ...)
-	return UnitIsBattlePet and UnitIsBattlePet(...)
+function CPAPI:UnitIsBattlePet(unit)
+	if UnitIsBattlePet then
+		return UnitIsBattlePet(unit)
+	else
+		-- Fallback for Classic - battle pets don't exist
+		return false
+	end
 end
 
-CPAPI.UnitThreatSituation = function(self, ...)
-	return UnitThreatSituation and UnitThreatSituation(...)
+function CPAPI:UnitThreatSituation(unit, target)
+	if UnitThreatSituation then
+		return UnitThreatSituation(unit, target)
+	else
+		-- Fallback for Classic - return 0 (no threat)
+		return 0
+	end
 end
 
-CPAPI.IsXPUserDisabled = function(self, ...)
-	return IsXPUserDisabled and IsXPUserDisabled(...)
+function CPAPI:IsXPUserDisabled()
+	if IsXPUserDisabled then
+		return IsXPUserDisabled()
+	else
+		-- Fallback for Classic - XP is always enabled
+		return false
+	end
 end
 
-CPAPI.IsSpellOverlayed = function(self, ...)
-	return IsSpellOverlayed and IsSpellOverlayed(...)
+function CPAPI:IsSpellOverlayed(spellID)
+	if IsSpellOverlayed then
+		return IsSpellOverlayed(spellID)
+	else
+		-- Fallback for Classic - no spell overlays
+		return false
+	end
 end
 
-CPAPI.GetFriendshipReputation = function(self, ...)
-	return GetFriendshipReputation and GetFriendshipReputation(...)
+function CPAPI:GetFriendshipReputation(factionID)
+	if GetFriendshipReputation then
+		return GetFriendshipReputation(factionID)
+	else
+		-- Fallback for Classic - no friendship reputation
+		return nil, nil, nil, nil, nil
+	end
 end
 
-CPAPI.IsPartyLFG = function(self, ...)
-	return IsPartyLFG and IsPartyLFG(...)
+function CPAPI:IsPartyLFG()
+	if IsPartyLFG then
+		return IsPartyLFG()
+	else
+		-- Fallback for Classic - no LFG system
+		return false
+	end
 end
 
-CPAPI.IsInLFGDungeon = function(self, ...)
-	return IsInLFGDungeon and IsInLFGDungeon(...)
+function CPAPI:IsInLFGDungeon()
+	if IsInLFGDungeon then
+		return IsInLFGDungeon()
+	else
+		-- Fallback for Classic - no LFG system
+		return false
+	end
 end
 
 
 -- Project identifiers, should return true or nil (nil for dynamic table insertions)
-CPAPI.IsClassicVersion = function(self, ...)
+function CPAPI:IsClassicVersion()
 	if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then return true end
 end
 
-CPAPI.IsRetailVersion = function(self, ...)
+function CPAPI:IsRetailVersion()
 	if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then return true end
 end
