@@ -1,147 +1,141 @@
-8/22 21:31:25.338  ** Loading table of contents Interface\FrameXML\FrameXML.toc
-8/22 21:31:25.338  Couldn't open Interface\FrameXML\Turtle_Barbershop\Turtle_BarbershopTemplates.xml
-8/22 21:31:25.338  Couldn't open Interface\FrameXML\Turtle_Barbershop\Turtle_Barbershop.xml
-8/22 21:31:25.338  ++ Loading file Interface\FrameXML\Turtle_TransmogUI\Turtle_TransmogUI.xml
-8/22 21:31:25.338  Couldn't find inherited node: TransmogPlayerSlotSmall
-8/22 21:31:25.338  ++ Loading file Interface\FrameXML\LFT\LFT.xml
-8/22 21:31:25.338  SETALLPOINTS set to true in frame with anchors (ignored)
-8/22 21:31:25.338  Loading add-on ConsolePort
-8/22 21:31:25.338  ** Loading table of contents Interface\AddOns\ConsolePort\ConsolePort.toc
-8/22 21:31:25.338  ++ Loading file Interface\AddOns\ConsolePort\XML\Manifest.xml
-8/22 21:31:25.338  ++ Loading file Interface\AddOns\ConsolePort\XML\Frames\GlobalFrames.xml
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerStateTemplate, SecureActionButtonTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerStateTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerBaseTemplate
-8/22 21:31:25.338  Couldn't find inherited node: Fancy22Font
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerAttributeTemplate
-8/22 21:31:25.338  Texture <unnamed>: Unable to load texture file 1243535
-8/22 21:31:25.338  Couldn't find inherited node: MovieSubtitleFont
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerBaseTemplate, SecureActionButtonTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerStateTemplate, SecureHandlerShowHideTemplate, SecureActionButtonTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerBaseTemplate, SecureActionButtonTemplate
-8/22 21:31:25.338  Texture <unnamed>: Unable to load texture file Interface\LevelUp\LevelUpTex
-8/22 21:31:25.338  Texture <unnamed>: Unable to load texture file Interface\LevelUp\LevelUpTex
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerStateTemplate, SecureActionButtonTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureActionButtonTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureActionButtonTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureActionButtonTemplate
-8/22 21:31:25.338  Couldn't find inherited node: InsecureActionButtonTemplate
-8/22 21:31:25.338  Couldn't find inherited node: HelpPlateArrowUP
-8/22 21:31:25.338  Couldn't find inherited node: HelpPlateArrowDOWN
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerStateTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerClickTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerStateTemplate, SecureActionButtonTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerBaseTemplate
-8/22 21:31:25.338  ++ Loading file Interface\AddOns\ConsolePort\Locale\Locale.xml
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Locale\enUS.lua:251: attempt to concatenate global `SET_FOCUS' (a nil value)
-8/22 21:31:25.338  ++ Loading file Interface\AddOns\ConsolePort\Controllers\Controllers.xml
-8/22 21:31:25.338  Error loading Interface\AddOns\ConsolePort\Controllers\STEAM/Steam.lua
-8/22 21:31:25.338  Error loading Interface\AddOns\ConsolePort\Controllers\XBOX/Xbox.lua
-8/22 21:31:25.338  Error loading Interface\AddOns\ConsolePort\Controllers\XBOXELITE/XboxElite.lua
-8/22 21:31:25.338  Error loading Interface\AddOns\ConsolePort\Controllers\PS4/PS4.lua
-8/22 21:31:25.338  Error loading Interface\AddOns\ConsolePort\Controllers\WII/WII.lua
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Init\Wrapper.lua:53: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Init\Init.lua:81: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Init\Slash.lua:266: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Init\Table.lua:113: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Init\Theme.lua:51: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\UI\Alpha.lua:57: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Frames\Atlas.lua:353: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Frames\Config.lua:90: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Config\Lookup.lua:24: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Config\Splash.lua:39: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Config\Binds.lua:298: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Config\Controls.lua:373: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Config\Help.lua:177: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Config\UICtrl.lua:416: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Config\Hotkey.lua:186: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Core\Camera.lua:33: `)' expected near `'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Core\Mouse.lua:221: attempt to call global `hooksecurefunc' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Core\Cvar.lua:34: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Core\Events.lua:75: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Core\UICore.lua:107: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Core\Callback.lua:23: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Drivers\Button.lua:16: attempt to call global `RegisterStateDriver' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Drivers\Pager.lua:8: attempt to call method `WrapScript' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Drivers\Radial.lua:36: `}' expected (to close `{' at line 34) near `x00000001'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Drivers\FocusHold.lua:1: attempt to index global `CPAPI' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Drivers\EasyMotion.lua:427: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Drivers\TargetAI.lua:153: unexpected symbol near `#'
-8/22 21:31:25.338  ...rface\AddOns\ConsolePort\Drivers\OverrideBarExit.lua:1: attempt to index global `CPAPI' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Drivers\UIStack.lua:27: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Drivers\UITracker.lua:102: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Drivers\UIProbe.lua:22: attempt to index global `ConsolePortUI' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Drivers\UIControl.lua:238: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Cursors\Interface.lua:417: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Cursors\UnitFrames.lua:369: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Frames\Hooks.lua:28: attempt to call method `SetAttribute' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Frames\Hints.lua:22: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Frames\Popup.lua:49: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Frames\Stacksplit.lua:16: attempt to call method `HookScript' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Frames\Utility.lua:16: attempt to call field `GetFaders' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Frames\Flyout.lua:122: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Frames\Helper.lua:128: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Frames\Nameplate.lua:15: attempt to index a string value
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\UI\Utils.lua:2: attempt to index field `table' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\UI\Media.lua:102: attempt to index local `UI' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\UI\Mixins.lua:16: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\UI\Tooltip.lua:75: unexpected symbol near `#'
-8/22 21:31:25.338  ++ Loading file Interface\AddOns\ConsolePort\Plugins\Plugins.xml
-8/22 21:31:25.338  [string "Interface\AddOns\ConsolePort\Plugins\Plugin..."]:12: attempt to call global `select' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Plugins\Blizzard_MapCanvas.lua:45: unexpected symbol near `#'
-8/22 21:31:25.338  [string "Interface\AddOns\ConsolePort\Plugins\Plugin..."]:12: attempt to call global `select' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePort\Plugins\Storyline.lua:218: `then' expected near `'
-8/22 21:31:25.338  [string "Interface\AddOns\ConsolePort\Plugins\Plugin..."]:12: attempt to call global `select' (a nil value)
-8/22 21:31:25.338  Found binding CP_L_UP with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_L_DOWN with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_L_LEFT with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_L_RIGHT with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_R_UP with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_R_DOWN with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_R_LEFT with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_R_RIGHT with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_X_RIGHT with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_X_CENTER with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_X_LEFT with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_T1 with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_T2 with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_T3 with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_T4 with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_T5 with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_T6 with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_T7 with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_T8 with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_RADIAL_VERT with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Found binding CP_RADIAL_HORZ with no script in Interface\AddOns\ConsolePort\Bindings.xml
-8/22 21:31:25.338  Loading add-on ConsolePortBar
-8/22 21:31:25.338  ** Loading table of contents Interface\AddOns\ConsolePortBar\ConsolePortBar.toc
-8/22 21:31:25.338  ++ Loading file Interface\AddOns\ConsolePortBar\Frame.xml
-8/22 21:31:25.338  Couldn't find inherited node: SecureHandlerStateTemplate, SecureHandlerShowHideTemplate
-8/22 21:31:25.338  Texture ConsolePortBarBottomLine: Unable to load texture file Interface\LevelUp\LevelUpTex
-8/22 21:31:25.338  Couldn't find inherited node: SecureActionButtonTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureActionButtonTemplate
-8/22 21:31:25.338  Couldn't find inherited node: SecureActionButtonTemplate
-8/22 21:31:25.338  Interface\AddOns\ConsolePortBar\Libs\ActionButton.lua:362: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePortBar\Core\Lookup.lua:4: attempt to call method `GetData' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePortBar\Core\Wrapper.lua:203: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePortBar\Core\Bar.lua:79: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePortBar\Core\Config.lua:267: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePortBar\Custom\Blizzard.lua:167: unexpected symbol near `...'
-8/22 21:31:25.338  ...terface\AddOns\ConsolePortBar\Custom\ConsolePort.lua:7: attempt to index local `bar' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePortBar\Components\Pet.lua:202: unexpected symbol near `...'
-8/22 21:31:25.338  ...terface\AddOns\ConsolePortBar\Components\MenuBar.lua:4: attempt to call method `GetData' (a nil value)
-8/22 21:31:25.338  ++ Loading file Interface\AddOns\ConsolePortBar\Components\WatchBars.xml
-8/22 21:31:25.338  Interface\AddOns\ConsolePortBar\Components\WatchBarMixins.lua:131: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePortBar\Components\WatchBars.lua:292: unexpected symbol near `#'
-8/22 21:31:25.338  Loading add-on ConsolePortUI_Loot
-8/22 21:31:25.338  ** Loading table of contents Interface\AddOns\ConsolePortUI_Loot\ConsolePortUI_Loot.toc
-8/22 21:31:25.338  ++ Loading file Interface\AddOns\ConsolePortUI_Loot\Frame.xml
-8/22 21:31:25.338  Interface\AddOns\ConsolePortUI_Loot\LootButton.lua:3: attempt to index global `ConsolePortUI' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePortUI_Loot\Logic.lua:46: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePortUI_Loot\Frame.lua:6: attempt to index local `UI' (a nil value)
-8/22 21:31:25.338  Loading add-on ConsolePortUI_Menu
-8/22 21:31:25.338  ** Loading table of contents Interface\AddOns\ConsolePortUI_Menu\ConsolePortUI_Menu.toc
-8/22 21:31:25.338  Interface\AddOns\ConsolePortUI_Menu\Menu_Button.lua:3: attempt to call method `GetData' (a nil value)
-8/22 21:31:25.338  Interface\AddOns\ConsolePortUI_Menu\Menu_LootButton.lua:139: unexpected symbol near `#'
-8/22 21:31:25.338  Interface\AddOns\ConsolePortUI_Menu\Menu_Frame.lua:55: unexpected symbol near `...'
-8/22 21:31:25.338  Interface\AddOns\ConsolePortUI_Menu\Menu_Logic.lua:3: attempt to index local `L' (a nil value)
+8/22 22:41:32.541  ** Loading table of contents Interface\FrameXML\FrameXML.toc
+8/22 22:41:32.541  Couldn't open Interface\FrameXML\Turtle_Barbershop\Turtle_BarbershopTemplates.xml
+8/22 22:41:32.541  Couldn't open Interface\FrameXML\Turtle_Barbershop\Turtle_Barbershop.xml
+8/22 22:41:32.541  ++ Loading file Interface\FrameXML\Turtle_TransmogUI\Turtle_TransmogUI.xml
+8/22 22:41:32.541  Couldn't find inherited node: TransmogPlayerSlotSmall
+8/22 22:41:32.541  ++ Loading file Interface\FrameXML\LFT\LFT.xml
+8/22 22:41:32.541  SETALLPOINTS set to true in frame with anchors (ignored)
+8/22 22:41:32.541  Loading add-on ConsolePort
+8/22 22:41:32.541  ** Loading table of contents Interface\AddOns\ConsolePort\ConsolePort.toc
+8/22 22:41:32.541  ++ Loading file Interface\AddOns\ConsolePort\XML\Manifest.xml
+8/22 22:41:32.541  ++ Loading file Interface\AddOns\ConsolePort\XML\Frames\GlobalFrames.xml
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerStateTemplate, SecureActionButtonTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerStateTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerBaseTemplate
+8/22 22:41:32.541  Couldn't find inherited node: Fancy22Font
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerAttributeTemplate
+8/22 22:41:32.541  Texture <unnamed>: Unable to load texture file 1243535
+8/22 22:41:32.541  Couldn't find inherited node: MovieSubtitleFont
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerBaseTemplate, SecureActionButtonTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerStateTemplate, SecureHandlerShowHideTemplate, SecureActionButtonTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerBaseTemplate, SecureActionButtonTemplate
+8/22 22:41:32.541  Texture <unnamed>: Unable to load texture file Interface\LevelUp\LevelUpTex
+8/22 22:41:32.541  Texture <unnamed>: Unable to load texture file Interface\LevelUp\LevelUpTex
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerStateTemplate, SecureActionButtonTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureActionButtonTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureActionButtonTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureActionButtonTemplate
+8/22 22:41:32.541  Couldn't find inherited node: InsecureActionButtonTemplate
+8/22 22:41:32.541  Couldn't find inherited node: HelpPlateArrowUP
+8/22 22:41:32.541  Couldn't find inherited node: HelpPlateArrowDOWN
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerStateTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerClickTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerStateTemplate, SecureActionButtonTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerBaseTemplate
+8/22 22:41:32.541  ++ Loading file Interface\AddOns\ConsolePort\Locale\Locale.xml
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Locale\enUS.lua:251: attempt to concatenate global `SET_FOCUS' (a nil value)
+8/22 22:41:32.541  ++ Loading file Interface\AddOns\ConsolePort\Controllers\Controllers.xml
+8/22 22:41:32.541  Error loading Interface\AddOns\ConsolePort\Controllers\STEAM/Steam.lua
+8/22 22:41:32.541  Error loading Interface\AddOns\ConsolePort\Controllers\XBOX/Xbox.lua
+8/22 22:41:32.541  Error loading Interface\AddOns\ConsolePort\Controllers\XBOXELITE/XboxElite.lua
+8/22 22:41:32.541  Error loading Interface\AddOns\ConsolePort\Controllers\PS4/PS4.lua
+8/22 22:41:32.541  Error loading Interface\AddOns\ConsolePort\Controllers\WII/WII.lua
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Init\Init.lua:142: attempt to index field `__index' (a function value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Init\Slash.lua:266: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Init\Table.lua:115: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Init\Theme.lua:51: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\UI\Alpha.lua:57: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Frames\Atlas.lua:353: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Frames\Config.lua:90: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Config\Lookup.lua:803: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Config\Splash.lua:39: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Config\Binds.lua:298: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Config\Controls.lua:373: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Config\Help.lua:177: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Config\UICtrl.lua:416: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Config\Hotkey.lua:186: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Core\Camera.lua:33: `)' expected near `'nsion
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Init\Init.lua:83: attempt to index local `table' (a string value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Core\UICore.lua:107: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Drivers\Button.lua:17: attempt to call method `SetAttribute' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Drivers\Pager.lua:8: attempt to call method `WrapScript' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Drivers\Radial.lua:36: `}' expected (to close `{' at line 34) near `x00000001'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Drivers\EasyMotion.lua:402: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Drivers\TargetAI.lua:153: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Drivers\UIStack.lua:22: attempt to index field `table' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Drivers\UITracker.lua:7: attempt to index global `C_Widget' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Drivers\UIProbe.lua:22: attempt to index global `ConsolePortUI' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Drivers\UIControl.lua:238: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Cursors\Interface.lua:417: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Cursors\UnitFrames.lua:12: attempt to call field `GetFaders' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Frames\Hooks.lua:28: attempt to call method `SetAttribute' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Frames\Hints.lua:22: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Frames\Popup.lua:20: attempt to call method `HookScript' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Frames\Stacksplit.lua:16: attempt to call method `HookScript' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Frames\Utility.lua:16: attempt to call field `GetFaders' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Frames\Flyout.lua:122: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Frames\Helper.lua:302: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Frames\Nameplate.lua:15: attempt to index a string value
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\UI\Utils.lua:2: attempt to index field `table' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\UI\Media.lua:102: attempt to index local `UI' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\UI\Mixins.lua:90: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\UI\Tooltip.lua:75: unexpected symbol near `#'
+8/22 22:41:32.541  ++ Loading file Interface\AddOns\ConsolePort\Plugins\Plugins.xml
+8/22 22:41:32.541  [string "Interface\AddOns\ConsolePort\Plugins\Plugin..."]:12: attempt to call global `select' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Plugins\Blizzard_MapCanvas.lua:45: unexpected symbol near `#'
+8/22 22:41:32.541  [string "Interface\AddOns\ConsolePort\Plugins\Plugin..."]:12: attempt to call global `select' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePort\Plugins\Storyline.lua:218: `then' expected near `'���
+8/22 22:41:32.541  [string "Interface\AddOns\ConsolePort\Plugins\Plugin..."]:12: attempt to call global `select' (a nil value)
+8/22 22:41:32.541  Found binding CP_L_UP with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_L_DOWN with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_L_LEFT with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_L_RIGHT with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_R_UP with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_R_DOWN with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_R_LEFT with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_R_RIGHT with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_X_RIGHT with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_X_CENTER with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_X_LEFT with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_T1 with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_T2 with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_T3 with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_T4 with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_T5 with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_T6 with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_T7 with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_T8 with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_RADIAL_VERT with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Found binding CP_RADIAL_HORZ with no script in Interface\AddOns\ConsolePort\Bindings.xml
+8/22 22:41:32.541  Loading add-on ConsolePortBar
+8/22 22:41:32.541  ** Loading table of contents Interface\AddOns\ConsolePortBar\ConsolePortBar.toc
+8/22 22:41:32.541  ++ Loading file Interface\AddOns\ConsolePortBar\Frame.xml
+8/22 22:41:32.541  Couldn't find inherited node: SecureHandlerStateTemplate, SecureHandlerShowHideTemplate
+8/22 22:41:32.541  Texture ConsolePortBarBottomLine: Unable to load texture file Interface\LevelUp\LevelUpTex
+8/22 22:41:32.541  Couldn't find inherited node: SecureActionButtonTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureActionButtonTemplate
+8/22 22:41:32.541  Couldn't find inherited node: SecureActionButtonTemplate
+8/22 22:41:32.541  ...nterface\AddOns\ConsolePortBar\Libs\ActionButton.lua:13: attempt to call method `GetData' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePortBar\Core\Lookup.lua:4: attempt to call method `GetData' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePortBar\Core\Wrapper.lua:399: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePortBar\Core\Bar.lua:257: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePortBar\Core\Config.lua:267: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePortBar\Custom\Blizzard.lua:7: attempt to index field `data' (a nil value)
+8/22 22:41:32.541  ...terface\AddOns\ConsolePortBar\Custom\ConsolePort.lua:7: attempt to index local `bar' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePortBar\Components\Pet.lua:2: attempt to call method `GetData' (a nil value)
+8/22 22:41:32.541  ...terface\AddOns\ConsolePortBar\Components\MenuBar.lua:4: attempt to call method `GetData' (a nil value)
+8/22 22:41:32.541  ++ Loading file Interface\AddOns\ConsolePortBar\Components\WatchBars.xml
+8/22 22:41:32.541  Interface\AddOns\ConsolePortBar\Components\WatchBarMixins.lua:371: unexpected symbol near `'
+8/22 22:41:32.541  Interface\AddOns\ConsolePortBar\Components\WatchBars.lua:292: unexpected symbol near `#'
+8/22 22:41:32.541  Loading add-on ConsolePortUI_Loot
+8/22 22:41:32.541  ** Loading table of contents Interface\AddOns\ConsolePortUI_Loot\ConsolePortUI_Loot.toc
+8/22 22:41:32.541  ++ Loading file Interface\AddOns\ConsolePortUI_Loot\Frame.xml
+8/22 22:41:32.541  Interface\AddOns\ConsolePortUI_Loot\LootButton.lua:3: attempt to index global `ConsolePortUI' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePortUI_Loot\Logic.lua:68: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePortUI_Loot\Frame.lua:6: attempt to index local `UI' (a nil value)
+8/22 22:41:32.541  Loading add-on ConsolePortUI_Menu
+8/22 22:41:32.541  ** Loading table of contents Interface\AddOns\ConsolePortUI_Menu\ConsolePortUI_Menu.toc
+8/22 22:41:32.541  Interface\AddOns\ConsolePortUI_Menu\Menu_Button.lua:3: attempt to call method `GetData' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePortUI_Menu\Menu_LootButton.lua:139: unexpected symbol near `#'
+8/22 22:41:32.541  Interface\AddOns\ConsolePortUI_Menu\Menu_Frame.lua:5: attempt to call method `GetData' (a nil value)
+8/22 22:41:32.541  Interface\AddOns\ConsolePortUI_Menu\Menu_Logic.lua:3: attempt to index local `L' (a nil value)
