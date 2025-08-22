@@ -39,6 +39,80 @@ local function CancelPopup()
 end
 
 ---------------------------------------------------------------
+-- Compatibility layer for WoW Classic 1.12.1 (Turtle WoW)
+-- Add missing APIs that were introduced in later versions
+
+-- C_Timer compatibility (introduced in WoW 5.0)
+if not C_Timer then
+    C_Timer = {}
+    local timers = {}
+    local timerIndex = 0
+    
+    function C_Timer.After(delay, callback)
+        timerIndex = timerIndex + 1
+        local timer = CreateFrame("Frame")
+        timer:SetScript("OnUpdate", function(self, elapsed)
+            self.elapsed = (self.elapsed or 0) + elapsed
+            if self.elapsed >= delay then
+                callback()
+                self:SetScript("OnUpdate", nil)
+                self:Hide()
+            end
+        end)
+        timers[timerIndex] = timer
+        return timer
+    end
+end
+
+-- InCombatLockdown compatibility (introduced in WoW 3.0)
+if not InCombatLockdown then
+    function InCombatLockdown()
+        return UnitAffectingCombat("player")
+    end
+end
+
+-- hooksecurefunc compatibility (introduced in WoW 2.1)
+if not hooksecurefunc then
+    function hooksecurefunc(table, key, hookFunction)
+        local oldValue = table[key]
+        table[key] = function(...)
+            local ret = oldValue(...)
+            hookFunction(...)
+            return ret
+        end
+    end
+end
+
+-- IsAddOnLoaded compatibility (introduced in WoW 2.0)
+if not IsAddOnLoaded then
+    function IsAddOnLoaded(addonName)
+        return GetAddOnInfo(addonName) ~= nil
+    end
+end
+
+-- HasCursorItem compatibility (if it doesn't exist)
+if not HasCursorItem then
+    function HasCursorItem()
+        local cursorType = GetCursorInfo()
+        return cursorType == "item"
+    end
+end
+
+-- GetScaledCursorPosition compatibility (if it doesn't exist)
+if not GetScaledCursorPosition then
+    function GetScaledCursorPosition()
+        return GetCursorPosition()
+    end
+end
+
+-- SetPortraitTexture compatibility (if it doesn't exist)
+if not SetPortraitTexture then
+    function SetPortraitTexture(texture, unit)
+        SetPortrait(texture, unit)
+    end
+end
+
+---------------------------------------------------------------
 
 function ConsolePort:LoadSettings()
 

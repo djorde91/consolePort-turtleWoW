@@ -1,4 +1,4 @@
-## Interface: 11302
+## Interface: 11200
 ## Title: Console Port |cff69ccf0Keyboard|r
 ## Notes: Keyboard extension for Console Port.
 ## SavedVariables: ConsolePortKeyboardLayout, ConsolePortKeyboardDictionary
