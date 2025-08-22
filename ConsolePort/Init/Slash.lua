@@ -1,4 +1,6 @@
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 
 function ConsolePort:CreateSlashHandler()
 	local SLASH = db.TUTORIAL.SLASH

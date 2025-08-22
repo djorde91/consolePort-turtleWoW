@@ -5,7 +5,9 @@
 -- in order to alleviate targeting. A healer's delight. 
 -- Thanks to Yoki for original concept! :) 
 
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 ---------------------------------------------------------------
 -- Key sets and their integer identifiers for input processing
 local Key = {

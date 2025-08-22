@@ -4,7 +4,9 @@
 -- Collection of functions related to event management.
 -- Manages mouse look triggering from events.
 ---------------------------------------------------------------
-local Events, _, db = {}, ...
+-- Fix for WoW Classic 1.12.1 - properly define Events and db
+local Events = {}
+local db = ConsolePort
 ---------------------------------------------------------------
 local After, WorldFrame, MouseEvents = C_Timer.After, WorldFrame
 ---------------------------------------------------------------

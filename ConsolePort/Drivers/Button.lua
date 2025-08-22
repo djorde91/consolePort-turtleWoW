@@ -6,7 +6,9 @@
 -- direct 'clicking' causes taint to spread in a lot of cases.
 -- These buttons are under-the-hood and invisible to the user.
 
+-- Fix for WoW Classic 1.12.1 - properly define variables
 local db = ConsolePort
+local cfg = ConsolePort.Mouse
 local CORE, HANDLE, KEY = ConsolePort, ConsolePortButtonHandler, db.KEY
 ---------------------------------------------------------------
 local Button = {}

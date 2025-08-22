@@ -2,7 +2,9 @@
 
 -- Idea abandoned for now, but this seems like it could be useful.
 
-local an, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define an and ab
+local an = "ConsolePortBar"
+local ab = ConsolePortBar
 local acb = ab.libs.acb
 
 local HANDLE = CreateFrame('Frame', 'ConsolePortBarActionPlacer', UIParent, 'SecureHandlerStateTemplate')

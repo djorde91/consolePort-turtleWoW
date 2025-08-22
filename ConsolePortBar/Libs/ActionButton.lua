@@ -8,7 +8,8 @@ to make sure ConsolePort is using a separate button registry in case other actio
 simultaneously loaded. Do not copy or use this library for anything else.
 ]]
 
-local _, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define ab and db
+local ab = ConsolePortBar
 local db = ConsolePort:GetData()
 local lib = {}
 ab.libs = ab.libs or {}

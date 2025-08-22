@@ -4,7 +4,9 @@
 -- Tables/functions in this file are used to get information
 -- used when generating settings and game state data.
 
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 ---------------------------------------------------------------
 local tonumber, ipairs, pairs = tonumber, ipairs, pairs
 local spairs, copy = db.table.spairs, db.table.copy

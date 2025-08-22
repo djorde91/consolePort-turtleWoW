@@ -1,4 +1,6 @@
-local addOn, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and ab
+local addOn = ConsolePortBar
+local ab = ConsolePortBar
 local db = ConsolePort:GetData()
 local L = db.ACTIONBAR
 local Bar = ab.bar

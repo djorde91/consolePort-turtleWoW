@@ -1,4 +1,7 @@
-local UI, an, L = ConsolePortUI, ...
+-- Fix for WoW Classic 1.12.1 - properly define an and L
+local UI = ConsolePortUI
+local an = "ConsolePortUI_Menu"
+local L = ConsolePortUI_Menu
 local db = ConsolePort:GetData()
 local ICON = 'Interface\\Icons\\%s'
 local Button = L.Button

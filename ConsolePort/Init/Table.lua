@@ -4,6 +4,7 @@
 -- These table functions are used to perform special operations
 -- that are not natively supported.  
 ---------------------------------------------------------------
+-- Fix for WoW Classic 1.12.1 - properly define db
 local db = ConsolePort
 local tbl = {}
 ---------------------------------------------------------------

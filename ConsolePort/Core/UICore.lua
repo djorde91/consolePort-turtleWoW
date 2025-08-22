@@ -1,4 +1,6 @@
-local UI = {} ConsolePortUI = UI
+-- Fix for WoW Classic 1.12.1 - properly define UI
+local UI = {} 
+ConsolePortUI = UI
 ----------------------------------------------------------------
 local 	assert, pairs, ipairs, type, unpack, wipe, tconcat = 
 		assert, pairs, ipairs, type, unpack, wipe, table.concat

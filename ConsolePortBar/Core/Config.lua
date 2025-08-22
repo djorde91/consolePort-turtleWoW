@@ -1,4 +1,5 @@
-local _, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define ab
+local ab = ConsolePortBar
 local db = ab.data
 local Bar = ab.bar
 local WindowMixin, Generic, Layout, Button, Position, Color, Bool, Profiler, Preset = {}, {}, {}, {}, {}, {}, {}, {}, {}

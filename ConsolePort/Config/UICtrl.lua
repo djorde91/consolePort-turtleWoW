@@ -5,7 +5,9 @@
 -- UI cursor. User has full control over which frames to bind
 -- and may add custom frames from other addons.
 
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 local FadeIn, FadeOut = db.GetFaders()
 local spairs = db.table.spairs
 local TUTORIAL, ICONS = db.TUTORIAL.UICTRL, db.ICONS

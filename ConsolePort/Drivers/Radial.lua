@@ -1,7 +1,9 @@
 ---------------------------------------------------------------
 -- Radial.lua: Handles radial input (left stick & movement)
 ---------------------------------------------------------------
-local HANDLE, _, db = ConsolePortRadialHandler, ...
+-- Fix for WoW Classic 1.12.1 - properly define HANDLE and db
+local HANDLE = ConsolePortRadialHandler
+local db = ConsolePort
 ---------------------------------------------------------------
 local DEFAULT_BINDINGS, LOCAL_BINDINGS = {
 	UP    = {'W', 'UP'};

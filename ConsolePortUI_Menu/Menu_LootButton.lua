@@ -1,4 +1,5 @@
-local _, L = ...
+-- Fix for WoW Classic 1.12.1 - properly define L
+local L = ConsolePortUI_Menu
 local UI, Control, db = ConsolePortUI:GetEssentials()
 local KEY = db.KEY
 local LootButton = {}

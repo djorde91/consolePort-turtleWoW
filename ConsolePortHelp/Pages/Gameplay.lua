@@ -1,4 +1,5 @@
-local _, Help = ...
+-- Fix for WoW Classic 1.12.1 - properly define Help
+local Help = ConsolePortHelp
 
 Help:AddPage('Gameplay', nil, [[<HTML><BODY>
 	<H1 align="center">

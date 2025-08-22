@@ -1,7 +1,8 @@
 -- This was mostly stolen from Bartender4.
 -- This code snippet hides and modifies the default action bars.
 
-local _, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define ab
+local ab = ConsolePortBar
 local Bar = ab.bar
 local red, green, blue = ab.data.Atlas.GetCC()
 

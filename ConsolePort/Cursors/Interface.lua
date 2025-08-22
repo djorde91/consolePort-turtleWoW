@@ -6,7 +6,9 @@
 -- UICore.lua and calculates appropriate actions based on
 -- node priority and where nodes are drawn on screen.
 
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 ---------------------------------------------------------------
 local MAX_WIDTH, MAX_HEIGHT = UIParent:GetSize()
 ---------------------------------------------------------------

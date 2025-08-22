@@ -2,7 +2,9 @@
 local db = ConsolePort:GetData()
 local HANDLE, WrapperMixin = {}, {}
 ---------------------------------------------------------------
-local an, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define an and ab
+local an = "ConsolePortBar"
+local ab = ConsolePortBar
 local acb = ab.libs.acb
 ---------------------------------------------------------------
 ab.libs.wrapper = HANDLE

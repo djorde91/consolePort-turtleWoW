@@ -5,7 +5,9 @@
 -- 2. Validate compatibility with older versions.
 -- 3. Create the slash handler function.
 
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addon and db
+local addOn = ConsolePort
+local db = ConsolePort
 ---------------------------------------------------------------
 local NEWCALIBRATION, BINDINGSLOADED
 ---------------------------------------------------------------

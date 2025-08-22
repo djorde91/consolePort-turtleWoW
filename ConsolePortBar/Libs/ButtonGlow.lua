@@ -7,7 +7,10 @@ This version is heavily modified for ConsolePort and removes the use of LibStub/
 Do not copy or use this library for anything else.
 ]]
 
-local addOn, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and ab
+local addOn = ConsolePortBar
+local ab = ConsolePortBar
+
 local lib = {}
 
 ab.libs = ab.libs or {}

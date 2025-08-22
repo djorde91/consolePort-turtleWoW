@@ -1,4 +1,6 @@
-local UI, MEDIA = ConsolePortUI
+-- Fix for WoW Classic 1.12.1 - properly define UI and MEDIA
+local UI = ConsolePortUI
+local MEDIA = {}
 local _, class = UnitClass("player")
 local cc = RAID_CLASS_COLORS[class]
 local PT = [[Interface\AddOns\ConsolePort\Textures\]]

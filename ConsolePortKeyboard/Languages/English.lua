@@ -1,4 +1,6 @@
-local addOn, Language = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and Language
+local addOn = ConsolePortKeyboard
+local Language = ConsolePortKeyboard
 
 Language.English = {
 	[1] = { 

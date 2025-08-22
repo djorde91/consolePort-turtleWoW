@@ -1,4 +1,6 @@
-local UI, _, db = ConsolePortUI, ...
+-- Fix for WoW Classic 1.12.1 - properly define UI and db
+local UI = ConsolePortUI
+local db = ConsolePort
 ----------------------------------
 local MIXINS
 ----------------------------------

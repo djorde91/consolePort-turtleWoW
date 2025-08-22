@@ -1,4 +1,8 @@
-local UI, Tooltip, framePool, _, db = ConsolePortUI, {}, {}, ...
+-- Fix for WoW Classic 1.12.1 - properly define UI, Tooltip, framePool, and db
+local UI = ConsolePortUI
+local Tooltip = {}
+local framePool = {}
+local db = ConsolePort
 
 function Tooltip:OnShow()
 	db.UIFrameFadeIn(self, 0.2, 0, 1)

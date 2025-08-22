@@ -6,7 +6,9 @@
 -- Gathers all nodes by recursively scanning UIParent for
 -- secure frames with the 'unit' attribute assigned.
 
-local 	addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 local 	Flash, FadeIn, FadeOut = db.UIFrameFlash, db.GetFaders()
 ---------------------------------------------------------------
 local 	Cursor = ConsolePortRaidCursor

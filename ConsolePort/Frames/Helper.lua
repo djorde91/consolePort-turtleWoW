@@ -4,7 +4,9 @@
 -- This frame places cursor pickups on action buttons by
 -- reading input and comparing it to controller bindings.
 
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 local Core, Helper = ConsolePort, ConsolePortSpellHelperFrame
 Helper:SetBackdrop(db.Atlas.Backdrops.Talkbox)
 
