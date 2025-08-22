@@ -156,7 +156,7 @@ do
 
 	-- Replace spell push animations. 
 	if IconIntroTracker then
-		IconIntroTracker:HookScript('OnEvent', function(self, event, ...)
+		IconIntroTracker:HookScript('OnEvent', function(self, event, arg1, arg2, arg3, arg4, arg5)
 			local anim = ConsolePortSpellHelperFrame
 			if anim and event == 'SPELL_PUSHED_TO_ACTIONBAR' then
 				for _, icon in pairs(self.iconList) do
@@ -164,7 +164,7 @@ do
 					icon:SetAlpha(0)
 				end
 
-				local spellID, slotIndex, slotPos = ...
+				local spellID, slotIndex, slotPos = arg1, arg2, arg3
 				local page = math.floor((slotIndex - 1) / NUM_ACTIONBAR_BUTTONS) + 1
 				local currentPage = GetActionBarPage()
 				local bonusBarIndex = GetBonusBarIndex()

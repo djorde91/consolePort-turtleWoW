@@ -41,10 +41,10 @@ for name, script in pairs({
 		end
 	]],
 	SetHeaderID = [[
-		hID = ...
+		hID = arg1
 	]],
 	ShowHeader = [[
-		local hID = ...
+		local hID = arg1
 		local header = headers[hID]
 		for _, button in ipairs(newtable(header:GetChildren())) do
 			local condition = button:GetAttribute('condition')
@@ -90,7 +90,7 @@ for name, script in pairs({
 		end
 	]],
 	SetCurrent = [[
-		local newIndex, delta = ...
+		local newIndex, delta = arg1, arg2
 		bID = newIndex + delta
 		if current then
 			current:CallMethod('OnLeave')

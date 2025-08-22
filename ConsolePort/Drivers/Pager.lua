@@ -20,7 +20,7 @@ Pager:Execute('headers = newtable()')
 
 local PAGER_SECURE_FUNCTIONS = {
 	GetActionID = [[
-		local id = ...
+		local id = arg1
 		if id then
 			local page = self:GetAttribute('actionpage') or 1
 			if id >= 1 and id <= 12 then
@@ -31,27 +31,27 @@ local PAGER_SECURE_FUNCTIONS = {
 		end
 	]],
 	GetActionInfo = [[
-		local id = self:RunAttribute('GetActionID', ...)
+		local id = self:RunAttribute('GetActionID', arg1)
 		if id then
 			return GetActionInfo(id)
 		end
 	]],
 	GetSpellID = [[
-		local actionType, spellID, subType = self:RunAttribute('GetActionInfo', ...)
+		local actionType, spellID, subType = self:RunAttribute('GetActionInfo', arg1)
 		if actionType == 'spell' and subType == 'spell' then
 			return spellID
 		end
 	]],
 	GetActionSpellInfo = [[
-		local type, spellID, subType = self:RunAttribute('GetActionInfo', ...)
+		local type, spellID, subType = self:RunAttribute('GetActionInfo', arg1)
 		if type == 'spell' and spellID and spellID ~= 0 and subType == 'spell' then
 			return FindSpellBookSlotBySpellID(spellID)
 		end
 	]],
 	IsHarmfulAction = [[
-		local type, id = self:RunAttribute('GetActionInfo', ...)
+		local type, id = self:RunAttribute('GetActionInfo', arg1)
 		if type == 'spell' then
-			local slot = self:RunAttribute('GetActionSpellInfo', ...)
+			local slot = self:RunAttribute('GetActionSpellInfo', arg1)
 			if slot then
 				return IsHarmfulSpell(slot, 'spell')
 			end
@@ -60,9 +60,9 @@ local PAGER_SECURE_FUNCTIONS = {
 		end
 	]],
 	IsHelpfulAction = [[
-		local type, id = self:RunAttribute('GetActionInfo', ...)
+		local type, id = self:RunAttribute('GetActionInfo', arg1)
 		if type == 'spell' then
-			local slot = self:RunAttribute('GetActionSpellInfo', ...)
+			local slot = self:RunAttribute('GetActionSpellInfo', arg1)
 			if slot then
 				return IsHelpfulSpell(slot, 'spell')
 			end

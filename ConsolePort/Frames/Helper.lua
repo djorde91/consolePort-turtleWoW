@@ -123,9 +123,9 @@ function Helper:ShowBags()
 	self.BagFrame:Show()
 end
 
-function Helper:OnEvent(event, ...)
+function Helper:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
 	if self[event] then
-		self[event](self, ...)
+		self[event](self, arg1, arg2, arg3, arg4, arg5)
 	elseif self:IsVisible() then
 		self:Hide()
 	end
@@ -228,31 +228,20 @@ function Helper:OnKeyDown(key)
 	self:UpdateWidth()
 end
 
-function Helper:PLAYER_REGEN_ENABLED(...)
-	self:UnregisterEvent('PLAYER_REGEN_ENABLED')
-	self:Show()
+function Helper:PLAYER_REGEN_ENABLED(arg1, arg2, arg3, arg4, arg5)
+	self:FadeOut(self:GetAlpha())
 end
 
-function Helper:PLAYER_REGEN_DISABLED(...) 
-	if self:IsVisible() then 
-		self:RegisterEvent('PLAYER_REGEN_ENABLED')
-		self:Hide() 
-	end
+function Helper:PLAYER_REGEN_DISABLED(arg1, arg2, arg3, arg4, arg5)
+	self:FadeIn(self:GetAlpha())
 end
 
-function Helper:ACTIONBAR_HIDEGRID(...)
-	self:UnregisterEvent('PLAYER_REGEN_ENABLED')
-	self.cache = nil
-	self.manifest = nil
+function Helper:ACTIONBAR_HIDEGRID(arg1, arg2, arg3, arg4, arg5)
 	self:Hide()
 end
 
-function Helper:ACTIONBAR_SHOWGRID(...)
-	if not InCombatLockdown() then
-		self:Show()
-	else
-		self:RegisterEvent('PLAYER_REGEN_ENABLED')
-	end
+function Helper:ACTIONBAR_SHOWGRID(arg1, arg2, arg3, arg4, arg5)
+	self:Show()
 end
 
 for _, event in pairs({

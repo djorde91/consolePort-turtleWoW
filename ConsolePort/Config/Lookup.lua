@@ -20,9 +20,9 @@ end
 ---------------------------------------------------------------
 -- Plug-in access to addon table
 ---------------------------------------------------------------
-function ConsolePort:GetData(...) 
-    if select('#', ...) > 0 then
-        return db(...)
+function ConsolePort:GetData(arg1, arg2, arg3, arg4, arg5) 
+    if arg1 then
+        return db(arg1, arg2, arg3, arg4, arg5)
     end
     return db
 end

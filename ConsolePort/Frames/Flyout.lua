@@ -39,7 +39,7 @@ Selector:Execute([[
 ]])
 
 Selector:SetAttribute('SelectSpell', [[
-	local key = ...
+	local key = arg1
 	if key == 'Up' then
 		self:SetAttribute('macrotext', '/click '..Spells[Index]:GetName())
 	elseif key == 'Down' then

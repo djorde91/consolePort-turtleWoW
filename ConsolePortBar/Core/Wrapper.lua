@@ -198,12 +198,12 @@ function WrapperMixin:Hide()
 	self[''].shadow:Hide()
 end
 
-function WrapperMixin:SetPoint(...)
+function WrapperMixin:SetPoint(arg1, arg2, arg3, arg4, arg5)
 	local main = self['']
-	local p, x, y = ...
+	local p, x, y = arg1, arg2, arg3
 	main:ClearAllPoints()
 	if p and x and y then
-		return main:SetPoint(...)
+		return main:SetPoint(arg1, arg2, arg3, arg4, arg5)
 	end
 end
 

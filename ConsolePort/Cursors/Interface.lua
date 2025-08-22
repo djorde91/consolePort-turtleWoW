@@ -421,7 +421,7 @@ function Node:CacheItem(node, object, super)
 	});
 end
 
-function Node:Scan(super, node, sibling, ...)
+function Node:Scan(super, node, sibling, arg1, arg2, arg3, arg4, arg5)
 	if self:IsRelevant(node) then
 		local object = node:GetObjectType()
 		if self:IsInteractive(node, object) and self:IsDrawn(node, super) then
@@ -432,7 +432,7 @@ function Node:Scan(super, node, sibling, ...)
 		end
 	end
 	if sibling then
-		self:Scan(super, sibling, ...)
+		self:Scan(super, sibling, arg1, arg2, arg3, arg4, arg5)
 	end
 end
 

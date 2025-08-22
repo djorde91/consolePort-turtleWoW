@@ -45,9 +45,9 @@ end
 local db = ConsolePort
 local popup, defaultBackdrop
 
-function ConsolePort:ShowPopup(...)
-	StaticPopup_Hide(...)
-	popup = StaticPopup_Show(...)
+function ConsolePort:ShowPopup(arg1, arg2, arg3, arg4, arg5)
+	StaticPopup_Hide(arg1, arg2, arg3, arg4, arg5)
+	popup = StaticPopup_Show(arg1, arg2, arg3, arg4, arg5)
 	if popup then
 		defaultBackdrop = popup:GetBackdrop()
 		popup:EnableKeyboard(false)

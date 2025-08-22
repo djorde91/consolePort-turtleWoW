@@ -10,15 +10,19 @@ local mx = db.table.mixin
 --- Applies mixin(s) either from template or table.
 -- @param 	region 	: Region to apply mixin to.
 -- @param 	mixer 	: Mixer function to be used.
--- @param 	... 	: Objects to mix in, or template identifier(s).
+-- @param 	arg1 	: Objects to mix in, or template identifier(s).
+-- @param 	arg2 	: Additional mixin objects.
+-- @param 	arg3 	: Additional mixin objects.
+-- @param 	arg4 	: Additional mixin objects.
+-- @param 	arg5 	: Additional mixin objects.
 -- @return 	region 	: Returns the altered object.
-function UI:ApplyMixin(region, mixer, ...)
-	local mixins = {...}
+function UI:ApplyMixin(region, mixer, arg1, arg2, arg3, arg4, arg5)
+	local mixins = {arg1, arg2, arg3, arg4, arg5}
 	local mixer = mixer or mx
 	for _, mixin in pairs(mixins) do
-		if type(mixin) == "string" then
+		if mixin and type(mixin) == "string" then
 			mixer(region, MIXINS[mixin] or _G[mixin])
-		else
+		elseif mixin then
 			mixer(region, mixin)
 		end
 	end

@@ -81,9 +81,9 @@ end
 if not hooksecurefunc then
     function hooksecurefunc(table, key, hookFunction)
         local oldValue = table[key]
-        table[key] = function(...)
-            local ret = oldValue(...)
-            hookFunction(...)
+        table[key] = function(arg1, arg2, arg3, arg4, arg5)
+            local ret = oldValue(arg1, arg2, arg3, arg4, arg5)
+            hookFunction(arg1, arg2, arg3, arg4, arg5)
             return ret
         end
     end

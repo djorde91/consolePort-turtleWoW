@@ -66,7 +66,7 @@ ConsolePort:AddPlugin('Blizzard_MapCanvas', function(self)
 		end
 	end
 
-	local function AcquirePin(self, pinTemplate, ...)
+	local function AcquirePin(self, pinTemplate, arg1, arg2, arg3, arg4, arg5)
 		for pin in self:EnumeratePinsByTemplate(pinTemplate) do
 			CreateNode(pin, self, pinTemplate)
 		end

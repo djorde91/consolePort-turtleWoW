@@ -73,10 +73,10 @@ function Bar:RegisterOverride(key, button)
 	]], key, button))
 end
 
-function Bar:OnNewBindings(...)
+function Bar:OnNewBindings(arg1, arg2, arg3, arg4, arg5)
 	if not InCombatLockdown() then
 		self:UnregisterOverrides()
-		WrapperLib:UpdateAllBindings(...)
+		WrapperLib:UpdateAllBindings(arg1, arg2, arg3, arg4, arg5)
 		self:UpdateOverrides()
 	end
 end
@@ -84,9 +84,9 @@ end
 ConsolePort:RegisterCallback('OnNewBindings', Bar.OnNewBindings, Bar)
 ConsolePort:RegisterSpellHeader(Bar, true)
 
-function Bar:OnEvent(event, ...)
+function Bar:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
 	if self[event] then
-		self[event](self, ...)
+		self[event](self, arg1, arg2, arg3, arg4, arg5)
 	end
 end
 
@@ -340,7 +340,7 @@ for name, script in pairs({
 	]],
 	['GetReticleMacro'] = [[
 		if disableCastOnRelease then return end
-		local actionID, buttonID, down, macro = ...
+		local actionID, buttonID, down, macro = arg1, arg2, arg3, arg4
 
 		if down then
 			if not storedSpellID then

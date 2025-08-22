@@ -151,12 +151,15 @@ function NPE:Initialize()
 	KBM.LStickText:SetText(NPE_MOVE .. '\n' .. KEY_BUTTON1 .. '\n' .. NPE_SELECTTARGET .. ' (' .. MOUSE_LABEL .. ')')
 	KBM.RStickText:SetText(NPE_TURN .. '\n' .. KEY_BUTTON2 .. '\n' .. UNIT_FRAME_DROPDOWN_SUBSECTION_TITLE_INTERACT)
 
-	local function SetBindingText(fontString, text, ...)
+	local function SetBindingText(fontString, text, arg1, arg2, arg3, arg4, arg5)
 		local binding
-		for i=1, select('#', ...) do
-			binding = ConsolePort:GetFormattedBindingOwner(select(i, ...), nil, 32, true)
-			if binding then
-				break
+		local args = {arg1, arg2, arg3, arg4, arg5}
+		for i=1, #args do
+			if args[i] then
+				binding = ConsolePort:GetFormattedBindingOwner(args[i], nil, 32, true)
+				if binding then
+					break
+				end
 			end
 		end
 		if not binding then

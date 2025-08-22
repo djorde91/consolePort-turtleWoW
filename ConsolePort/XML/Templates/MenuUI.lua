@@ -29,7 +29,7 @@ local ENV_DEFAULT = {
 	--------------------------------
 	-- @param hID : header to set, identified by ID
 	SetHeader = [[
-		local header = headers[...]
+		local header = headers[arg1]
 		if not header then return end
 		header:CallMethod('SetButtonState', 'PUSHED')
 		header:CallMethod('LockHighlight')
@@ -38,7 +38,7 @@ local ENV_DEFAULT = {
 	]];
 	-- @param hID : header to clear, identified by ID
 	ClearHeader = [[
-		local header = headers[...]
+		local header = headers[arg1]
 		if not header then return end
 		header:CallMethod('SetButtonState', 'NORMAL')
 		header:CallMethod('UnlockHighlight')
@@ -46,7 +46,7 @@ local ENV_DEFAULT = {
 	]];
 	-- @param delta : increment/decrement from current hID
 	ChangeHeader = [[
-		local delta = ...
+		local delta = arg1
 		local newIndex = hID + delta
 		local header = headers[newIndex]
 		if header and header:IsShown() then
@@ -59,7 +59,7 @@ local ENV_DEFAULT = {
 	-- @param returnValue : secure button action (e.g. '/click Button')
 	-- @return (optional) clickType, clickHandler, clickValue
 	OnInput = [[
-		local key, down = ...
+		local key, down = arg1, arg2
 		local returnHandler, returnValue
 
 		if down then

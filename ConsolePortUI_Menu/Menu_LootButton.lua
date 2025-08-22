@@ -169,7 +169,7 @@ end
 
 
 L.lootButtonProbeScript = [[
-local count = ...
+local count = arg1
 local isShown = count and count > 0
 local lootHeader = self:GetParent()
 local menuParent = lootHeader:GetParent()

@@ -84,17 +84,17 @@ function decodeB64(str)
 	return table.concat(bit8, '', 1, decoded_size)
 end
 
-function ConsolePort:Serialize(...)
+function ConsolePort:Serialize(arg1, arg2, arg3, arg4, arg5)
 	local serializer = LibStub:GetLibrary('AceSerializer-3.0')
 	local compressor = LibStub:GetLibrary('LibCompress')
-	local compressed = compressor:CompressHuffman(serializer:Serialize(...))
+	local compressed = compressor:CompressHuffman(serializer:Serialize(arg1, arg2, arg3, arg4, arg5))
 	return encodeB64(compressed)
 end
 
-function ConsolePort:Deserialize(...)
+function ConsolePort:Deserialize(arg1, arg2, arg3, arg4, arg5)
 	local serializer = LibStub:GetLibrary('AceSerializer-3.0')
 	local compressor = LibStub:GetLibrary('LibCompress')
-	local decoded = decodeB64(...)
+	local decoded = decodeB64(arg1, arg2, arg3, arg4, arg5)
 	local decompressed, errorMsg = compressor:Decompress(decoded)
 	if not decompressed then
 		return

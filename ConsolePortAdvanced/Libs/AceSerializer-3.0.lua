@@ -117,14 +117,21 @@ local serializeTbl = { "^1" }	-- "^1" = Hi, I'm data serialized by AceSerializer
 -- Takes a list of values (strings, numbers, booleans, nils, tables)
 -- and returns it in serialized form (a string).\\
 -- May throw errors on invalid data types.
--- @param ... List of values to serialize
+-- @param arg1 List of values to serialize
+-- @param arg2 Additional values to serialize
+-- @param arg3 Additional values to serialize
+-- @param arg4 Additional values to serialize
+-- @param arg5 Additional values to serialize
 -- @return The data in its serialized form (string)
-function AceSerializer:Serialize(...)
+function AceSerializer:Serialize(arg1, arg2, arg3, arg4, arg5)
 	local nres = 1
+	local args = {arg1, arg2, arg3, arg4, arg5}
 	
-	for i=1,select("#", ...) do
-		local v = select(i, ...)
-		nres = SerializeValue(v, serializeTbl, nres)
+	for i=1,#args do
+		local v = args[i]
+		if v then
+			nres = SerializeValue(v, serializeTbl, nres)
+		end
 	end
 	
 	serializeTbl[nres+1] = "^^"	-- "^^" = End of serialized data

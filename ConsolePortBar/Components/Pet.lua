@@ -198,8 +198,8 @@ Pet:HookScript('OnLeave', function(self)
 	GameTooltip:Hide()
 end)
 
-Pet:SetScript('OnEvent', function(self, event, ...)
-	local arg1 = ...
+Pet:SetScript('OnEvent', function(self, event, arg1, arg2, arg3, arg4, arg5)
+	local arg1 = arg1
 	if event == 'PET_BAR_UPDATE' or event == 'PET_SPECIALIZATION_CHANGED' or
 		(event == 'UNIT_PET' and arg1 == 'player') or
 		((event == 'UNIT_FLAGS' or event == 'UNIT_AURA') and arg1 == 'pet') or
@@ -311,7 +311,7 @@ do -- Wheel setup
 		---------------------------------------------------------------
 		OnKey = [=[
 			if self:IsVisible() then
-				local key, down = ...
+				local key, down = arg1, arg2
 				-----------------------------
 				if BUTTON then
 					BUTTON:SetWidth(40)
@@ -356,7 +356,7 @@ do -- Wheel setup
 			end
 		]=]
 		SetBindingClick = [=[
-			local binding, owner, ID = ...
+			local binding, owner, ID = arg1, arg2, arg3
 			self:SetBindingClick(true, binding, owner, ID)
 			self:SetBindingClick(true, 'CTRL-'..binding, owner, ID)
 			self:SetBindingClick(true, 'SHIFT-'..binding, owner, ID)

@@ -126,9 +126,9 @@ function CPExpBarMixin:OnLoad()
 	self.priority = 3 
 end
 
-function CPExpBarMixin:OnEvent(event, ...) 
+function CPExpBarMixin:OnEvent(event, arg1, arg2, arg3, arg4, arg5) 
 	if( event == "CVAR_UPDATE") then
-		local cvar = ...
+		local cvar = arg1
 		if( cvar == "XP_BAR_TEXT" ) then
 			self:UpdateTextVisibility()
 		end
@@ -299,27 +299,9 @@ function CPExhaustionTickMixin:UpdateExhaustionColor()
 	end
 end
 
-function CPExhaustionTickMixin:OnEvent(event, ...)
-	if (IsRestrictedAccount()) then
-		local rlevel = GetRestrictedAccountData()
-		if (UnitLevel("player") >= rlevel) then
-			self:GetParent():SetBarColor(ab:GetRGBColorFor('exp'))
-			self:Hide()
-			self:GetParent().ExhaustionLevelFillBar:Hide()
-			self:UnregisterAllEvents()	
-			return
-		end
-	end
-	if ( event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_XP_UPDATE" or event == "UPDATE_EXHAUSTION" or event == "PLAYER_LEVEL_UP" ) then
-		self:UpdateTickPosition() 
-	end
-	
-	if ( event == "PLAYER_ENTERING_WORLD" or event == "UPDATE_EXHAUSTION" ) then
-		self:UpdateExhaustionColor()
-	end
-	
-	if ( not self:IsShown() ) then
-		self:Hide()
+function CPExhaustionTickMixin:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
+	if event == "PLAYER_UPDATE_RESTING" then
+		self:UpdateTick()
 	end
 end
 
@@ -430,12 +412,9 @@ function CPReputationBarMixin:OnLoad()
 	self.priority = 1 
 end
 
-function CPReputationBarMixin:OnEvent(event, ...)
-	if( event == "CVAR_UPDATE") then
-		local cvar = ...
-		if( cvar == "XP_BAR_TEXT" ) then
-			self:UpdateTextVisibility()
-		end
+function CPReputationBarMixin:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
+	if event == "UPDATE_FACTION" then
+		self:Update()
 	end
 end
 

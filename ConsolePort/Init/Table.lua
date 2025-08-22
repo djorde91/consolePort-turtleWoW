@@ -108,10 +108,13 @@ local function spairs(t, order)
 	end
 end
 ---------------------------------------------------------------
-local function mixin(object, ...)
+local function mixin(object, mixin1, mixin2, mixin3, mixin4, mixin5)
 	local scriptSupport = (type(object.HasScript) == 'function')
-	for i = 1, select('#', ...) do
-		local mixin = select(i, ...)
+	local mixins = {mixin1, mixin2, mixin3, mixin4, mixin5}
+	
+	for i = 1, #mixins do
+		local mixin = mixins[i]
+		if not mixin then break end
 
 		for k, v in pairs(mixin) do
 			if scriptSupport and object:HasScript(k) then

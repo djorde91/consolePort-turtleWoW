@@ -273,16 +273,19 @@ function Layout:OnHide()
 	end
 end
 
-function Layout:CreateHeader(...)
+function Layout:CreateHeader(arg1, arg2, arg3, arg4, arg5)
 	local frame = CreateFrame('Frame', nil, self.Child)
 	frame:SetSize(1, 32)
 	frame.Objects = {}
-	for i, info in pairs({...}) do
-		local object = frame['Create' .. info.type](frame, unpack(info.setup))
-		local anchor = frame.Objects[i-1]
-		object['Set' .. info.data](object, type(info.val) == 'table' and unpack(info.val) or info.val)
-		object:SetPoint('LEFT', anchor or frame, anchor and 'RIGHT' or 'LEFT', info.x or 0, info.y or 0)
-		frame.Objects[#frame.Objects + 1] = object
+	local args = {arg1, arg2, arg3, arg4, arg5}
+	for i, info in pairs(args) do
+		if info then
+			local object = frame['Create' .. info.type](frame, unpack(info.setup))
+			local anchor = frame.Objects[i-1]
+			object['Set' .. info.data](object, type(info.val) == 'table' and unpack(info.val) or info.val)
+			object:SetPoint('LEFT', anchor or frame, anchor and 'RIGHT' or 'LEFT', info.x or 0, info.y or 0)
+			frame.Objects[#frame.Objects + 1] = object
+		end
 	end
 	self:AddButton(frame, 12, 0)
 	return frame

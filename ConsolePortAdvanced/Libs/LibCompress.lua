@@ -75,13 +75,16 @@ LibCompress.frame = LibCompress.frame or CreateFrame("frame", nil, UIParent) -- 
 LibCompress.frame:SetScript("OnUpdate", onUpdate)
 LibCompress.frame:Hide()
 
-local function setCleanupTables(...)
+local function setCleanupTables(arg1, arg2, arg3, arg4, arg5)
 	timeout = 15 -- empty tables after 15 seconds
 	if not LibCompress.frame:IsShown() then
 		LibCompress.frame:Show()
 	end
-	for i = 1, select("#",...) do
-		tables_to_clean[(select(i, ...))] = true
+	local args = {arg1, arg2, arg3, arg4, arg5}
+	for i = 1, #args do
+		if args[i] then
+			tables_to_clean[args[i]] = true
+		end
 	end
 end
 

@@ -193,7 +193,7 @@ do
 			end
 		]=]
 		SelectNode = [=[
-			key = ...
+			key = arg1
 			if current then
 				old = current
 			end
@@ -291,7 +291,7 @@ do
 			end
 		]=]
 		UpdateUnitExists = [=[
-			local exists = ...
+			local exists = arg1
 			if not exists then
 				self:Run(SelectNode, 0)
 			end
@@ -365,8 +365,8 @@ end
 Cursor.ScaleUp = Cursor.Group.ScaleUp
 Cursor.ScaleDown = Cursor.Group.ScaleDown
 ---------------------------------------------------------------
-function Cursor:OnEvent(event, ...)
-	local unit, spell, _, _, spellID = ...
+function Cursor:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
+	local unit, spell, _, _, spellID = arg1, arg2, arg3, arg4, arg5
 
 	if event == 'UNIT_HEALTH' and unit == self.unit then
 		local hp = UnitHealth(unit)

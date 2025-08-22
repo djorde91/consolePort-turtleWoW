@@ -848,9 +848,8 @@ db.PANELS[#db.PANELS + 1] = {name = "Binds", header = TUTORIAL.HEADER, mixin = W
 	self.Tutorial = self:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
 	self.Tutorial.SetNewText = self.Tutorial.SetText
 
-	function self.Tutorial:SetText(...)
-		self:SetNewText(...)
-		FadeIn(self, 1, 0, 1)
+	function self.Tutorial:SetText(arg1, arg2, arg3, arg4, arg5)
+		self.Tutorial:SetText(arg1, arg2, arg3, arg4, arg5)
 	end
 
 ---------------------------------------------------------------

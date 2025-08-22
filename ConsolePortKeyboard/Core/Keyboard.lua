@@ -289,9 +289,9 @@ function Keyboard:LoadFrame()
 	self:CheckModifier()
 end
 
-function Keyboard:OnEvent(event, ...)
+function Keyboard:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
 	if self[event] then
-		self[event](self, ...)
+		self[event](self, arg1, arg2, arg3, arg4, arg5)
 	end
 end
 
@@ -321,8 +321,8 @@ function Keyboard:LoadSettings()
 	self:NormalizeDictionary()
 end
 
-function Keyboard:ADDON_LOADED(...)
-	local name = ...
+function Keyboard:ADDON_LOADED(arg1, arg2, arg3, arg4, arg5)
+	local name = arg1
 	if name == addOn then
 		self:UPDATE_BINDINGS()
 		self:LoadSettings()
@@ -345,7 +345,7 @@ function Keyboard:UPDATE_BINDINGS()
 	end
 end
 
-function Keyboard:CheckModifier(...)
+function Keyboard:CheckModifier(arg1, arg2, arg3, arg4, arg5)
 	local SetIndex = IsShiftKeyDown() and IsControlKeyDown() and 4 or IsShiftKeyDown() and 1 or IsControlKeyDown() and 3 or 2
 	for i, Set in pairs(self.Sets) do
 		for i, Char in pairs(Set.Buttons) do

@@ -29,9 +29,8 @@ function ConsolePort:LoadDefaultCVars()
 	self.LoadDefaultCVars = nil
 end
 
-function ConsolePort:UpdateCVars(inCombat, ...)
+function ConsolePort:UpdateCVars(inCombat, newCvar, newValue)
 	local isToggled = db.Settings
-	local newCvar, newValue = ...
 	for cvar, info in pairs(CVars) do
 		if inCombat == nil then
 			-- If a specific cvar triggered the update (toggled inside Blizzard interface options), assign it to default value
