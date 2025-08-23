@@ -70,7 +70,7 @@ end
 local function __decodestring(str)
 	local ret = {}
 	for word in str:gmatch('%a+') do
-		ret[#ret + 1] = word
+		table.insert(ret, word)
 	end
 	return ret
 end
@@ -87,7 +87,7 @@ function NPE:GetContentID(content)
 	local countMatch, matchID = 0
 	for k, v in pairs(self.DecodeIndex) do
 		local innerCount = 0
-		for i=1, #base do
+		for i=1, db.table.count(base) do
 			if k:match(base[i]) then
 				innerCount = innerCount + 1
 			end
@@ -98,7 +98,7 @@ function NPE:GetContentID(content)
 		end
 	end
 	-- at least 75% of words should be the same in order to elicit a match.
-	return countMatch >= (#base * .75) and matchID
+	return countMatch >= (db.table.count(base) * .75) and matchID
 end
 
 function NPE:Initialize()
@@ -151,12 +151,15 @@ function NPE:Initialize()
 	KBM.LStickText:SetText(NPE_MOVE .. '\n' .. KEY_BUTTON1 .. '\n' .. NPE_SELECTTARGET .. ' (' .. MOUSE_LABEL .. ')')
 	KBM.RStickText:SetText(NPE_TURN .. '\n' .. KEY_BUTTON2 .. '\n' .. UNIT_FRAME_DROPDOWN_SUBSECTION_TITLE_INTERACT)
 
-	local function SetBindingText(fontString, text, ...)
+	local function SetBindingText(fontString, text, arg1, arg2, arg3, arg4, arg5)
 		local binding
-		for i=1, select('#', ...) do
-			binding = ConsolePort:GetFormattedBindingOwner(select(i, ...), nil, 32, true)
-			if binding then
-				break
+		local args = {arg1, arg2, arg3, arg4, arg5}
+		for i=1, db.table.count(args) do
+			if args[i] then
+				binding = ConsolePort:GetFormattedBindingOwner(args[i], nil, 32, true)
+				if binding then
+					break
+				end
 			end
 		end
 		if not binding then

@@ -1,4 +1,5 @@
-local _, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define ab
+local ab = ConsolePortBar
 local db = ab.data
 local Bar = ab.bar
 local WindowMixin, Generic, Layout, Button, Position, Color, Bool, Profiler, Preset = {}, {}, {}, {}, {}, {}, {}, {}, {}
@@ -263,7 +264,7 @@ function Layout:OnShow()
 		button:Show()
 	end
 	self.Popout:Show()
-	self:Refresh(#self.Buttons)
+	self:Refresh(db.table.count(self.Buttons))
 end
 
 function Layout:OnHide()
@@ -272,16 +273,19 @@ function Layout:OnHide()
 	end
 end
 
-function Layout:CreateHeader(...)
+function Layout:CreateHeader(arg1, arg2, arg3, arg4, arg5)
 	local frame = CreateFrame('Frame', nil, self.Child)
 	frame:SetSize(1, 32)
 	frame.Objects = {}
-	for i, info in pairs({...}) do
-		local object = frame['Create' .. info.type](frame, unpack(info.setup))
-		local anchor = frame.Objects[i-1]
-		object['Set' .. info.data](object, type(info.val) == 'table' and unpack(info.val) or info.val)
-		object:SetPoint('LEFT', anchor or frame, anchor and 'RIGHT' or 'LEFT', info.x or 0, info.y or 0)
-		frame.Objects[#frame.Objects + 1] = object
+	local args = {arg1, arg2, arg3, arg4, arg5}
+	for i, info in pairs(args) do
+		if info then
+			local object = frame['Create' .. info.type](frame, unpack(info.setup))
+			local anchor = frame.Objects[i-1]
+			object['Set' .. info.data](object, type(info.val) == 'table' and unpack(info.val) or info.val)
+			object:SetPoint('LEFT', anchor or frame, anchor and 'RIGHT' or 'LEFT', info.x or 0, info.y or 0)
+			table.insert(frame.Objects, object)
+		end
 	end
 	self:AddButton(frame, 12, 0)
 	return frame
@@ -527,7 +531,7 @@ function WindowMixin:CreateLayoutModule()
 		[19] = 'Art';
 	}
 
-	for i=1, #info, 2 do
+	for i=1, db.table.count(info), 2 do
 		local header = subHeaders[i]
 		if header then
 			layout:CreateHeader({val = header, x = 0, data = 'Text', type = 'FontString', setup = {nil, 'ARTWORK', 'FriendsFont_Large'}})

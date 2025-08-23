@@ -1,7 +1,8 @@
 -- This was mostly stolen from Bartender4.
 -- This code snippet hides and modifies the default action bars.
 
-local _, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define ab
+local ab = ConsolePortBar
 local Bar = ab.bar
 local red, green, blue = ab.data.Atlas.GetCC()
 
@@ -155,7 +156,7 @@ do
 
 	-- Replace spell push animations. 
 	if IconIntroTracker then
-		IconIntroTracker:HookScript('OnEvent', function(self, event, ...)
+		IconIntroTracker:HookScript('OnEvent', function(self, event, arg1, arg2, arg3, arg4, arg5)
 			local anim = ConsolePortSpellHelperFrame
 			if anim and event == 'SPELL_PUSHED_TO_ACTIONBAR' then
 				for _, icon in pairs(self.iconList) do
@@ -163,7 +164,7 @@ do
 					icon:SetAlpha(0)
 				end
 
-				local spellID, slotIndex, slotPos = ...
+				local spellID, slotIndex, slotPos = arg1, arg2, arg3
 				local page = math.floor((slotIndex - 1) / NUM_ACTIONBAR_BUTTONS) + 1
 				local currentPage = GetActionBarPage()
 				local bonusBarIndex = GetBonusBarIndex()

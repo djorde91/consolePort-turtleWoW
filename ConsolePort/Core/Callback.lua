@@ -18,9 +18,9 @@ local function OnUpdate(self, elapsed)
 	end
 end
 
-function ConsolePort:AddUpdateSnippet(snippet, ...)
+function ConsolePort:AddUpdateSnippet(snippet, arg1, arg2, arg3, arg4, arg5)
 	if type(snippet) == 'function' then
-		scripts[snippet] = {...}
+		scripts[snippet] = {arg1, arg2, arg3, arg4, arg5}
 		self:SetScript('OnUpdate', OnUpdate)
 	end
 end
@@ -33,11 +33,11 @@ function ConsolePort:RemoveUpdateSnippet(snippet)
 	end
 end
 
-function ConsolePort:RunOOC(snippet, ...)
+function ConsolePort:RunOOC(snippet, arg1, arg2, arg3, arg4, arg5)
 	if InCombatLockdown() then
-		self:AddUpdateSnippet(snippet, ...)
+		self:AddUpdateSnippet(snippet, arg1, arg2, arg3, arg4, arg5)
 	else
-		snippet(self, ...)
+		snippet(self, arg1, arg2, arg3, arg4, arg5)
 	end
 end
 
@@ -65,9 +65,9 @@ function ConsolePort:RegisterCallback(method, func, owner, orderIndex)
 		local functionsToRun = {}
 		local callBackOwners = owners[method]
 		callbacks[method] = functionsToRun
-		hooksecurefunc(self, method, function(self, ...)
+		hooksecurefunc(self, method, function(self, arg1, arg2, arg3, arg4, arg5)
 			for _, callback in ipairs(functionsToRun) do
-				callback(callBackOwners and callBackOwners[callback] or self, ...)
+				callback(callBackOwners and callBackOwners[callback] or self, arg1, arg2, arg3, arg4, arg5)
 			end
 		end)
 	end
@@ -98,15 +98,15 @@ function ConsolePort:UnregisterCallback(method, func)
 	end
 end
 
-function ConsolePort:RegisterVarCallback(cvar, func, owner, ...)
+function ConsolePort:RegisterVarCallback(cvar, func, owner, arg1, arg2, arg3, arg4, arg5)
 	cvarCallbacks[cvar] = cvarCallbacks[cvar] or {}
 	for i, data in ipairs(cvarCallbacks[cvar]) do
 		if data[1] == func then
-			cvarCallbacks[cvar][i] = {func, owner, ...}
+			cvarCallbacks[cvar][i] = {func, owner, arg1, arg2, arg3, arg4, arg5}
 			return
 		end
 	end
-	tinsert(cvarCallbacks[cvar], {func, owner, ...})
+	tinsert(cvarCallbacks[cvar], {func, owner, arg1, arg2, arg3, arg4, arg5})
 end
 
 
@@ -116,10 +116,10 @@ function ConsolePort:FireVarCallback(cvar, newvalue)
 		for i, data in ipairs(cvarCallbacks) do
 			local callback, owner = data[1], data[2]
 			-- create lambda wrapper to fire OOC
-			local function cb(caller, lambda, callback, ...)
+			local function cb(caller, lambda, callback, arg1, arg2, arg3, arg4, arg5)
 				if not InCombatLockdown() then
 					caller:RemoveUpdateSnippet(lambda)
-					callback(...)
+					callback(arg1, arg2, arg3, arg4, arg5)
 				end
 			end
 			if C_Widget.IsFrameWidget(owner) then

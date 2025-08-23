@@ -1,4 +1,5 @@
-local _, Help = ...
+-- Fix for WoW Classic 1.12.1 - properly define Help
+local Help = ConsolePortHelp
 
 Help:SetWelcomePage([[<HTML><BODY>
 	<IMG src="Interface\AddOns\ConsolePort\Textures\Logos\CP" align="center" width="128" height="128"/>

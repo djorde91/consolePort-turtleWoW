@@ -350,7 +350,7 @@ end
 Atlas.ScrollMeta = {}
 
 function Atlas.ScrollMeta:Refresh(numVisible)
-	numVisible = numVisible or #self.Buttons
+	numVisible = numVisible or db.table.count(self.Buttons)
 	if self.Child then
 		for i, button in pairs(self.Buttons) do
 			button:SetShown(i <= numVisible)
@@ -369,8 +369,8 @@ function Atlas.ScrollMeta:AddButton(button, xOffset, yOffset)
 	elseif button then
 		button:SetParent(self.Child)
 		button:ClearAllPoints()
-		button:SetPoint("TOPLEFT", xOffset or 0, - #self.Buttons * self.stepSize + (yOffset or 0))
-		self.Buttons[#self.Buttons + 1] = button
+		button:SetPoint("TOPLEFT", xOffset or 0, - db.table.count(self.Buttons) * self.stepSize + (yOffset or 0))
+		table.insert(self.Buttons, button)
 		return true
 	end
 end
@@ -579,7 +579,7 @@ function Atlas.BindingMeta:RefreshBindings()
 					bindings[hTitle] = category
 				end
 				-- add binding to its designated category table, omit binding index if not an actual binding
-				category[#category + 1] = {name = name, binding = id}
+				table.insert(category, {name = name, binding = id})
 			-- else check that this isn't (1) a header which isn't blank and is not a controller header or (2) just a header
 			elseif ( id:match("^HEADER") and not id:match("^HEADER_BLANK") and not id:match("^CP_") ) or ( not id:match("^HEADER") ) then
 				-- at this point, the binding definitely belongs in the "Other" category
@@ -589,7 +589,7 @@ function Atlas.BindingMeta:RefreshBindings()
 					bindings[BINDING_HEADER_OTHER] = otherCategory
 				end
 				-- add binding to the "Other" table, omit binding index if not an actual binding
-				otherCategory[#otherCategory + 1] = {name = name, binding = id}
+				table.insert(otherCategory, {name = name, binding = id})
 			end
 		end
 		-- scrub base controller bindings, since they're not relevant.

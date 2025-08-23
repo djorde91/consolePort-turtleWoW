@@ -48,7 +48,13 @@ local function LoadTriggerTextures(ctrlType, cfg, shared)
 		[4] = cfg.CP_T4 or 'CP_R_GRIP',
 	}
 	-- Arbitrary buttons
-	for i=#t, 8 do
+	local tLength = 0
+	for k in pairs(t) do
+		if type(k) == "number" and k > tLength then
+			tLength = k
+		end
+	end
+	for i = tLength + 1, 8 do
 		t[i] = cfg['CP_T' .. i]
 	end
 	-- Modifiers
@@ -142,7 +148,7 @@ db.Hex2RGB = function(hex, fractal)
     return 	( (tonumber(hex:sub(1,2), 16) or div) / div ), -- R
     		( (tonumber(hex:sub(3,4), 16) or div) / div ), -- G
     		( (tonumber(hex:sub(5,6), 16) or div) / div ), -- B
-    		( (tonumber(hex:sub(7,8), 16) or div) / div ); -- A
+    		( (tonumber(hex:sub(7,8), 16) or div) / div ) -- A
 end
 
 function ConsolePort:GetControllerTexture() 

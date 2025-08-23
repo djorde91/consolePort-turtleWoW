@@ -1,5 +1,6 @@
 -- This file modifies default ConsolePort behaviour to accommodate the action bars.
-local bar = select(2, ...).bar
+-- Fix for WoW Classic 1.12.1 - properly define bar
+local bar = ConsolePortBar.bar
 ---------------------------------------------------------------
 -- Raid cursor fix to add the hidden action bars to the interface scan process
 
@@ -7,7 +8,7 @@ ConsolePortRaidCursor:SetFrameRef("hiddenBars", bar.UIHider)
 ConsolePortRaidCursor:Execute([[
 	UpdateFrameStack = [=[
 		local frames = newtable(self:GetParent():GetChildren())
-		frames[#frames + 1] = self:GetFrameRef("hiddenBars")
+		table.insert(frames, self:GetFrameRef("hiddenBars"))
 		for _, frame in ipairs(frames) do
 			if frame:IsProtected() and not Cache[frame] then
 				CurrentNode = frame

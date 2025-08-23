@@ -1,5 +1,6 @@
 do
-local _, L = ...
+-- Fix for WoW Classic 1.12.1 - properly define L
+local L = ConsolePortUI_Loot
 local UI = ConsolePortUI
 
 local frame = UI:CreateFrame('Frame', _, LootFrame, 'SecureHandlerBaseTemplate, SecureHandlerShowHideTemplate, SecureHandlerStateTemplate', {

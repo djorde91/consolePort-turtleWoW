@@ -1,7 +1,8 @@
 ---------------------------------------------------------------
 local db = ConsolePort:GetData()
 ---------------------------------------------------------------
-local _, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define ab
+local ab = ConsolePortBar
 ---------------------------------------------------------------
 local cfg
 
@@ -72,10 +73,10 @@ function Bar:RegisterOverride(key, button)
 	]], key, button))
 end
 
-function Bar:OnNewBindings(...)
+function Bar:OnNewBindings(arg1, arg2, arg3, arg4, arg5)
 	if not InCombatLockdown() then
 		self:UnregisterOverrides()
-		WrapperLib:UpdateAllBindings(...)
+		WrapperLib:UpdateAllBindings(arg1, arg2, arg3, arg4, arg5)
 		self:UpdateOverrides()
 	end
 end
@@ -83,9 +84,9 @@ end
 ConsolePort:RegisterCallback('OnNewBindings', Bar.OnNewBindings, Bar)
 ConsolePort:RegisterSpellHeader(Bar, true)
 
-function Bar:OnEvent(event, ...)
+function Bar:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
 	if self[event] then
-		self[event](self, ...)
+		self[event](self, arg1, arg2, arg3, arg4, arg5)
 	end
 end
 
@@ -253,7 +254,7 @@ function Bar:OnLoad(cfg, benign)
 		if borderRGB then wrapper:SetBorderColor(unpack(borderRGB))
 		else wrapper:SetBorderColor(1, 1, 1, 1) end
 
-		self.Buttons[#self.Buttons + 1] = wrapper
+		table.insert(self.Buttons, wrapper)
 	end
 
 	self.WatchBarContainer:Hide() -- hide so it updates OnShow, if set.
@@ -287,7 +288,7 @@ function Bar:OnLoad(cfg, benign)
 		]])
 	end
 
-	local width = cfg.width or ( #self.Buttons > 10 and (10 * 110) + 55 or (#self.Buttons * 110) + 55 )
+	local width = cfg.width or ( db.table.count(self.Buttons) > 10 and (10 * 110) + 55 or (db.table.count(self.Buttons) * 110) + 55 )
 	self:SetSize(width, BAR_FIXED_HEIGHT)
 end
 
@@ -339,7 +340,7 @@ for name, script in pairs({
 	]],
 	['GetReticleMacro'] = [[
 		if disableCastOnRelease then return end
-		local actionID, buttonID, down, macro = ...
+		local actionID, buttonID, down, macro = arg1, arg2, arg3, arg4
 
 		if down then
 			if not storedSpellID then

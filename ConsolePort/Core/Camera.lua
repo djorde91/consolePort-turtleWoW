@@ -1,7 +1,9 @@
 ---------------------------------------------------------------
 -- Action camera wrapper
 ---------------------------------------------------------------
-local _, db, cfg = ...
+-- Fix for WoW Classic 1.12.1 - properly define db and cfg
+local db = ConsolePort
+local cfg = ConsolePort.Mouse
 ---------------------------------------------------------------
 UIParent:UnregisterEvent('EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED')
 

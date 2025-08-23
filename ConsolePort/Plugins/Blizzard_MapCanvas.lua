@@ -42,7 +42,7 @@ ConsolePort:AddPlugin('Blizzard_MapCanvas', function(self)
 
 	local function CreateNode(pin)
 		if pins[pin] then return end
-		local index = #nodes + 1
+		local index = db.table.count(nodes) + 1
 		local node = CreateFrame('Button', 'CanvasNode'..index, pin)
 		node.pin = pin
 		node:SetSize(4, 4)
@@ -66,7 +66,7 @@ ConsolePort:AddPlugin('Blizzard_MapCanvas', function(self)
 		end
 	end
 
-	local function AcquirePin(self, pinTemplate, ...)
+	local function AcquirePin(self, pinTemplate, arg1, arg2, arg3, arg4, arg5)
 		for pin in self:EnumeratePinsByTemplate(pinTemplate) do
 			CreateNode(pin, self, pinTemplate)
 		end

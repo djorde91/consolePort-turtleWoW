@@ -4,7 +4,9 @@
 -- Tables/functions in this file are used to get information
 -- used when generating settings and game state data.
 
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 ---------------------------------------------------------------
 local tonumber, ipairs, pairs = tonumber, ipairs, pairs
 local spairs, copy = db.table.spairs, db.table.copy
@@ -18,9 +20,9 @@ end
 ---------------------------------------------------------------
 -- Plug-in access to addon table
 ---------------------------------------------------------------
-function ConsolePort:GetData(...) 
-    if select('#', ...) > 0 then
-        return db(...)
+function ConsolePort:GetData(arg1, arg2, arg3, arg4, arg5) 
+    if arg1 then
+        return db(arg1, arg2, arg3, arg4, arg5)
     end
     return db
 end
@@ -798,7 +800,7 @@ setmetatable(db, {
 
 local function __cd(root, default, raw)
 	local path = {strsplit('/', raw)}
-	local depth = #path
+	local depth = db.table.count(path)
 	if (depth == 1) then
 		return default, raw
 	else

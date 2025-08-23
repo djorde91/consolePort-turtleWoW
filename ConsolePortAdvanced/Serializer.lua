@@ -36,7 +36,7 @@ function encodeB64(str)
 	local remainder = 0
 	local remainder_length = 0
 	local encoded_size = 0
-	local l=#str
+	local l = db.table.count(str)
 	local code
 	for i=1,l do
 		code = string.byte(str, i)
@@ -65,7 +65,7 @@ function decodeB64(str)
 	local i = 1
 	local bitfield_len = 0
 	local bitfield = 0
-	local l = #str
+	local l = db.table.count(str)
 	while true do
 		if bitfield_len >= 8 then
 			decoded_size = decoded_size + 1
@@ -84,17 +84,17 @@ function decodeB64(str)
 	return table.concat(bit8, '', 1, decoded_size)
 end
 
-function ConsolePort:Serialize(...)
+function ConsolePort:Serialize(arg1, arg2, arg3, arg4, arg5)
 	local serializer = LibStub:GetLibrary('AceSerializer-3.0')
 	local compressor = LibStub:GetLibrary('LibCompress')
-	local compressed = compressor:CompressHuffman(serializer:Serialize(...))
+	local compressed = compressor:CompressHuffman(serializer:Serialize(arg1, arg2, arg3, arg4, arg5))
 	return encodeB64(compressed)
 end
 
-function ConsolePort:Deserialize(...)
+function ConsolePort:Deserialize(arg1, arg2, arg3, arg4, arg5)
 	local serializer = LibStub:GetLibrary('AceSerializer-3.0')
 	local compressor = LibStub:GetLibrary('LibCompress')
-	local decoded = decodeB64(...)
+	local decoded = decodeB64(arg1, arg2, arg3, arg4, arg5)
 	local decompressed, errorMsg = compressor:Decompress(decoded)
 	if not decompressed then
 		return

@@ -6,7 +6,9 @@
 -- UICore.lua and calculates appropriate actions based on
 -- node priority and where nodes are drawn on screen.
 
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 ---------------------------------------------------------------
 local MAX_WIDTH, MAX_HEIGHT = UIParent:GetSize()
 ---------------------------------------------------------------
@@ -412,14 +414,15 @@ function Node:IsDrawn(node, super)
 end
 
 function Node:CacheItem(node, object, super)
-	tinsert(self.cache, node.hasPriority and 1 or #self.cache + 1, {
+	local insertPos = node.hasPriority and 1 or db.table.count(self.cache) + 1
+	tinsert(self.cache, insertPos, {
 		node   = node;
 		object = object;
 		super  = super;
 	});
 end
 
-function Node:Scan(super, node, sibling, ...)
+function Node:Scan(super, node, sibling, arg1, arg2, arg3, arg4, arg5)
 	if self:IsRelevant(node) then
 		local object = node:GetObjectType()
 		if self:IsInteractive(node, object) and self:IsDrawn(node, super) then
@@ -430,7 +433,7 @@ function Node:Scan(super, node, sibling, ...)
 		end
 	end
 	if sibling then
-		self:Scan(super, sibling, ...)
+		self:Scan(super, sibling, arg1, arg2, arg3, arg4, arg5)
 	end
 end
 
@@ -568,7 +571,7 @@ end
 function Node:SetCurrent()	
 	if old and old.node:IsVisible() and Node:IsDrawn(old.node) then
 		current = old
-	elseif #self.cache > 0 and (not current or not current.node:IsVisible()) then
+	elseif db.table.count(self.cache) > 0 and (not current or not current.node:IsVisible()) then
 		local x, y, targNode = Cursor:GetCenter()
 		if not x or not y then
 			targNode = self.cache[1]

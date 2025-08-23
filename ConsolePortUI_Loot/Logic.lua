@@ -1,10 +1,11 @@
-local _, L = ...
+-- Fix for WoW Classic 1.12.1 - properly define L
+local L = ConsolePortUI_Loot
 local UI, Control, Data = ConsolePortUI:GetEssentials()
 local KEY = Data.KEY
 local LootFrame, focusButton = {}
 L.LootFrameLogicMixin = LootFrame
 
-function LootFrame:LOOT_READY(...)
+function LootFrame:LOOT_READY(arg1, arg2, arg3, arg4, arg5)
 	if GetNumLootItems() < 1 then
 		CloseLoot()
 	else
@@ -12,15 +13,15 @@ function LootFrame:LOOT_READY(...)
 	end
 end
 
-function LootFrame:LOOT_SLOT_CLEARED(...)
+function LootFrame:LOOT_SLOT_CLEARED(arg1, arg2, arg3, arg4, arg5)
 	self:UpdateItems()
 end
 
-function LootFrame:LOOT_SLOT_CHANGED(...)
+function LootFrame:LOOT_SLOT_CHANGED(arg1, arg2, arg3, arg4, arg5)
 	self:UpdateItems()
 end
 
-function LootFrame:MODIFIER_STATE_CHANGED(...)
+function LootFrame:MODIFIER_STATE_CHANGED(arg1, arg2, arg3, arg4, arg5)
 end
 
 function LootFrame:OnShow()
@@ -40,9 +41,9 @@ function LootFrame:OnHide()
 	end
 end
 
-function LootFrame:OnEvent(event, ...)
+function LootFrame:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
 	if self[event] then
-		self[event](self, ...)
+		self[event](self, arg1, arg2, arg3, arg4, arg5)
 	end
 end
 
@@ -64,7 +65,7 @@ function LootFrame:UpdateItems(fadeOnShow)
 				Data.UIFrameFadeIn(button, 0.3, 0, 1)
 			end
 
-			self.active[#self.active + 1] = button
+			table.insert(self.active, button)
 
 			if prevButton then
 				button:SetPoint('TOPRIGHT', prevButton.NameFrame, 'BOTTOMLEFT', 36, -4)

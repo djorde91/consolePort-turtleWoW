@@ -370,7 +370,7 @@ end
 -- Controls: Create panel and children 
 ---------------------------------------------------------------
 
-db.PANELS[#db.PANELS + 1] = {name = 'Controls', header = SETTINGS, mixin = WindowMixin, onCreate = function(Controls, self)
+table.insert(db.PANELS, {name = 'Controls', header = SETTINGS, mixin = WindowMixin, onCreate = function(Controls, self)
 	local red, green, blue = db.Atlas.GetCC()
 
 	Settings = db.Settings
@@ -734,7 +734,7 @@ db.PANELS[#db.PANELS + 1] = {name = 'Controls', header = SETTINGS, mixin = Windo
 	------------------------------------------------------------------------------------------------------------------------------
 	do local GeneralModule = Controls.GeneralModule
 
-		local mouseCvarOffset = #Controls.Events
+		local mouseCvarOffset = db.table.count(Controls.Events)
 		local padding = 28
 		Controls.General = {}
 		for i, setting in pairs(GetAddonSettings()) do
@@ -976,8 +976,16 @@ db.PANELS[#db.PANELS + 1] = {name = 'Controls', header = SETTINGS, mixin = Windo
 					end
 					tinsert(checks, check)
 				end
-				local check = CreateCheckButton(i.. #setting.value + 1, setting.cvar, setting[#setting.value+1], state == tostring(setting.default), setting.default)
-				check:SetPoint('LEFT', checks[#checks].Description, 'RIGHT', 8, 0)
+				local settingValueSize = 0
+				for _ in pairs(setting.value) do
+					settingValueSize = settingValueSize + 1
+				end
+				local check = CreateCheckButton(i.. settingValueSize + 1, setting.cvar, setting[settingValueSize+1], state == tostring(setting.default), setting.default)
+				local checksSize = 0
+				for _ in pairs(checks) do
+					checksSize = checksSize + 1
+				end
+				check:SetPoint('LEFT', checks[checksSize].Description, 'RIGHT', 8, 0)
 				tinsert(checks, check)
 				for _, check in pairs(checks) do
 					check.checks = checks

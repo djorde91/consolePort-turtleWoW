@@ -1,4 +1,6 @@
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 db.Hint = ConsolePortHintFrame
 
 local Hint = ConsolePortHintFrame
@@ -17,7 +19,7 @@ function Hint:DisplayMessage(text, time, yOffset)
 		self:Show()
 		self:SetScript("OnUpdate", self.ShowHint)
 	else
-		queue[#queue + 1] = {text = text, time = time, yOffset = yOffset}
+		table.insert(queue, {text = text, time = time, yOffset = yOffset})
 	end
 end
 

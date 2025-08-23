@@ -4,7 +4,9 @@
 -- This frame places cursor pickups on action buttons by
 -- reading input and comparing it to controller bindings.
 
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 local Core, Helper = ConsolePort, ConsolePortSpellHelperFrame
 Helper:SetBackdrop(db.Atlas.Backdrops.Talkbox)
 
@@ -121,9 +123,9 @@ function Helper:ShowBags()
 	self.BagFrame:Show()
 end
 
-function Helper:OnEvent(event, ...)
+function Helper:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
 	if self[event] then
-		self[event](self, ...)
+		self[event](self, arg1, arg2, arg3, arg4, arg5)
 	elseif self:IsVisible() then
 		self:Hide()
 	end
@@ -226,31 +228,20 @@ function Helper:OnKeyDown(key)
 	self:UpdateWidth()
 end
 
-function Helper:PLAYER_REGEN_ENABLED(...)
-	self:UnregisterEvent('PLAYER_REGEN_ENABLED')
-	self:Show()
+function Helper:PLAYER_REGEN_ENABLED(arg1, arg2, arg3, arg4, arg5)
+	self:FadeOut(self:GetAlpha())
 end
 
-function Helper:PLAYER_REGEN_DISABLED(...) 
-	if self:IsVisible() then 
-		self:RegisterEvent('PLAYER_REGEN_ENABLED')
-		self:Hide() 
-	end
+function Helper:PLAYER_REGEN_DISABLED(arg1, arg2, arg3, arg4, arg5)
+	self:FadeIn(self:GetAlpha())
 end
 
-function Helper:ACTIONBAR_HIDEGRID(...)
-	self:UnregisterEvent('PLAYER_REGEN_ENABLED')
-	self.cache = nil
-	self.manifest = nil
+function Helper:ACTIONBAR_HIDEGRID(arg1, arg2, arg3, arg4, arg5)
 	self:Hide()
 end
 
-function Helper:ACTIONBAR_SHOWGRID(...)
-	if not InCombatLockdown() then
-		self:Show()
-	else
-		self:RegisterEvent('PLAYER_REGEN_ENABLED')
-	end
+function Helper:ACTIONBAR_SHOWGRID(arg1, arg2, arg3, arg4, arg5)
+	self:Show()
 end
 
 for _, event in pairs({
@@ -308,8 +299,12 @@ function Helper:OnActionPlaced(actionID, pushTexture)
 		end
 		
 		if not freeIcon then
-			freeIcon = CreateFrame('FRAME', self:GetName()..'Icon'..(#self.iconList+1), UIParent, 'CPIconIntroTemplate')
-			self.iconList[#self.iconList+1] = freeIcon
+			local iconListSize = 0
+			for _ in pairs(self.iconList) do
+				iconListSize = iconListSize + 1
+			end
+			freeIcon = CreateFrame('FRAME', self:GetName()..'Icon'..(iconListSize+1), UIParent, 'CPIconIntroTemplate')
+			table.insert(self.iconList, freeIcon)
 		end
 
 		freeIcon:AnimateNewActionFromCoords(button, x, y, actionID, texture)

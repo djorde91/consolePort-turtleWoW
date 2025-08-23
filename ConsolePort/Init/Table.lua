@@ -4,6 +4,7 @@
 -- These table functions are used to perform special operations
 -- that are not natively supported.  
 ---------------------------------------------------------------
+-- Fix for WoW Classic 1.12.1 - properly define db
 local db = ConsolePort
 local tbl = {}
 ---------------------------------------------------------------
@@ -107,10 +108,28 @@ local function spairs(t, order)
 	end
 end
 ---------------------------------------------------------------
-local function mixin(object, ...)
+-- count: Count the number of entries in a table (safe for WoW Classic 1.12.1)
+---------------------------------------------------------------
+local function count(t)
+	if type(t) ~= "table" then
+		print("ConsolePort: Warning - Attempted to count non-table value:", type(t), tostring(t))
+		return 0
+	end
+	local count = 0
+	for _ in pairs(t) do
+		count = count + 1
+	end
+	return count
+end
+
+---------------------------------------------------------------
+local function mixin(object, mixin1, mixin2, mixin3, mixin4, mixin5)
 	local scriptSupport = (type(object.HasScript) == 'function')
-	for i = 1, select('#', ...) do
-		local mixin = select(i, ...)
+	local mixins = {mixin1, mixin2, mixin3, mixin4, mixin5}
+	
+	for i = 1, 5 do
+		local mixin = mixins[i]
+		if not mixin then break end
 
 		for k, v in pairs(mixin) do
 			if scriptSupport and object:HasScript(k) then
@@ -131,3 +150,4 @@ end
 tbl.copy, tbl.flip, tbl.compare = copy, flip, compare
 tbl.unravel, tbl.unravelv = unravel, unravelv
 tbl.spairs, tbl.mixin = spairs, mixin
+tbl.count = count

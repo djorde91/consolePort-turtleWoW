@@ -2,7 +2,9 @@
 local db = ConsolePort:GetData()
 local HANDLE, WrapperMixin = {}, {}
 ---------------------------------------------------------------
-local an, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define an and ab
+local an = "ConsolePortBar"
+local ab = ConsolePortBar
 local acb = ab.libs.acb
 ---------------------------------------------------------------
 ab.libs.wrapper = HANDLE
@@ -196,12 +198,12 @@ function WrapperMixin:Hide()
 	self[''].shadow:Hide()
 end
 
-function WrapperMixin:SetPoint(...)
+function WrapperMixin:SetPoint(arg1, arg2, arg3, arg4, arg5)
 	local main = self['']
-	local p, x, y = ...
+	local p, x, y = arg1, arg2, arg3
 	main:ClearAllPoints()
 	if p and x and y then
-		return main:SetPoint(...)
+		return main:SetPoint(arg1, arg2, arg3, arg4, arg5)
 	end
 end
 
@@ -394,7 +396,7 @@ function HANDLE:Create(parent, id, orientation)
 	wrapper.Buttons = {}
 
 	for mod, info in pairs(mods) do
-		local name = 'CPB_' .. (id:sub(4, #id)) .. (mod == '' and mod or ('_' .. (mod:sub(1, #mod -1))))
+		local name = 'CPB_' .. (id:sub(4, db.table.count(id))) .. (mod == '' and mod or ('_' .. (mod:sub(1, db.table.count(mod) -1))))
 		local bSize, tSize = unpack(info.size)
 		local button = CreateButton(parent, id..mod, name, mod, bSize, tSize, mod == '' and config)
 		button.plainID = id

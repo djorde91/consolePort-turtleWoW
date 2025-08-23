@@ -1,4 +1,6 @@
-local addOn, Language = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and Language
+local addOn = ConsolePortKeyboard
+local Language = ConsolePortKeyboard
 local class = select(2, UnitClass("player"))
 local cc = RAID_CLASS_COLORS[class]
 
@@ -68,7 +70,11 @@ local function utf8sub(str, startChar, numChars)
  
 	local currentIndex = startIndex
  
-	while numChars > 0 and currentIndex <= #str do
+	local strSize = 0
+	for _ in pairs(str) do
+		strSize = strSize + 1
+	end
+	while numChars > 0 and currentIndex <= strSize do
 		local char = string.byte(str, currentIndex)
 		currentIndex = currentIndex + chsize(char)
 		numChars = numChars -1
@@ -287,9 +293,9 @@ function Keyboard:LoadFrame()
 	self:CheckModifier()
 end
 
-function Keyboard:OnEvent(event, ...)
+function Keyboard:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
 	if self[event] then
-		self[event](self, ...)
+		self[event](self, arg1, arg2, arg3, arg4, arg5)
 	end
 end
 
@@ -319,8 +325,8 @@ function Keyboard:LoadSettings()
 	self:NormalizeDictionary()
 end
 
-function Keyboard:ADDON_LOADED(...)
-	local name = ...
+function Keyboard:ADDON_LOADED(arg1, arg2, arg3, arg4, arg5)
+	local name = arg1
 	if name == addOn then
 		self:UPDATE_BINDINGS()
 		self:LoadSettings()
@@ -343,7 +349,7 @@ function Keyboard:UPDATE_BINDINGS()
 	end
 end
 
-function Keyboard:CheckModifier(...)
+function Keyboard:CheckModifier(arg1, arg2, arg3, arg4, arg5)
 	local SetIndex = IsShiftKeyDown() and IsControlKeyDown() and 4 or IsShiftKeyDown() and 1 or IsControlKeyDown() and 3 or 2
 	for i, Set in pairs(self.Sets) do
 		for i, Char in pairs(Set.Buttons) do

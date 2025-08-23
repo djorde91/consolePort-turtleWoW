@@ -1,7 +1,9 @@
 ---------------------------------------------------------------
 -- Radial.lua: Handles radial input (left stick & movement)
 ---------------------------------------------------------------
-local HANDLE, _, db = ConsolePortRadialHandler, ...
+-- Fix for WoW Classic 1.12.1 - properly define HANDLE and db
+local HANDLE = ConsolePortRadialHandler
+local db = ConsolePort
 ---------------------------------------------------------------
 local DEFAULT_BINDINGS, LOCAL_BINDINGS = {
 	UP    = {'W', 'UP'};
@@ -31,13 +33,13 @@ local MOVEMENT = {
 ---------------------------------------------------------------
 local BIT = {
 	-- Directions:
-	UP    = 0x00000001; [0x00000001] = 'UP';
-	DOWN  = 0x00000002; [0x00000002] = 'DOWN';
-	LEFT  = 0x00000004; [0x00000004] = 'LEFT';
-	RIGHT = 0x00000008; [0x00000008] = 'RIGHT';
+	UP    = 0x00000001, [0x00000001] = 'UP',
+	DOWN  = 0x00000002, [0x00000002] = 'DOWN',
+	LEFT  = 0x00000004, [0x00000004] = 'LEFT',
+	RIGHT = 0x00000008, [0x00000008] = 'RIGHT',
 	-- Axis dominant:
-	HORZ  = 0x00000010; [0x00000010] = 'HORZ';
-	VERT  = 0x00000020; [0x00000020] = 'VERT';
+	HORZ  = 0x00000010, [0x00000010] = 'HORZ',
+	VERT  = 0x00000020, [0x00000020] = 'VERT',
 }
 ---------------------------------------------------------------
 local RADIAL_TYPE_LARGE, RADIAL_TYPE_SMALL = 0x1, 0x2
@@ -222,7 +224,7 @@ local ENV_RADIAL = {
 	---------------------------------------------------------------
 	['_bits'] = BITS_TO_ANGLE_SECURE;
 	['_onkey'] = [[
-		local key, down = ...
+		local key, down = arg1, arg2
 		BIT[key] = down and true or nil
 
 		local index = self:RunAttribute('_setindex', self:RunAttribute('_bits'))
@@ -246,7 +248,7 @@ local ENV_RADIAL = {
 	]];
 	---------------------------------------------------------------
 	['_setindex'] = [[
-		local index = ...
+		local index = arg1
 		local newindex = tostring(index)
 		self:SetAttribute('index', newindex)
 		return newindex
@@ -280,7 +282,7 @@ local ENV_RADIAL = {
 	]];
 	---------------------------------------------------------------
 	['_onuse'] = [[
-		self:SetAttribute('toggled', ...)
+		self:SetAttribute('toggled', arg1)
 
 		if self:GetAttribute('toggled') then
 			HANDLE:RunAttribute('_bind', self:GetName())
@@ -294,7 +296,7 @@ local ENV_RADIAL = {
 	]];
 	---------------------------------------------------------------
 	['_oncursor'] = [[
-		local hasItem = ...
+		local hasItem = arg1
 		local hide = not hasItem and not self:GetAttribute('toggled')
 		if hasItem or hide then
 			if hasItem then
@@ -325,13 +327,13 @@ local ENV_RADIAL = {
 local INPUTS, FRAMES = {}, {}
 ------------------------------
 HANDLE:SetAttribute('_bind', [[
-	local frame = self:GetFrameRef(...)
+	local frame = self:GetFrameRef(arg1)
 	if frame then
 		for i=1, self:GetAttribute('inputs') do
 			local input = self:GetFrameRef(tostring(i))
 			local name = input:GetName()
 			local key = input:GetAttribute('key')
-			input:SetAttribute('ref', ...)
+			input:SetAttribute('ref', arg1)
 
 			input:SetBindingClick(true, key, name)
 			input:SetBindingClick(true, 'CTRL-'..key, name)

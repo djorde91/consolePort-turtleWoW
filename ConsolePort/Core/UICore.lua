@@ -1,4 +1,6 @@
-local UI = {} ConsolePortUI = UI
+-- Fix for WoW Classic 1.12.1 - properly define UI
+local UI = {} 
+ConsolePortUI = UI
 ----------------------------------------------------------------
 local 	assert, pairs, ipairs, type, unpack, wipe, tconcat = 
 		assert, pairs, ipairs, type, unpack, wipe, table.concat
@@ -102,7 +104,7 @@ function call(region, method, data)
 	local func = SETUP[method] or region[method]
 	if type(func) == 'function' then
 		-- if sequential array, just unpack it.
-		if ( type(data) == 'table' and #data ~= 0 ) then
+		if ( type(data) == 'table' and db.table.count(data) ~= 0 ) then
 			return func(region, unpack(data))
 		else
 			return func(region, data)
@@ -164,7 +166,7 @@ end
 
 function anchor()
 	for _, setup in pairs(ANCHORS) do
-		local numArgs = #setup
+		local numArgs = db.table.count(setup)
 		if numArgs == 2 then
 			local region, point = unpack(setup)
 			region:SetPoint(point)
@@ -191,7 +193,16 @@ end
 ----------------------------------
 function getBuildInfo(bp) return bp.Type, type(bp.Type), bp.Setup, bp.Repeat end
 ----------------------------------
-function addSubTable(tbl, ...) tbl[#tbl + 1] = {...} end
+function addSubTable(tbl, arg1, arg2, arg3, arg4, arg5) 
+	local args = {arg1, arg2, arg3, arg4, arg5}
+	local validArgs = {}
+	for _, arg in ipairs(args) do
+		if arg then
+			table.insert(validArgs, arg)
+		end
+	end
+	table.insert(tbl, validArgs) 
+end
 
 ----------------------------------
 RESERVED = {
@@ -260,57 +271,57 @@ REGION = {
 SETUP = {
 ----------------------------------
 --	[1] = function(frame, blueprint) UI:BuildFrame(frame, blueprint, true) end,
-	ID 	= function(region, ...) region:SetID(...) end,
+	ID 	= function(region, arg1, arg2, arg3, arg4, arg5) region:SetID(arg1, arg2, arg3, arg4, arg5) end,
 	--- Texture
-	Atlas 	= function(texture, ...) texture:SetAtlas(...) end,
-	Blend 	= function(texture, ...) texture:SetBlendMode(...) end,
-	Coords 	= function(texture, ...) texture:SetTexCoord(...) end,
-	Gradient = function(texture, ...) texture:SetGradientAlpha(...) end,
-	Texture = function(texture, ...) texture:SetTexture(...) end,
+	Atlas 	= function(texture, arg1, arg2, arg3, arg4, arg5) texture:SetAtlas(arg1, arg2, arg3, arg4, arg5) end,
+	Blend 	= function(texture, arg1, arg2, arg3, arg4, arg5) texture:SetBlendMode(arg1, arg2, arg3, arg4, arg5) end,
+	Coords 	= function(texture, arg1, arg2, arg3, arg4, arg5) texture:SetTexCoord(arg1, arg2, arg3, arg4, arg5) end,
+	Gradient = function(texture, arg1, arg2, arg3, arg4, arg5) texture:SetGradientAlpha(arg1, arg2, arg3, arg4, arg5) end,
+	Texture = function(texture, arg1, arg2, arg3, arg4, arg5) texture:SetTexture(arg1, arg2, arg3, arg4, arg5) end,
 	--- FontString
-	AlignH 	= function(fontString, ...) fontString:SetJustifyH(...) end,
-	AlignV 	= function(fontString, ...) fontString:SetJustifyV(...) end,
-	Color 	= function(fontString, ...) fontString:SetTextColor(...) end,
-	Font 	= function(fontString, ...) fontString:SetFont(...) end,
-	FontH 	= function(fontString, ...) fontString:SetHeight(...) end,
-	Text 	= function(fontString, ...) fontString:SetText(...) end,
+	AlignH 	= function(fontString, arg1, arg2, arg3, arg4, arg5) fontString:SetJustifyH(arg1, arg2, arg3, arg4, arg5) end,
+	AlignV 	= function(fontString, arg1, arg2, arg3, arg4, arg5) fontString:SetJustifyV(arg1, arg2, arg3, arg4, arg5) end,
+	Color 	= function(fontString, arg1, arg2, arg3, arg4, arg5) fontString:SetTextColor(arg1, arg2, arg3, arg4, arg5) end,
+	Font 	= function(fontString, arg1, arg2, arg3, arg4, arg5) fontString:SetFont(arg1, arg2, arg3, arg4, arg5) end,
+	FontH 	= function(fontString, arg1, arg2, arg3, arg4, arg5) fontString:SetHeight(arg1, arg2, arg3, arg4, arg5) end,
+	Text 	= function(fontString, arg1, arg2, arg3, arg4, arg5) fontString:SetText(arg1, arg2, arg3, arg4, arg5) end,
 	--- LayeredRegion
-	Layer 	= function(region, ...) region:SetDrawLayer(...) end,
-	Vertex 	= function(region, ...) region:SetVertexColor(...) end,
+	Layer 	= function(region, arg1, arg2, arg3, arg4, arg5) region:SetDrawLayer(arg1, arg2, arg3, arg4, arg5) end,
+	Vertex 	= function(region, arg1, arg2, arg3, arg4, arg5) region:SetVertexColor(arg1, arg2, arg3, arg4, arg5) end,
 	--- Frame
 	Attrib 	= function(frame, attributes) for k, v in pairs(attributes) do frame:SetAttribute(k, v) end end,
 	Backdrop = function(frame, backdrop) frame:SetBackdrop(backdrop) end,
 	Background = function(frame, backdrop) UI.Media:SetBackdrop(frame, backdrop) end,
-	Events 	= function(frame, ...) for _, v in ipairs({...}) do frame:RegisterEvent(v) end end,
+	Events 	= function(frame, arg1, arg2, arg3, arg4, arg5) local args = {arg1, arg2, arg3, arg4, arg5} for _, v in ipairs(args) do if v then frame:RegisterEvent(v) end end end,
 	Hooks 	= function(frame, scripts) for k, v in pairs(scripts) do frame:HookScript(k, v) end end,
-	Level 	= function(frame, ...) frame:SetFrameLevel(...) end,
-	Strata 	= function(frame, ...) frame:SetFrameStrata(...) end,
+	Level 	= function(frame, arg1, arg2, arg3, arg4, arg5) frame:SetFrameLevel(arg1, arg2, arg3, arg4, arg5) end,
+	Strata 	= function(frame, arg1, arg2, arg3, arg4, arg5) frame:SetFrameStrata(arg1, arg2, arg3, arg4, arg5) end,
 	Scripts = function(frame, scripts) for k, v in pairs(scripts) do frame:SetScript(k, v) end end,
 	--- Region
-	Alpha 	= function(region, ...) region:SetAlpha(...) end,
+	Alpha 	= function(region, arg1, arg2, arg3, arg4, arg5) region:SetAlpha(arg1, arg2, arg3, arg4, arg5) end,
 	Clear 	= function(region) region:ClearAllPoints() end,
 	Fill 	= function(region, target) region:SetAllPoints(target ~= true and getRelative(region, target)) end,
-	Height 	= function(region, ...) region:SetHeight(...) end,
-	Hide 	= function(region, ...) region:Hide() end,
-	Probe 	= function(region, ...) region.probe = UI:CreateProbe(region, ...) end,
-	Show 	= function(region, ...) region:Show() end,
-	Size 	= function(region, ...) region:SetSize(...) end,
-	Scale 	= function(region, ...) region:SetScale(...) end,
-	Width 	= function(region, ...) region:SetWidth(...) end,
+	Height 	= function(region, arg1, arg2, arg3, arg4, arg5) region:SetHeight(arg1, arg2, arg3, arg4, arg5) end,
+	Hide 	= function(region, arg1, arg2, arg3, arg4, arg5) region:Hide() end,
+	Probe 	= function(region, arg1, arg2, arg3, arg4, arg5) region.probe = UI:CreateProbe(region, arg1, arg2, arg3, arg4, arg5) end,
+	Show 	= function(region, arg1, arg2, arg3, arg4, arg5) region:Show() end,
+	Size 	= function(region, arg1, arg2, arg3, arg4, arg5) region:SetSize(arg1, arg2, arg3, arg4, arg5) end,
+	Scale 	= function(region, arg1, arg2, arg3, arg4, arg5) region:SetScale(arg1, arg2, arg3, arg4, arg5) end,
+	Width 	= function(region, arg1, arg2, arg3, arg4, arg5) region:SetWidth(arg1, arg2, arg3, arg4, arg5) end,
 	--- Button
-	Click 	= function(button, ...) button:SetAttribute('type', 'click') button:SetAttribute('clickbutton', ...) end,
-	Macro 	= function(button, ...) button:SetAttribute('type', 'macro') button:SetAttribute('macrotext', ...) end,
-	Action 	= function(button, ...) button:SetAttribute('type', 'action') button:SetAttribute('action', ...) end,
-	Spell 	= function(button, ...) button:SetAttribute('type', 'spell') button:SetAttribute('spell', ...) end,
-	Unit 	= function(button, ...) button:SetAttribute('type', 'target') button:SetAttribute('unit', ...) end,
-	Item 	= function(button, ...) button:SetAttribute('type', 'item') button:SetAttribute('item', ...) end,
+	Click 	= function(button, arg1, arg2, arg3, arg4, arg5) button:SetAttribute('type', 'click') button:SetAttribute('clickbutton', arg1, arg2, arg3, arg4, arg5) end,
+	Macro 	= function(button, arg1, arg2, arg3, arg4, arg5) button:SetAttribute('type', 'macro') button:SetAttribute('macrotext', arg1, arg2, arg3, arg4, arg5) end,
+	Action 	= function(button, arg1, arg2, arg3, arg4, arg5) button:SetAttribute('type', 'action') button:SetAttribute('action', arg1, arg2, arg3, arg4, arg5) end,
+	Spell 	= function(button, arg1, arg2, arg3, arg4, arg5) button:SetAttribute('type', 'spell') button:SetAttribute('spell', arg1, arg2, arg3, arg4, arg5) end,
+	Unit 	= function(button, arg1, arg2, arg3, arg4, arg5) button:SetAttribute('type', 'target') button:SetAttribute('unit', arg1, arg2, arg3, arg4, arg5) end,
+	Item 	= function(button, arg1, arg2, arg3, arg4, arg5) button:SetAttribute('type', 'item') button:SetAttribute('item', arg1, arg2, arg3, arg4, arg5) end,
 	--- Constructor
-	OnLoad 	= function(region, ...) addSubTable(CONSTRUCTORS, region, ...) end,
+	OnLoad 	= function(region, arg1, arg2, arg3, arg4, arg5) addSubTable(CONSTRUCTORS, region, arg1, arg2, arg3, arg4, arg5) end,
 	--- Points
-	Point 	= function(region, ...) addSubTable(ANCHORS, region, ...) end,
-	Points  = function(region, ...) for _, point in ipairs({...}) do addSubTable(ANCHORS, region, unpack(point)) end end,
+	Point 	= function(region, arg1, arg2, arg3, arg4, arg5) addSubTable(ANCHORS, region, arg1, arg2, arg3, arg4, arg5) end,
+	Points  = function(region, arg1, arg2, arg3, arg4, arg5) local args = {arg1, arg2, arg3, arg4, arg5} for _, point in ipairs(args) do if point then addSubTable(ANCHORS, region, unpack(point)) end end end,
 	-- Mixin 
-	Mixin 	= function(region, ...) UI:ApplyMixin(region, nil, ...) end,
+	Mixin 	= function(region, arg1, arg2, arg3, arg4, arg5) UI:ApplyMixin(region, nil, arg1, arg2, arg3, arg4, arg5) end,
 	--- Multiple runs
 	Multiple 	= function(region, multiTable)
 		for k, v in pairs(multiTable) do
@@ -342,19 +353,19 @@ end
 -- @param	parent 	: Parent of frame
 -- @param	inherit : Templates to inherit from
 -- @return 	frame 	: Returns the created frame.
-function UI:CreateScriptFrame(...)
-	local frame = CreateFrame(...)
+function UI:CreateScriptFrame(arg1, arg2, arg3, arg4, arg5)
+	local frame = CreateFrame(arg1, arg2, arg3, arg4, arg5)
 	local index = getmetatable(frame).__index
 
 	function index:Hook(name, func)
-		hooksecurefunc(name, function(...)
-			func(self, ...)
+		hooksecurefunc(name, function(arg1, arg2, arg3, arg4, arg5)
+			func(self, arg1, arg2, arg3, arg4, arg5)
 		end)
 	end
 
 	function index:HookObject(object, name, func)
-		hooksecurefunc(object, name, function(...)
-			func(self, ...)
+		hooksecurefunc(object, name, function(arg1, arg2, arg3, arg4, arg5)
+			func(self, arg1, arg2, arg3, arg4, arg5)
 		end)
 	end
 
@@ -374,9 +385,9 @@ function UI:CreateScriptFrame(...)
 		end;
 	})
 
-	function frame:OnEvent(event, ...)
+	function frame:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
 		if self[event] then
-			self[event](self, ...)
+			self[event](self, arg1, arg2, arg3, arg4, arg5)
 		end
 	end
 	return frame

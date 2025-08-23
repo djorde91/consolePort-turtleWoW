@@ -193,7 +193,7 @@
 				self.cooldown:SetSwipeColor(0, 0, 0);
 			</OnLoad>
 			<OnEvent>
-				PetActionButton_OnEvent(self, event, ...);
+				PetActionButton_OnEvent(self, event, arg1, arg2, arg3, arg4, arg5);
 			</OnEvent>
 			<PreClick>
 				self:SetChecked(false);

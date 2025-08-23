@@ -174,7 +174,7 @@ local errorText =
 <p align="center">The tutorial content failed to load.</p>
 </BODY></HTML>]]
 
-db.PANELS[#db.PANELS + 1] = {
+table.insert(db.PANELS, {
 	name = HELP_LABEL, 
 	header  = HELP_LABEL, 
 	mixin = WindowMixin,

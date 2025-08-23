@@ -24,8 +24,8 @@ local 	Core,
 -- Externals:
 ---------------------------------------------------------------
 function Core:HasUIFocus()         return hasUIFocus   end
-function Core:SetUIFocus(...)      hasUIFocus = ...    end
-function Core:LockUICore(...)      isLocked = ...      end
+function Core:SetUIFocus(focus)    hasUIFocus = focus    end
+function Core:LockUICore(locked)   isLocked = locked      end
 function Core:IsUICoreLocked()     return isLocked     end
 function Core:IsCursorObstructed() return isObstructed end
 
@@ -260,10 +260,7 @@ function Core:GetVisibleCursorFrames()
 	return unravel(visible)
 end
 
-function Core:IsFrameVisibleToCursor(...)
-	local returns = {}
-	for i, frame in ipairs({...}) do
-		returns[i] = visible[frame] or false
-	end
-	return unpack(returns)
+function Core:IsFrameVisibleToCursor(arg1, arg2, arg3, arg4, arg5)
+	-- Check if frame is visible to cursor
+	return arg1 and arg1:IsVisible()
 end

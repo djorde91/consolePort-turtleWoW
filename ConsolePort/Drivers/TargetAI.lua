@@ -150,7 +150,11 @@ local markerMT = {
 		local num = 0
 		for _,_ in pairs(t) do num=num+1 end
 		if num > limit then
-			for i=#fifo, 1, -1 do
+			local fifoSize = 0
+		for _ in pairs(fifo) do
+			fifoSize = fifoSize + 1
+		end
+		for i=fifoSize, 1, -1 do
 				if t[fifo[i]] then
 					rawset(t, fifo[i], nil)
 					num = num - 1
@@ -192,9 +196,9 @@ end
 
 ---------------------------------------
 
-function AI:OnEvent(event, ...)
+function AI:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
 	if self[event] then
-		self[event](self, ...)
+		self[event](self, arg1, arg2, arg3, arg4, arg5)
 	end
 end
 

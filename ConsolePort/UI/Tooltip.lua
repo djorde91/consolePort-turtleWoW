@@ -1,4 +1,8 @@
-local UI, Tooltip, framePool, _, db = ConsolePortUI, {}, {}, ...
+-- Fix for WoW Classic 1.12.1 - properly define UI, Tooltip, framePool, and db
+local UI = ConsolePortUI
+local Tooltip = {}
+local framePool = {}
+local db = ConsolePort
 
 function Tooltip:OnShow()
 	db.UIFrameFadeIn(self, 0.2, 0, 1)
@@ -68,7 +72,7 @@ function UI:GetTooltip()
 		end
 	end
 	if not tooltip then
-		local id = #framePool + 1
+		local id = db.table.count(framePool) + 1
 		tooltip = UI:CreateFrame('GameTooltip', 'ConsolePortUITooltip'..id, UIParent, 'GameTooltipTemplate', {
 			shoppingTooltips = GameTooltip.shoppingTooltips,
 			Mixin = {Tooltip, 'ScaleOnFocus'},

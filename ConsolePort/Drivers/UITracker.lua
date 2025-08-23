@@ -98,8 +98,8 @@ local function CacheActionBar(cache, this, action)
 end
 
 -- Scanner:
-local function FindActionButtons(callback, cache, this, sibling, ...)
-	if sibling then FindActionButtons(callback, cache, sibling, ...) end
+local function FindActionButtons(callback, cache, this, sibling, arg1, arg2, arg3, arg4, arg5)
+	if sibling then FindActionButtons(callback, cache, sibling, arg1, arg2, arg3, arg4, arg5) end
 	if not IsFrameWidget(this) or this:IsForbidden() or IGNORE_FRAMES[this] then return cache end
 	-------------------------------------
 	local action = ValidateActionID(this)

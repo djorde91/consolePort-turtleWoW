@@ -1,4 +1,7 @@
-local UI, an, L = ConsolePortUI, ...
+-- Fix for WoW Classic 1.12.1 - properly define an and L
+local UI = ConsolePortUI
+local an = "ConsolePortUI_Menu"
+local L = ConsolePortUI_Menu
 local db = ConsolePort:GetData()
 local ICON = 'Interface\\Icons\\%s'
 local Button = L.Button
@@ -45,11 +48,11 @@ local Menu =  UI:CreateFrame('Frame', an, GameMenuFrame, 'SecureHandlerStateTemp
 						end
 					end,
 					OnClick = function(self) ToggleCharacter('PaperDollFrame') end,
-					OnEvent = function(self, event, ...)
+					OnEvent = function(self, event, arg1, arg2, arg3, arg4, arg5)
 						if event == 'UNIT_PORTRAIT_UPDATE' then
 							SetPortraitTexture(self.Icon, 'player')
 						elseif event == 'PLAYER_LEVEL_UP' then
-							self:UpdateLevel(...)
+							self:UpdateLevel(arg1, arg2, arg3, arg4, arg5)
 						else
 							SetPortraitTexture(self.Icon, 'player')
 							self:UpdateLevel()
@@ -81,7 +84,7 @@ local Menu =  UI:CreateFrame('Frame', an, GameMenuFrame, 'SecureHandlerStateTemp
 					Events 	= {'BAG_UPDATE'},
 					Attrib 	= {hidemenu = true},
 					OnClick = ToggleAllBags,
-					OnEvent = function(self, event, ...)
+					OnEvent = function(self, event, arg1, arg2, arg3, arg4, arg5)
 						local totalFree, numSlots, freeSlots, bagFamily = 0, 0
 						for i = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
 							freeSlots, bagFamily = GetContainerNumFreeSlots(i)
@@ -154,10 +157,10 @@ local Menu =  UI:CreateFrame('Frame', an, GameMenuFrame, 'SecureHandlerStateTemp
 						--	'PLAYER_CHARACTER_UPGRADE_TALENT_COUNT_CHANGED',
 						}) do pcall(self.RegisterEvent, self, event) end
 					end,
-					OnEvent = function(self, event, ...)
+					OnEvent = function(self, event, arg1, arg2, arg3, arg4, arg5)
 						self.tooltipText = nil
 						if ( event == 'PLAYER_LEVEL_UP' ) then
-							local level = ...
+							local level = arg1
 							if (level == SHOW_SPEC_LEVEL) then
 								self.tooltipText = TALENT_MICRO_BUTTON_SPEC_TUTORIAL
 								self:SetPulse(true)
@@ -181,7 +184,7 @@ local Menu =  UI:CreateFrame('Frame', an, GameMenuFrame, 'SecureHandlerStateTemp
 								end
 							end
 						elseif ( event == 'PLAYER_CHARACTER_UPGRADE_TALENT_COUNT_CHANGED' ) then
-							local prev, current = ...
+							local prev, current = arg1, arg2
 							if ( prev == 0 and current > 0 ) then
 								self.tooltipText = TALENT_MICRO_BUTTON_TALENT_TUTORIAL
 								self:SetPulse(true)

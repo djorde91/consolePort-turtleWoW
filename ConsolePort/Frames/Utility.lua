@@ -7,7 +7,9 @@
 -- Action buttons can grab info from cursor.
 
 ---------------------------------------------------------------
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 ---------------------------------------------------------------
 local ConsolePort = ConsolePort
 ---------------------------------------------------------------
@@ -197,14 +199,9 @@ end
 ---------------------------------------------------------------
 -- Ring maangement 
 ---------------------------------------------------------------
-function Utility:OnEvent(event, ...)
-	if (event == 'QUEST_ACCEPTED' or 
-		event == 'QUEST_POI_UPDATE' or 
-		event == 'QUEST_WATCH_LIST_CHANGED') and self.autoExtra then
-		ConsolePort:RunOOC(UpdateQuestItems)
-	end
-	for _, ActionButton in ipairs(self.Buttons) do
-		ActionButton:UpdateState()
+function Utility:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
+	if self[event] then
+		self[event](self, arg1, arg2, arg3, arg4, arg5)
 	end
 end
 

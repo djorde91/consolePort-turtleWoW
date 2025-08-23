@@ -6,7 +6,8 @@
 -- enabled. Introduces some vanity to plates, e.g. class color,
 -- guild information, or NPC subtitle.
 
-local FadeIn = select(2, ...).GetFaders()
+-- Fix for WoW Classic 1.12.1 - properly define FadeIn
+local FadeIn = ConsolePort.UIFrameFadeIn
 -- Borrowed fix from Kui Nameplates - I highly recommend the full addon.
 -- Generate matching patterns for locale, replace format substitution with match anything
 local PATTERNS = {TOOLTIP_UNIT_LEVEL, TOOLTIP_UNIT_LEVEL_TYPE, TOOLTIP_UNIT_LEVEL_CLASS, TOOLTIP_UNIT_LEVEL_CLASS_TYPE}

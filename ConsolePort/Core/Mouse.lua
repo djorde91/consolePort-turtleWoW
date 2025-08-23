@@ -218,7 +218,11 @@ for func, hook in pairs({
 	PetMoveTo = Camera.Stop,
 	-- Hook action usage to manipulate mouselook
 	UseAction = Camera.OnAction, 
-}) do hooksecurefunc(func, hook) end
+}) do 
+	if _G[func] then
+		hooksecurefunc(func, hook) 
+	end
+end
 
 ---------------------------------------------------------------
 -- Mouse function wrappers in case of extended functionality
@@ -318,7 +322,7 @@ for name, script in pairs({
 		end
 	]],
 	UpdateVehicle = [[
-		inVehicle = ...
+		inVehicle = arg1
 		if inVehicle then
 			self:ClearBindings()
 		else
@@ -326,7 +330,7 @@ for name, script in pairs({
 		end
 	]],
 	Clear = [[
-		local clearType = ...
+		local clearType = arg1
 		if clearType then
 			local key = GetBindingKey(clearType)
 			if key then
@@ -335,7 +339,7 @@ for name, script in pairs({
 		end
 	]],
 	Set = [[
-		local setType, binding = ...
+		local setType, binding = arg1, arg2
 		if setType and binding then
 			local key = GetBindingKey(setType)
 			if key then
@@ -344,7 +348,7 @@ for name, script in pairs({
 		end
 	]],
 	UpdateTarget = [[
-		target = ...
+		target = arg1
 		self:SetAttribute('current', target)
 		self:SetAttribute('npc', nil)
 		self:ClearBindings()

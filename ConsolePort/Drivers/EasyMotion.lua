@@ -5,7 +5,9 @@
 -- in order to alleviate targeting. A healer's delight. 
 -- Thanks to Yoki for original concept! :) 
 
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addOn and db
+local addOn = ConsolePort
+local db = ConsolePort
 ---------------------------------------------------------------
 -- Key sets and their integer identifiers for input processing
 local Key = {
@@ -72,7 +74,7 @@ end
 for name, script in pairs({
 	-- Parse the input
 	Input = [[
-		key = ...
+		key = arg1
 		input = input and tonumber( input .. key ) or tonumber(key)
 		self:CallMethod('Filter', tostring(input))
 	]],
@@ -136,7 +138,7 @@ for name, script in pairs({
 
 	-- Refresh everything on down press
 	Refresh = [[
-		pool, onDown = ...
+		pool, onDown = arg1, arg2
 		if not onDown then
 			self:RunAttribute('SetTarget')
 			return
@@ -182,37 +184,29 @@ for name, script in pairs({
 
 	-- Update sources of units
 	UpdateUnits = [[
-		local pool = ...
-
-		if pool == 'frames' then
-			self:RunAttribute('UpdateFrames')
-		elseif pool == 'plates' or pool == 'tab' then
-			self:RunAttribute('UpdatePlates')
+		local pool = arg1
+		if pool then
+			for unit in pairs(pool) do
+				units[unit] = true
+			end
 		end
 	]],
 
 	-- Sort the units by name, to retain some coherence when setting up bindings
 	SortUnits = [[
-		local specific = self:GetAttribute('unitpool')
-		for unit in pairs(units) do
-			if ( not specific ) then
-				sorted[#sorted + 1] = unit
-			else
-				specific = specific:gsub(';', '\n')
-				for token in specific:gmatch('[%a%p]+') do
-					if unit:match(token) then
-						sorted[#sorted + 1] = unit
-						break 
-					end
-				end
+		local pool = arg1
+		if pool then
+			sorted = newtable()
+			for unit in pairs(pool) do
+				table.insert(sorted, unit)
 			end
+			table.sort(sorted)
 		end
-		table.sort(sorted)
 	]],
 
 	-- Set the bindings that control the input
 	SetBindings = [[
-		local pool = ...
+		local pool = arg1
 		if pool == 'frames' then
 			set = btns[frameSet]
 			side = frameSet
@@ -239,11 +233,15 @@ for name, script in pairs({
 
 	-- Display the bindings on frames/plates
 	DisplayBindings = [[
-		local ghostMode = ...
-		self:CallMethod('SetFramePool', pool, side)
-		self:CallMethod('HideBindings', ghostMode)
-		for binding, unit in pairs(lookup) do
-			self:CallMethod('DisplayBinding', tostring(binding), unit, ghostMode)
+		local ghostMode = arg1
+		if ghostMode then
+			for binding, unit in pairs(lookup) do
+				self:SetBindingClick(true, binding, self, 'SetTarget')
+			end
+		else
+			for binding, unit in pairs(lookup) do
+				self:SetBindingClick(true, binding, self, 'SetTarget')
+			end
 		end
 	]],
 
@@ -295,30 +293,9 @@ for name, script in pairs({
 	]],
 }) do EM:WrapScript(Input, name, script) end
 
-function EM:OnNewBindings(...)
-	local keys = {
-		plate = {ConsolePort:GetCurrentBindingOwner('CLICK ConsolePortEasyMotionButton:RightButton')},
-		frame = {ConsolePort:GetCurrentBindingOwner('CLICK ConsolePortEasyMotionButton:LeftButton')},
-		tab = {ConsolePort:GetCurrentBindingOwner('CLICK ConsolePortEasyMotionButton:MiddleButton')},
-	}
-	if db.Settings.unitHotkeyPool then
-		self:SetAttribute('unitpool', db.Settings.unitHotkeyPool)
-	end
-	self:SetAttribute('ignorePlayer', db.Settings.unitHotkeyIgnorePlayer)
-	self:SetAttribute('ghostMode', db.Settings.unitHotkeyGhostMode)
-	self:Execute([[self:RunAttribute('OnNewSettings')]])
-	local hSet = db.Settings.unitHotkeySet
-	if hSet then
-		hSet = hSet:lower()
-		hSet = hSet:match('left') and 'L' or hSet:match('right') and 'R'
-	end
-	for unitType, info in pairs(keys) do
-		local key, mod = unpack(info)
-		if key and mod then
-			local set = hSet or ( key:match('CP_R_') and 'L' or 'R' )
-			self:Execute(format([[ %sSet = '%s' %sMod = '%s' ]], unitType, set, unitType, mod))
-		end
-	end
+function EM:OnNewBindings(arg1, arg2, arg3, arg4, arg5)
+	-- Update bindings when they change
+	self:UpdateBindings()
 end
 
 ConsolePort:RegisterCallback('OnNewBindings', EM.OnNewBindings, EM)
@@ -422,7 +399,7 @@ end
 function EM:GetHotkey(binding)
 	local frame
 	self.ActiveFrames = self.ActiveFrames + 1
-	if self.ActiveFrames > #self.FramePool then
+	if self.ActiveFrames > db.table.count(self.FramePool) then
 		frame = CreateFrame('Frame', 'ConsolePortEasyMotionDisplay'..self.ActiveFrames, self)
 		frame:SetFrameStrata("TOOLTIP")
 		frame.size = db.Settings.unitHotkeySize or 32
@@ -465,7 +442,7 @@ function HotkeyMixin:Clear()
 end
 
 function HotkeyMixin:Adjust(depth)
-	local offset = depth and #self.ShownKeys + depth or #self.ShownKeys
+	local offset = depth and db.table.count(self.ShownKeys) + depth or db.table.count(self.ShownKeys)
 	self:SetWidth( offset * ( self.size * 0.75 ) )
 end
 

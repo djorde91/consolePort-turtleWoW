@@ -5,7 +5,13 @@
 -- 2. Validate compatibility with older versions.
 -- 3. Create the slash handler function.
 
-local addOn, db = ...
+-- Fix for WoW Classic 1.12.1 - properly define addon and db
+-- Ensure ConsolePort global exists
+if not ConsolePort then
+    ConsolePort = CreateFrame("Frame", "ConsolePort")
+end
+local addOn = ConsolePort
+local db = ConsolePort
 ---------------------------------------------------------------
 local NEWCALIBRATION, BINDINGSLOADED
 ---------------------------------------------------------------
@@ -36,6 +42,114 @@ end
 
 local function CancelPopup()
 	ConsolePort:ClearPopup()
+end
+
+---------------------------------------------------------------
+-- Compatibility layer for WoW Classic 1.12.1 (Turtle WoW)
+-- Add missing APIs that were introduced in later versions
+
+-- C_Timer compatibility (introduced in WoW 5.0)
+if not C_Timer then
+    C_Timer = {}
+    local timers = {}
+    local timerIndex = 0
+    
+    function C_Timer.After(delay, callback)
+        timerIndex = timerIndex + 1
+        local timer = CreateFrame("Frame")
+        timer:SetScript("OnUpdate", function(self, elapsed)
+            self.elapsed = (self.elapsed or 0) + elapsed
+            if self.elapsed >= delay then
+                callback()
+                self:SetScript("OnUpdate", nil)
+                self:Hide()
+            end
+        end)
+        timers[timerIndex] = timer
+        return timer
+    end
+end
+
+-- InCombatLockdown compatibility (introduced in WoW 3.0)
+if not InCombatLockdown then
+    function InCombatLockdown()
+        return UnitAffectingCombat("player")
+    end
+end
+
+-- hooksecurefunc compatibility (introduced in WoW 2.1)
+if not hooksecurefunc then
+    function hooksecurefunc(table, key, hookFunction)
+        local oldValue = table[key]
+        table[key] = function(arg1, arg2, arg3, arg4, arg5)
+            local ret = oldValue(arg1, arg2, arg3, arg4, arg5)
+            hookFunction(arg1, arg2, arg3, arg4, arg5)
+            return ret
+        end
+    end
+end
+
+-- IsAddOnLoaded compatibility (introduced in WoW 2.0)
+if not IsAddOnLoaded then
+    function IsAddOnLoaded(addonName)
+        return GetAddOnInfo(addonName) ~= nil
+    end
+end
+
+-- HasCursorItem compatibility (if it doesn't exist)
+if not HasCursorItem then
+    function HasCursorItem()
+        local cursorType = GetCursorInfo()
+        return cursorType == "item"
+    end
+end
+
+-- GetScaledCursorPosition compatibility (if it doesn't exist)
+if not GetScaledCursorPosition then
+    function GetScaledCursorPosition()
+        return GetCursorPosition()
+    end
+end
+
+-- SetPortraitTexture compatibility (if it doesn't exist)
+if not SetPortraitTexture then
+    function SetPortraitTexture(texture, unit)
+        SetPortrait(texture, unit)
+    end
+end
+
+-- RegisterStateDriver compatibility (if it doesn't exist)
+if not RegisterStateDriver then
+    function RegisterStateDriver(frame, state, conditional)
+        -- Simple fallback - just store the state for later use
+        frame.stateDriver = frame.stateDriver or {}
+        frame.stateDriver[state] = conditional
+    end
+end
+
+-- WrapScript compatibility (if it doesn't exist)
+if not CreateFrame("Frame").WrapScript then
+    local function WrapScript(frame, scriptType, scriptBody)
+        -- Simple fallback - just store the script for later use
+        frame.wrappedScripts = frame.wrappedScripts or {}
+        frame.wrappedScripts[scriptType] = scriptBody
+    end
+    
+    -- Add WrapScript to all frames
+    local frameMeta = getmetatable(CreateFrame("Frame"))
+    if frameMeta then
+        frameMeta.__index = frameMeta.__index or {}
+        frameMeta.__index.WrapScript = WrapScript
+    end
+end
+
+-- Missing global variables compatibility
+if not SET_FOCUS then
+    SET_FOCUS = "Set Focus"
+end
+
+if not FOCUS_CAST_KEY_TEXT then
+    FOCUS_CAST_KEY_TEXT = "Focus Cast"
 end
 
 ---------------------------------------------------------------

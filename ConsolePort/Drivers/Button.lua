@@ -6,7 +6,9 @@
 -- direct 'clicking' causes taint to spread in a lot of cases.
 -- These buttons are under-the-hood and invisible to the user.
 
+-- Fix for WoW Classic 1.12.1 - properly define variables
 local db = ConsolePort
+local cfg = ConsolePort.Mouse
 local CORE, HANDLE, KEY = ConsolePort, ConsolePortButtonHandler, db.KEY
 ---------------------------------------------------------------
 local Button = {}
@@ -235,29 +237,29 @@ local ENV_DPAD = {
 	-- Rectangle properties
 	-----------------------------------------------------------
 	_getcenter = [[
-		local rL, rB, rW, rH = ...
+		local rL, rB, rW, rH = arg1, arg2, arg3, arg4
 		return (rL + rW / 2), (rB + rH / 2)
 	]];
 	-----------------------------------------------------------
 	_isdrawn = [[
-		local rL, rB, rW, rH = ...
+		local rL, rB, rW, rH = arg1, arg2, arg3, arg4
 		return rL and rB and rW > 0 and rH > 0
 	]];
 	-----------------------------------------------------------
 	_absxy = [[
-		local x1, x2, y1, y2 = ...
+		local x1, x2, y1, y2 = arg1, arg2, arg3, arg4
 		local x, y = abs(x1 - x2), abs(y1 - y2)
 		return x, y, x + y
 	]];
 	-----------------------------------------------------------
 	_sumxy = [[
-		return select(3, self:RunAttribute('_absxy', ...))
+		return select(3, self:RunAttribute('_absxy', arg1, arg2, arg3, arg4))
 	]];
 	-----------------------------------------------------------
 	-- Node selection
 	-----------------------------------------------------------
 	_setnodebydistance = [[
-		local cX, cY = ...
+		local cX, cY = arg1, arg2
 		local targ, dest
 		if cX and cY then
 			for node in pairs(NODES) do
@@ -300,13 +302,13 @@ local ENV_DPAD = {
 		end
 	]];
 	-----------------------------------------------------------
-	_keyUP    = [[ local tX, tY, nX, nY, dX, dY = ... return dY > dX and nY > tY ]];
-	_keyDOWN  = [[ local tX, tY, nX, nY, dX, dY = ... return dY > dX and nY < tY ]];
-	_keyLEFT  = [[ local tX, tY, nX, nY, dX, dY = ... return dY < dX and nX < tX ]];
-	_keyRIGHT = [[ local tX, tY, nX, nY, dX, dY = ... return dY < dX and nX > tX ]];
+	_keyUP    = [[ local tX, tY, nX, nY, dX, dY = arg1, arg2, arg3, arg4, arg5, arg6 return dY > dX and nY > tY ]];
+	_keyDOWN  = [[ local tX, tY, nX, nY, dX, dY = arg1, arg2, arg3, arg4, arg5, arg6 return dY > dX and nY < tY ]];
+	_keyLEFT  = [[ local tX, tY, nX, nY, dX, dY = arg1, arg2, arg3, arg4, arg5, arg6 return dY < dX and nX < tX ]];
+	_keyRIGHT = [[ local tX, tY, nX, nY, dX, dY = arg1, arg2, arg3, arg4, arg5, arg6 return dY < dX and nX > tX ]];
 	-----------------------------------------------------------
 	_setnodebykey = [[
-		local key = ...
+		local key = arg1
 		if curnode and (key ~= 0) then
 			local rL, rB, rW, rH = curnode:GetRect()
 			local tX, tY = self:RunAttribute('_getcenter', curnode:GetRect())
@@ -327,7 +329,7 @@ local ENV_DPAD = {
 	_selectnewnode = [[
 		if curnode then oldnode = curnode; end
 		self:RunAttribute('_setanynode')
-		self:RunAttribute('_setnodebykey', ...)
+		self:RunAttribute('_setnodebykey', arg1)
 		self:RunAttribute('_postnodeselect')
 	]];
 }

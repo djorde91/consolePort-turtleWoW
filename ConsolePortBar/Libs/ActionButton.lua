@@ -8,7 +8,8 @@ to make sure ConsolePort is using a separate button registry in case other actio
 simultaneously loaded. Do not copy or use this library for anything else.
 ]]
 
-local _, ab = ...
+-- Fix for WoW Classic 1.12.1 - properly define ab and db
+local ab = ConsolePortBar
 local db = ConsolePort:GetData()
 local lib = {}
 ab.libs = ab.libs or {}
@@ -140,7 +141,7 @@ function SetupSecureSnippets(button)
 	-- secure UpdateState(self, state)
 	-- update the type and action of the button based on the state
 	button:SetAttribute("UpdateState", [[
-		local state = ...
+		local state = arg1
 		local _type = type
 
 		self:SetAttribute("state", state)
@@ -195,7 +196,7 @@ function SetupSecureSnippets(button)
 	-- secure PickupButton(self, kind, value, ...)
 	-- utility function to place a object on the cursor
 	button:SetAttribute("PickupButton", [[
-		local kind, value = ...
+		local kind, value = arg1, arg2
 		if kind == "empty" then
 			return "clear"
 		elseif kind == "action" or kind == "pet" then
@@ -239,7 +240,7 @@ function SetupSecureSnippets(button)
 
 	button:SetAttribute("OnReceiveDrag", [[
 		if self:GetAttribute("disableDragNDrop") then return false end
-		local kind, value, subtype, extra = ...
+		local kind, value, subtype, extra = arg1, arg2, arg3, arg4
 		if not kind or not value then return false end
 		local state = self:GetAttribute("state")
 		local buttonType, buttonAction = self:GetAttribute("type"), nil
@@ -252,7 +253,7 @@ function SetupSecureSnippets(button)
 				if extra then
 					value = extra
 				else
-					print("no spell id?", ...)
+					print("no spell id?", arg1, arg2, arg3, arg4)
 				end
 			elseif kind == "item" and value then
 				value = format("item:%d", value)
@@ -299,7 +300,7 @@ function SetupSecureSnippets(button)
 	button:SetScript("OnReceiveDrag", nil)
 	-- Wrapped OnReceiveDrag(self, button, kind, value, ...)
 	button.header:WrapScript(button, "OnReceiveDrag", [[
-		return self:RunAttribute("OnReceiveDrag", kind, value, ...)
+		return self:RunAttribute("OnReceiveDrag", arg1, arg2, arg3, arg4)
 	]])
 	-- Wrap twice, because the post-script is not run when the pre-script causes a pickup (doh)
 	-- we also need some phony message, or it won't work =/
@@ -356,9 +357,9 @@ function lib:GetAllButtons()
 	return buttons
 end
 
-function Generic:ClearSetPoint(...)
+function Generic:ClearSetPoint(arg1, arg2, arg3, arg4, arg5)
 	self:ClearAllPoints()
-	self:SetPoint(...)
+	self:SetPoint(arg1, arg2, arg3, arg4, arg5)
 end
 
 function Generic:NewHeader(header)
@@ -468,10 +469,10 @@ end
 --- frame scripts
 
 -- copied (and adjusted) from SecureHandlers.lua
-local function PickupAny(kind, target, detail, ...)
+local function PickupAny(kind, target, detail, arg1, arg2, arg3, arg4, arg5)
 	if kind == "clear" then
 		ClearCursor()
-		kind, target, detail = target, detail, ...
+		kind, target, detail = target, detail, arg1
 	end
 
 	if kind == 'action' then
@@ -664,7 +665,7 @@ function InitializeEventHandler()
 	eventFrame:SetScript("OnUpdate", OnUpdate)
 end
 
-function OnEvent(_, event, arg1, ...)
+function OnEvent(_, event, arg1, arg2, arg3, arg4, arg5)
 	if (event == "UNIT_INVENTORY_CHANGED" and arg1 == "player") or event == "LEARNED_SPELL_IN_TAB" then
 		local tooltipOwner = GameTooltip:GetOwner()
 		if ButtonRegistry[tooltipOwner] then
@@ -1270,7 +1271,7 @@ function UpdateNewAction(self)
 end
 
 -- Hook UpdateFlyout so we can use the blizzy templates
-hooksecurefunc("ActionButton_UpdateFlyout", function(self, ...)
+hooksecurefunc("ActionButton_UpdateFlyout", function(self, arg1, arg2, arg3, arg4, arg5)
 	if ButtonRegistry[self] then
 		UpdateFlyout(self)
 	end

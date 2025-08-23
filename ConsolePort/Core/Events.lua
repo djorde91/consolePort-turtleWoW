@@ -4,7 +4,9 @@
 -- Collection of functions related to event management.
 -- Manages mouse look triggering from events.
 ---------------------------------------------------------------
-local Events, _, db = {}, ...
+-- Fix for WoW Classic 1.12.1 - properly define Events and db
+local Events = {}
+local db = ConsolePort
 ---------------------------------------------------------------
 local After, WorldFrame, MouseEvents = C_Timer.After, WorldFrame
 ---------------------------------------------------------------
@@ -69,8 +71,8 @@ function Events:WORLD_MAP_UPDATE()
 	-- self:GetMapNodes()
 end
 
-function Events:QUEST_AUTOCOMPLETE(...)
-	ShowQuestComplete(GetQuestLogIndexByID(...))
+function Events:QUEST_AUTOCOMPLETE(questID)
+	ShowQuestComplete(GetQuestLogIndexByID(questID))
 end
 
 function Events:UNIT_SPELLCAST_SENT()
@@ -131,8 +133,8 @@ function Events:PLAYER_LOGOUT()
 	end
 end
 
-function Events:CVAR_UPDATE(...)
-	self:UpdateCVars(nil, ...)
+function Events:CVAR_UPDATE(cvar, value)
+	self:UpdateCVars(nil, cvar, value)
 end
 
 function Events:UPDATE_BINDINGS()
@@ -227,9 +229,9 @@ function Events:ADDON_LOADED(name)
 end
 
 ---------------------------------------------------------------
-local function OnEvent (self, event, ...)
+local function OnEvent (self, event, arg1, arg2, arg3, arg4, arg5)
 	if 	Events[event] then
-		Events[event](self, ...)
+		Events[event](self, arg1, arg2, arg3, arg4, arg5)
 		return
 	end
 	self:StartCameraOnEvent(event)
